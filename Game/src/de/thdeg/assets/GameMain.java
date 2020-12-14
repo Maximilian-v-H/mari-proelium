@@ -1,10 +1,6 @@
 import java.util.List;
 import java.util.ArrayList;
 
-// package de.thdeg.game;
-
-// import de.thdeg.game.runtime.InternalLedGameThread;
-
 public class GameMain {
 
     static public void main(String[] passedArgs) throws InterruptedException {
