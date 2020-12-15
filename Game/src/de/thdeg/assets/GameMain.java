@@ -23,19 +23,16 @@ public class GameMain {
         InternalLedGameThread.showImage(myImage);
 
 
-        List<Ship> fleet = new ArrayList<Ship>();
         Player p = new Player(3, 7, 7, 5);
-        fleet.add(new Enemy(2, 12, 15, 3));
-        fleet.add(new Enemy(2, 9, 12, 3));
-        fleet.add(new Enemy(2, 20, 15, 3));
-        fleet.add(new Enemy(2, 30, 15, 3));
+        Fleet fleet = new Fleet();
+        fleet.addFleetmember(new Enemy(2, 12, 15, 3, 5));
+        fleet.addFleetmember(new Enemy(2, 9, 12, 3, 5));
+        fleet.addFleetmember(new Enemy(2, 20, 15, 3, 5));
+        fleet.addFleetmember(new Enemy(2, 30, 15, 3, 5));
 
 
         myImage = p.paint(myImage);
-        for (Ship s : fleet) {
-            myImage = s.paint(myImage);
-            s.print("Ship:");
-        }
+        myImage = fleet.paintFleet(myImage);
         p.print("Start");
         InternalLedGameThread.showImage(myImage);
         int round = 0;
@@ -43,11 +40,7 @@ public class GameMain {
             thisKey = InternalLedGameThread.getKeyboard();
             myImage = p.run(thisKey, myImage);
             if(round % 3 == 0) {
-                for (Ship s : fleet){
-                    if(s.isAlive()){
-                        myImage = s.run((int)(Math.random() * 4), myImage);
-                    }
-                }
+                fleet.executeOrders(myImage);
             }
             InternalLedGameThread.showImage(myImage);
             round++;

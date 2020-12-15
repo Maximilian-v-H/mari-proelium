@@ -1,4 +1,5 @@
 public class Enemy extends Ship {
+    private int range;
 
     Enemy(int hp){
         super(hp);
@@ -8,15 +9,79 @@ public class Enemy extends Ship {
         this.pos = pos;
     }
 
-    Enemy(int hp, int x, int y, int o){
+    Enemy(int hp, int x, int y, int o, int r){
         super(hp, x, y, o);
         short[][][] rgbs = {{{31, 222, 215},{21, 138, 134},{11, 74, 72}},{{31, 69, 222},{19, 43, 143},{10, 22, 74}},{{153, 23, 209},{94, 15, 128},{55, 10, 74}}};
         changeColor(rgbs);
+        this.range = r;
     }
 
     protected void shoot() {
 
     }
+
+    public short[] run(short[] myImage){
+        myImage = clearTrace(myImage);
+        // move();
+        if(playerInVision(myImage)){
+            System.out.println("DETECTED");
+            shoot();
+        }
+        if (collide(myImage)){
+            resetMove();
+        }
+        for (Bullet b : bullets) {
+            b.run(-1, myImage);
+        }
+        myImage = paint(myImage);
+        return myImage;
+    }
+
+    private void move(){
+        if(canMove()){
+            forward();
+        }else{
+            if(Math.random() > 0.5){
+                rotate(0);
+            }else {
+                rotate(1);
+            }
+        }
+    }
+
+    /**
+     *  Method to detect if the player is visible for the enemy ship.
+     * */
+    private boolean playerInVision(short[] myImage){
+        boolean ret = false;
+        for (int i = 0; i < this.range; i++) {
+            for (int j = 0; j < this.range; j++) {
+                // Checks if point is inside the radius of the ship's range
+                if (Math.pow(((this.range - i) - pos[1][0]),2)+Math.pow(((this.range - j) - this.pos[1][1]),2) <= this.range) {
+                    if(hitPlayer(myImage, this.range - i, this.range - j)) {
+                        ret = true;
+                    }
+                }
+                if(Math.pow(((this.range + i) - pos[1][0]),2)+Math.pow(((this.range + j) - this.pos[1][1]),2) <= this.range) {
+                    if(hitPlayer(myImage, this.range + i, this.range + j)) {
+                        ret = true;
+                    }
+                }
+                if(Math.pow(((this.range - i) - pos[1][0]),2)+Math.pow(((this.range + j) - this.pos[1][1]),2) <= this.range) {
+                    if(hitPlayer(myImage, this.range - i, this.range + j)) {
+                        ret = true;
+                    }
+                }
+                if(Math.pow(((this.range + i) - pos[1][0]),2)+Math.pow(((this.range - j) - this.pos[1][1]),2) <= this.range) {
+                    if(hitPlayer(myImage, this.range + i, this.range - j)) {
+                        ret = true;
+                    }
+                }
+            }
+        }
+        return ret;
+    }
+
 
     /**
      * The method collide looks at the pixels of the ship and look if it collided with another object
@@ -25,23 +90,10 @@ public class Enemy extends Ship {
         boolean ret = false;
         for(int i=0; i < this.pos.length; i++){
             int idx = (this.pos[i][1] * 48 + this.pos[i][0]) * 3;
-            if (    (myImage[idx + 0] == 237 && myImage[idx + 1] == 76 && myImage[idx + 2] == 36) ||
-                    (myImage[idx + 0] == 237 && myImage[idx + 1] == 207 && myImage[idx + 2] == 36) ||
-                    (myImage[idx + 0] == 123 && myImage[idx + 1] == 237 && myImage[idx + 2] == 36) ||
-
-                    (myImage[idx + 0] == 145 && myImage[idx + 1] == 47 && myImage[idx + 2] == 22) ||
-                    (myImage[idx + 0] == 148 && myImage[idx + 1] == 129 && myImage[idx + 2] == 22) ||
-                    (myImage[idx + 0] == 74 && myImage[idx + 1] == 143 && myImage[idx + 2] == 21) ||
-
-                    (myImage[idx + 0] == 74 && myImage[idx + 1] == 24 && myImage[idx + 2] == 11) ||
-                    (myImage[idx + 0] == 66 && myImage[idx + 1] == 58 && myImage[idx + 2] == 10) ||
-                    (myImage[idx + 0] == 38 && myImage[idx + 1] == 74 && myImage[idx + 2] == 11) ||
-
-                    (myImage[idx + 0] == 12 && myImage[idx + 1] == 13 && myImage[idx + 2] == 12)
-               ) {
+            if (hitBullet(myImage, this.pos[i][0], this.pos[i][1]) || hitPlayer(myImage, this.pos[i][0], this.pos[i][1])) {
                 damage(1);
                 ret = true;
-               }
+            }
         }
         return ret;
     }

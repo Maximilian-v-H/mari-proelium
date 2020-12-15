@@ -33,7 +33,7 @@ public class Bullet extends Agent {
         return false;
     }
 
-    public void move(int dir, short[] myImage){}
+    public void move(int dir){}
 
     private void saveOldPos(){
         this.oldpos[0] = this.pos[0];

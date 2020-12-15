@@ -140,13 +140,13 @@ public class Ship extends Agent {
      *          2 - left
      *          3 - right
      * */
-    protected void move(int dir, short[] myImage){
+    protected void move(int dir){
         switch(dir){
             case 0: // Hoch
                 forward();
                 break;
             case 1: // Runter
-                shoot(myImage);
+                shoot();
                 break;
             case 2: // Links
                 rotate(0);
@@ -396,17 +396,49 @@ public class Ship extends Agent {
         }
         return ret;
     }
-/**
- *  8 1 2
- *  7   3
- *  6 5 4
- * */
-    protected void shoot(short[] myImage) {
+    /**
+     *  8 1 2
+     *  7   3
+     *  6 5 4
+     * */
+    protected void shoot() {
         int dir1 = (this.align + 2 > 8) ? (this.align + 2 - 8) : (this.align + 2);
-        int dir2 = (this.align - 2 < 1) ? (8 + this.align - 2) : (this.align - 2);
+        // int dir2 = (this.align - 2 < 1) ? (8 + this.align - 2) : (this.align - 2);
         bullets.add(new Bullet(dir1, 5, this.pos[1][0], this.pos[1][1]));
-        bullets.add(new Bullet(dir2, 5, this.pos[1][0], this.pos[1][1]));
+        // bullets.add(new Bullet(dir2, 5, this.pos[1][0], this.pos[1][1]));
     }
+
+    protected boolean hitPlayer(short[] myImage, int x, int y){
+        int idx = (y * 48 + x) * 3;
+        return (myImage[idx + 0] == 237 && myImage[idx + 1] == 76 && myImage[idx + 2] == 36) ||
+            (myImage[idx + 0] == 237 && myImage[idx + 1] == 207 && myImage[idx + 2] == 36) ||
+            (myImage[idx + 0] == 123 && myImage[idx + 1] == 237 && myImage[idx + 2] == 36) ||
+            (myImage[idx + 0] == 145 && myImage[idx + 1] == 47 && myImage[idx + 2] == 22) ||
+            (myImage[idx + 0] == 148 && myImage[idx + 1] == 129 && myImage[idx + 2] == 22) ||
+            (myImage[idx + 0] == 74 && myImage[idx + 1] == 143 && myImage[idx + 2] == 21) ||
+            (myImage[idx + 0] == 74 && myImage[idx + 1] == 24 && myImage[idx + 2] == 11) ||
+            (myImage[idx + 0] == 66 && myImage[idx + 1] == 58 && myImage[idx + 2] == 10) ||
+            (myImage[idx + 0] == 38 && myImage[idx + 1] == 74 && myImage[idx + 2] == 11);
+    }
+
+    protected boolean hitEnemy(short[] myImage, int x, int y){
+        int idx = (y * 48 + x) * 3;
+        return (myImage[idx + 0] == 31 && myImage[idx + 1] == 69 && myImage[idx + 2] == 222) ||
+            (myImage[idx + 0] == 19 && myImage[idx + 1] == 43 && myImage[idx + 2] == 143) ||
+            (myImage[idx + 0] == 10 && myImage[idx + 1] == 22 && myImage[idx + 2] == 74) ||
+            (myImage[idx + 0] == 31 && myImage[idx + 1] == 222 && myImage[idx + 2] == 215) ||
+            (myImage[idx + 0] == 21 && myImage[idx + 1] == 138 && myImage[idx + 2] == 134) ||
+            (myImage[idx + 0] == 11 && myImage[idx + 1] == 74 && myImage[idx + 2] == 72) ||
+            (myImage[idx + 0] == 153 && myImage[idx + 1] == 23 && myImage[idx + 2] == 209) ||
+            (myImage[idx + 0] == 94 && myImage[idx + 1] == 15 && myImage[idx + 2] == 128) ||
+            (myImage[idx + 0] == 55 && myImage[idx + 1] == 10 && myImage[idx + 2] == 74);
+    }
+
+    protected boolean hitBullet(short[] myImage, int x, int y){
+        int idx = (y * 48 + x) * 3;
+        return (myImage[idx + 0] == 12 && myImage[idx + 1] == 13 && myImage[idx + 2] == 12);
+    }
+
 
     /**
      * This method is used to set the align variable after a succesful rotation
@@ -425,7 +457,7 @@ public class Ship extends Agent {
     public short[] run(int key, short[] myImage){
         if(key != -1){
             myImage = clearTrace(myImage);
-            move(key, myImage);
+            move(key);
             if (collide(myImage)){
                 resetMove();
                 if(key == 2){
@@ -443,7 +475,7 @@ public class Ship extends Agent {
         return myImage;
     }
 
-    private void resetMove(){
+    protected void resetMove(){
         for(int i=0; i < this.pos.length; i++){
             for(int j=0; j < this.pos[i].length; j++){
                 this.pos[i][j] = this.oldpos[i][j];

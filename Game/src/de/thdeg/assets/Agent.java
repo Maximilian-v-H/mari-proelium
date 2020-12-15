@@ -4,7 +4,7 @@ public abstract class Agent {
 
     abstract boolean collide(short[] myImage);
 
-    abstract void move(int dir, short[] myImage);
+    abstract void move(int dir);
 
     abstract short[] run(int key, short[] myImage);
 }

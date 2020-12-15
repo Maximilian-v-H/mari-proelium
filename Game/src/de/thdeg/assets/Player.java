@@ -21,21 +21,7 @@ public class Player extends Ship {
     public boolean collide(short[] myImage){
         boolean ret = false;
         for(int i=0; i < this.pos.length; i++){
-            int idx = (this.pos[i][1] * 48 + this.pos[i][0]) * 3;
-            if ((myImage[idx + 0] == 31 && myImage[idx + 1] == 69 && myImage[idx + 2] == 222) ||
-                    (myImage[idx + 0] == 19 && myImage[idx + 1] == 43 && myImage[idx + 2] == 143) ||
-                    (myImage[idx + 0] == 10 && myImage[idx + 1] == 22 && myImage[idx + 2] == 74) ||
-
-                    (myImage[idx + 0] == 31 && myImage[idx + 1] == 222 && myImage[idx + 2] == 215) ||
-                    (myImage[idx + 0] == 21 && myImage[idx + 1] == 138 && myImage[idx + 2] == 134) ||
-                    (myImage[idx + 0] == 11 && myImage[idx + 1] == 74 && myImage[idx + 2] == 72) ||
-
-                    (myImage[idx + 0] == 153 && myImage[idx + 1] == 23 && myImage[idx + 2] == 209) ||
-                    (myImage[idx + 0] == 94 && myImage[idx + 1] == 15 && myImage[idx + 2] == 128) ||
-                    (myImage[idx + 0] == 55 && myImage[idx + 1] == 10 && myImage[idx + 2] == 74) ||
-
-                    (myImage[idx + 0] == 12 && myImage[idx + 1] == 13 && myImage[idx + 2] == 12)
-               ) {
+            if (hitBullet(myImage, this.pos[i][0], this.pos[i][1]) || hitEnemy(myImage, this.pos[i][0], this.pos[i][1])) {
                 damage(1);
                 ret = true;
                }
