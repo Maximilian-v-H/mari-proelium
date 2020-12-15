@@ -25,10 +25,13 @@ public class GameMain {
 
         Player p = new Player(3, 7, 7, 5);
         Fleet fleet = new Fleet();
-        fleet.addFleetmember(new Enemy(2, 12, 15, 3, 5));
+        fleet.addFleetmember(new Enemy(2, 12, 15, 1, 5));
         fleet.addFleetmember(new Enemy(2, 9, 12, 3, 5));
-        fleet.addFleetmember(new Enemy(2, 20, 15, 3, 5));
-        fleet.addFleetmember(new Enemy(2, 30, 15, 3, 5));
+        fleet.addFleetmember(new Enemy(2, 20, 15, 7, 5));
+        fleet.addFleetmember(new Enemy(2, 30, 12, 8, 5));
+        fleet.addFleetmember(new Enemy(2, 23, 6, 2, 5));
+        fleet.addFleetmember(new Enemy(2, 40, 4, 5, 5));
+        fleet.addFleetmember(new Enemy(2, 35, 3, 4, 5));
 
 
         myImage = p.paint(myImage);

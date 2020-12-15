@@ -16,9 +16,9 @@ public class Enemy extends Ship {
         this.range = r;
     }
 
-    protected void shoot() {
+    // protected void shoot() {
 
-    }
+    // }
 
     public short[] run(short[] myImage){
         myImage = clearTrace(myImage);
@@ -53,33 +53,20 @@ public class Enemy extends Ship {
      *  Method to detect if the player is visible for the enemy ship.
      * */
     private boolean playerInVision(short[] myImage){
-        boolean ret = false;
-        for (int i = 0; i < this.range; i++) {
-            for (int j = 0; j < this.range; j++) {
-                // Checks if point is inside the radius of the ship's range
-                if (Math.pow(((this.range - i) - pos[1][0]),2)+Math.pow(((this.range - j) - this.pos[1][1]),2) <= this.range) {
-                    if(hitPlayer(myImage, this.range - i, this.range - j)) {
-                        ret = true;
-                    }
-                }
-                if(Math.pow(((this.range + i) - pos[1][0]),2)+Math.pow(((this.range + j) - this.pos[1][1]),2) <= this.range) {
-                    if(hitPlayer(myImage, this.range + i, this.range + j)) {
-                        ret = true;
-                    }
-                }
-                if(Math.pow(((this.range - i) - pos[1][0]),2)+Math.pow(((this.range + j) - this.pos[1][1]),2) <= this.range) {
-                    if(hitPlayer(myImage, this.range - i, this.range + j)) {
-                        ret = true;
-                    }
-                }
-                if(Math.pow(((this.range + i) - pos[1][0]),2)+Math.pow(((this.range - j) - this.pos[1][1]),2) <= this.range) {
-                    if(hitPlayer(myImage, this.range + i, this.range - j)) {
-                        ret = true;
+        int difx;
+        int dify;
+        for (int i = 0 - this.range; i <= this.range; i++) {
+            difx = this.pos[1][0] + i;
+            for (int j = 0 - this.range; j <= this.range; j++) {
+                dify = this.pos[1][1] + j;
+                if ((Math.pow(difx - this.pos[0][1], 2)+Math.pow(dify - this.pos[1][1], 2)) <= Math.pow(this.range, 2)) {
+                    if(hitPlayer(myImage, difx,dify)) {
+                        return true;
                     }
                 }
             }
         }
-        return ret;
+        return false;
     }
 
 
