@@ -1,6 +1,3 @@
-import java.util.List;
-import java.util.ArrayList;
-
 public class GameMain {
 
     static public void main(String[] passedArgs) throws InterruptedException {
