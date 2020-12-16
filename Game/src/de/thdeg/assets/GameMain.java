@@ -31,18 +31,28 @@ public class GameMain {
         myImage = p.paint(myImage);
         myImage = fleet.paintFleet(myImage);
         InternalLedGameThread.showImage(myImage);
-        int round = 0;
+        int frame = 0;
+        int round = 1;
+        long startTime = System.currentTimeMillis();
+        long roundtime = 30000;
         while(p.isAlive()){
             thisKey = InternalLedGameThread.getKeyboard();
             myImage = p.run(thisKey, myImage);
             myImage = fleet.statusUpdate(myImage);
-            if(round % 3 == 0) {
+            if(frame % 3 == 0) {
+                frame = 0;
                 fleet.executeOrders(myImage);
             }
             InternalLedGameThread.showImage(myImage);
-            round++;
+            frame++;
             Thread.sleep(100);
+            System.out.println("+++ " + (System.currentTimeMillis() - startTime) + " +++");
+        if((System.currentTimeMillis() - startTime) > roundtime){
+                round++;
+                startTime = System.currentTimeMillis();
+                p.addScore(200);
+            }
         }
-        System.out.println("Score: " + p.getScore());
+        System.out.println("(" + round + ") - Score: " + p.getScore());
     }
 }

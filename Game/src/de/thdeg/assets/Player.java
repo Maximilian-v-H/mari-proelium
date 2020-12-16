@@ -62,6 +62,10 @@ public class Player extends Ship {
         return this.score;
     }
 
+    public void addScore(int val){
+        this.score += val;
+    }
+
     /**
      * Debug method to print shiplocation and locationdifference between the new and old location.
      * */
