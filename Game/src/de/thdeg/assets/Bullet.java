@@ -1,12 +1,15 @@
 public class Bullet extends Agent {
     private int direction;
     private int range;
+    private int maxRange;
     private int[] pos = new int[2];
     private int[] oldpos = new int[2];
+    private boolean hasHit = false;
 
     Bullet(int dir, int range, int x, int y){
         this.direction = dir;
         this.range = range;
+        this.maxRange = range;
         this.pos[0] = x;
         this.pos[1] = y;
     }
@@ -58,6 +61,7 @@ public class Bullet extends Agent {
     }
 
     protected boolean hitEnemy(short[] myImage, int x, int y){
+        if (x <= 47 && y <= 23 && x >= 0 && y >= 0) {
         int idx = (y * 48 + x) * 3;
         return (myImage[idx + 0] == 31 && myImage[idx + 1] == 69 && myImage[idx + 2] == 222) ||
             (myImage[idx + 0] == 19 && myImage[idx + 1] == 43 && myImage[idx + 2] == 143) ||
@@ -68,6 +72,9 @@ public class Bullet extends Agent {
             (myImage[idx + 0] == 153 && myImage[idx + 1] == 23 && myImage[idx + 2] == 209) ||
             (myImage[idx + 0] == 94 && myImage[idx + 1] == 15 && myImage[idx + 2] == 128) ||
             (myImage[idx + 0] == 55 && myImage[idx + 1] == 10 && myImage[idx + 2] == 74);
+        }else {
+            return false;
+        }
     }
 
     public void move(int dir){}
@@ -133,7 +140,15 @@ public class Bullet extends Agent {
     }
 
     public short[] run(int key, short[] myImage){
-        if (!hitEnemy(myImage, this.pos[0], this.pos[1]) || !hitPlayer(myImage, this.pos[0], this.pos[1])){
+        if(this.range == this.maxRange){
+            if(move()){
+            myImage = paint(myImage);
+            }else {
+                this.range = 0;
+                myImage = clear(myImage);
+            }
+        }else{
+        if (!(hitEnemy(myImage, this.pos[0], this.pos[1]) || hitPlayer(myImage, this.pos[0], this.pos[1]))){
             if(move()){
             myImage = paint(myImage);
             }else {
@@ -142,9 +157,15 @@ public class Bullet extends Agent {
             }
         }else{
             this.range = 0;
+            this.hasHit = true;
             myImage = paint(myImage);
         }
+        }
         return myImage;
+    }
+
+    public boolean getHasHit(){
+        return this.hasHit;
     }
 
     public int getRange(){

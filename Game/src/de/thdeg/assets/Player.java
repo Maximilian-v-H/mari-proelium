@@ -1,4 +1,5 @@
 public class Player extends Ship {
+    private int score = 0;
 
     Player(int hp){
         super(hp);
@@ -27,6 +28,38 @@ public class Player extends Ship {
                }
         }
         return ret;
+    }
+
+    public short[] run(int key, short[] myImage){
+        myImage = isHit(myImage);
+        if(key != -1){
+            myImage = clearTrace(myImage);
+            move(key);
+            if (collide(myImage)){
+                resetMove();
+                if(key == 2){
+                    this.align++;
+                }
+                if(key == 3){
+                    this.align--;
+                }
+            }
+        }
+        if(this.bullet != null){
+            this.score = (this.bullet.getHasHit()) ? this.score + 50 : this.score ;
+            if(this.bullet.getRange() > 0){
+                this.bullet.run(-1, myImage);
+            }else{
+                this.bullet = null;
+            }
+        }
+        System.out.println("Score: " + this.score);
+        myImage = paint(myImage);
+        return myImage;
+    }
+
+    public int getScore(){
+        return this.score;
     }
 
     /**

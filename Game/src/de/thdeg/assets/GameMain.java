@@ -20,9 +20,6 @@ public class GameMain {
         }
 
         System.out.println("Sending to displayThread");
-        InternalLedGameThread.showImage(myImage);
-
-
         Player p = new Player(3, 7, 7, 5);
         Fleet fleet = new Fleet();
         fleet.addFleetmember(new Enemy(2, 12, 15, 1, 5));
@@ -49,5 +46,6 @@ public class GameMain {
             round++;
             Thread.sleep(100);
         }
+        System.out.println("Score: " + p.getScore());
     }
 }
