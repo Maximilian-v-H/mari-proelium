@@ -36,7 +36,6 @@ public class GameMain {
 
         myImage = p.paint(myImage);
         myImage = fleet.paintFleet(myImage);
-        p.print("Start");
         InternalLedGameThread.showImage(myImage);
         int round = 0;
         while(p.isAlive()){

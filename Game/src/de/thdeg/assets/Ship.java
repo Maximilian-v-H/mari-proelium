@@ -390,7 +390,6 @@ public class Ship extends Agent {
                     }
                     break;
             }
-            print("After Move");
         }
     }
 
@@ -427,6 +426,7 @@ public class Ship extends Agent {
     }
 
     protected boolean hitPlayer(short[] myImage, int x, int y){
+        if (x <= 47 && y <= 23 && x >= 0 && y >= 0) {
         int idx = (y * 48 + x) * 3;
         return (myImage[idx + 0] == 237 && myImage[idx + 1] == 76 && myImage[idx + 2] == 36) ||
             (myImage[idx + 0] == 237 && myImage[idx + 1] == 207 && myImage[idx + 2] == 36) ||
@@ -437,6 +437,9 @@ public class Ship extends Agent {
             (myImage[idx + 0] == 74 && myImage[idx + 1] == 24 && myImage[idx + 2] == 11) ||
             (myImage[idx + 0] == 66 && myImage[idx + 1] == 58 && myImage[idx + 2] == 10) ||
             (myImage[idx + 0] == 38 && myImage[idx + 1] == 74 && myImage[idx + 2] == 11);
+        }else {
+            return false;
+        }
     }
 
     protected boolean hitEnemy(short[] myImage, int x, int y){

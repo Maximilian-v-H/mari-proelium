@@ -22,11 +22,10 @@ public class Enemy extends Ship {
 
     public short[] run(short[] myImage){
         myImage = clearTrace(myImage);
-        // move();
         if(playerInVision(myImage) && this.bullet == null){
-            System.out.println("DETECTED");
             shoot();
         }
+        move();
         if (collide(myImage)){
             resetMove();
         }
