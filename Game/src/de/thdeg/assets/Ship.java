@@ -1,6 +1,3 @@
-import java.util.ArrayList;
-import java.util.List;
-
 public class Ship extends Agent {
     protected int hp;
     protected int[][] pos;
