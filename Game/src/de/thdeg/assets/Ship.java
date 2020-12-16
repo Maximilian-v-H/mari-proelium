@@ -7,7 +7,7 @@ public class Ship extends Agent {
     protected int[][] oldpos;
     protected int align;
     protected short[][][] color = new short[3][3][3];
-    protected List<Bullet> bullets = new ArrayList<Bullet>();
+    protected Bullet bullet = null;
 
     Ship(int hp){
         this.pos = new int[3][2];
@@ -404,7 +404,9 @@ public class Ship extends Agent {
     protected void shoot() {
         int dir1 = (this.align + 2 > 8) ? (this.align + 2 - 8) : (this.align + 2);
         // int dir2 = (this.align - 2 < 1) ? (8 + this.align - 2) : (this.align - 2);
-        bullets.add(new Bullet(dir1, 5, this.pos[1][0], this.pos[1][1]));
+        if(this.bullet == null){
+            bullet = new Bullet(dir1, 5, this.pos[1][0], this.pos[1][1]);
+        }
         // bullets.add(new Bullet(dir2, 5, this.pos[1][0], this.pos[1][1]));
     }
 
@@ -468,8 +470,12 @@ public class Ship extends Agent {
                 }
             }
         }
-        for (Bullet b : bullets) {
-            b.run(-1, myImage);
+        if(this.bullet != null){
+            if(this.bullet.getRange() > 0){
+                this.bullet.run(-1, myImage);
+            }else{
+                this.bullet = null;
+            }
         }
         myImage = paint(myImage);
         return myImage;

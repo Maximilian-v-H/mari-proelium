@@ -98,4 +98,8 @@ public class Bullet extends Agent {
 
         return myImage;
     }
+
+    public int getRange(){
+        return this.range;
+    }
 }

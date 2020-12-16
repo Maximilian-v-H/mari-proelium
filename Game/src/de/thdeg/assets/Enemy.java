@@ -23,15 +23,19 @@ public class Enemy extends Ship {
     public short[] run(short[] myImage){
         myImage = clearTrace(myImage);
         // move();
-        if(playerInVision(myImage)){
+        if(playerInVision(myImage) && this.bullet == null){
             System.out.println("DETECTED");
             shoot();
         }
         if (collide(myImage)){
             resetMove();
         }
-        for (Bullet b : bullets) {
-            b.run(-1, myImage);
+        if(this.bullet != null){
+            if(this.bullet.getRange() > 0){
+                this.bullet.run(-1, myImage);
+            }else{
+                this.bullet = null;
+            }
         }
         myImage = paint(myImage);
         return myImage;
@@ -53,6 +57,7 @@ public class Enemy extends Ship {
      *  Method to detect if the player is visible for the enemy ship.
      * */
     private boolean playerInVision(short[] myImage){
+        System.out.println("DESTRUCTIONEER: " + this.pos[1][1]);
         int difx;
         int dify;
         for (int i = 0 - this.range; i <= this.range; i++) {
