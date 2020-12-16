@@ -113,7 +113,23 @@ public class Ship extends Agent {
                 myImage[(this.pos[i][1] * 48 + this.pos[i][0]) * 3 + 1] = color[this.hp - 1][i][1];
                 myImage[(this.pos[i][1] * 48 + this.pos[i][0]) * 3 + 2] = color[this.hp - 1][i][2];
             }
+        }else {
+            for(int i=0; i < this.pos.length; i++){
+                myImage[(this.pos[i][1] * 48 + this.pos[i][0]) * 3 + 0] = 0;
+                myImage[(this.pos[i][1] * 48 + this.pos[i][0]) * 3 + 1] = 177;
+                myImage[(this.pos[i][1] * 48 + this.pos[i][0]) * 3 + 2] = 241;
+            }
         }
+        return myImage;
+    }
+
+    public short[] isHit(short[] myImage){
+        for(int i = 0; i < this.pos.length; i++){
+            if (hitBullet(myImage, this.pos[i][0], this.pos[i][1])){
+                damage(1);
+            }
+        }
+        myImage = paint(myImage);
         return myImage;
     }
 
@@ -457,6 +473,7 @@ public class Ship extends Agent {
     }
 
     public short[] run(int key, short[] myImage){
+        myImage = isHit(myImage);
         if(key != -1){
             myImage = clearTrace(myImage);
             move(key);

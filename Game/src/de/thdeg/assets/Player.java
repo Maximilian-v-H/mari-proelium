@@ -28,9 +28,6 @@ public class Player extends Ship {
         }
         return ret;
     }
-    protected void shoot() {
-
-    }
 
     /**
      * Debug method to print shiplocation and locationdifference between the new and old location.

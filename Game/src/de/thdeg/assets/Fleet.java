@@ -19,6 +19,12 @@ public class Fleet {
         }
     }
 
+    public short[] statusUpdate(short[] myImage){
+        for(Enemy e : this.fleet){
+            myImage = e.isHit(myImage);
+        }
+        return myImage;
+    }
 
     public short[] paintFleet(short[] myImage){
         for (Enemy s : this.fleet) {

@@ -57,16 +57,17 @@ public class Enemy extends Ship {
      *  Method to detect if the player is visible for the enemy ship.
      * */
     private boolean playerInVision(short[] myImage){
-        System.out.println("DESTRUCTIONEER: " + this.pos[1][1]);
         int difx;
         int dify;
-        for (int i = 0 - this.range; i <= this.range; i++) {
-            difx = this.pos[1][0] + i;
-            for (int j = 0 - this.range; j <= this.range; j++) {
-                dify = this.pos[1][1] + j;
-                if ((Math.pow(difx - this.pos[0][1], 2)+Math.pow(dify - this.pos[1][1], 2)) <= Math.pow(this.range, 2)) {
-                    if(hitPlayer(myImage, difx,dify)) {
-                        return true;
+        if(this.hp > 0){
+            for (int i = 0 - this.range; i <= this.range; i++) {
+                difx = this.pos[1][0] + i;
+                for (int j = 0 - this.range; j <= this.range; j++) {
+                    dify = this.pos[1][1] + j;
+                    if ((Math.pow(difx - this.pos[0][1], 2)+Math.pow(dify - this.pos[1][1], 2)) <= Math.pow(this.range, 2)) {
+                        if(hitPlayer(myImage, difx,dify)) {
+                            return true;
+                        }
                     }
                 }
             }

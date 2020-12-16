@@ -42,6 +42,7 @@ public class GameMain {
         while(p.isAlive()){
             thisKey = InternalLedGameThread.getKeyboard();
             myImage = p.run(thisKey, myImage);
+            myImage = fleet.statusUpdate(myImage);
             if(round % 3 == 0) {
                 fleet.executeOrders(myImage);
             }
