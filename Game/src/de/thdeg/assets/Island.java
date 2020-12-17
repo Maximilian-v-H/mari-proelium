@@ -23,8 +23,8 @@ public class Island extends Agent {
     }
 
     @Override
-    boolean collide(short[] myImage) {
-        return false;
+    int collide(short[] myImage) {
+        return -1;
     }
 
     @Override

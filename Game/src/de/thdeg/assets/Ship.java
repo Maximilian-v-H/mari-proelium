@@ -141,8 +141,8 @@ public class Ship extends Agent {
     /**
      * The method collide looks at the pixels of the ship and look if it collided with another object
      * */
-    public boolean collide(short[] myImage){
-        return false;
+    public int collide(short[] myImage){
+        return -1;
     }
 
     /**
@@ -485,7 +485,7 @@ public class Ship extends Agent {
         if(key != -1){
             myImage = clearTrace(myImage);
             move(key);
-            if (collide(myImage)){
+            if (collide(myImage) == 1){
                 resetMove();
                 if(key == 2){
                     this.align++;

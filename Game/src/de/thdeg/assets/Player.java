@@ -19,12 +19,12 @@ public class Player extends Ship {
     /**
      * The method collide looks at the pixels of the ship and look if it collided with another object
      * */
-    public boolean collide(short[] myImage){
-        boolean ret = false;
+    public int collide(short[] myImage){
+        boolean ret = 0;
         for(int i=0; i < this.pos.length; i++){
             if (hitBullet(myImage, this.pos[i][0], this.pos[i][1]) || hitEnemy(myImage, this.pos[i][0], this.pos[i][1])) {
                 damage(1);
-                ret = true;
+                ret = 1;
                }
         }
         return ret;
@@ -35,7 +35,7 @@ public class Player extends Ship {
         if(key != -1){
             myImage = clearTrace(myImage);
             move(key);
-            if (collide(myImage)){
+            if (collide(myImage) == 1){
                 resetMove();
                 if(key == 2){
                     this.align++;
@@ -46,14 +46,16 @@ public class Player extends Ship {
             }
         }
         if(this.bullet != null){
-            this.score = (this.bullet.getHasHit()) ? this.score + 50 : this.score ;
+            if(this.bullet.getHasHit()){
+                addScore(50);
+            }
             if(this.bullet.getRange() > 0){
                 this.bullet.run(-1, myImage);
             }else{
                 this.bullet = null;
             }
         }
-        System.out.println("Score: " + this.score);
+        System.out.println("Score: " + getScore());
         myImage = paint(myImage);
         return myImage;
     }

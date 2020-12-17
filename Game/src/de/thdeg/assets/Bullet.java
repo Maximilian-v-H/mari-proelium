@@ -39,8 +39,8 @@ public class Bullet extends Agent {
         return myImage;
     }
 
-    public boolean collide(short[] myImage){
-        return false;
+    public int collide(short[] myImage){
+        return 0;
     }
 
     protected boolean hitPlayer(short[] myImage, int x, int y){

@@ -49,6 +49,14 @@ public class Fleet {
         return ret;
     }
 
+    public int damageControl(){
+        int ret = 0;
+        for (Enemy e : this.fleet){
+            ret += e.getDamageReceived();
+        }
+        return ret;
+    }
+
     public void printing(){
         for(Enemy e : this.fleet){
             e.print("text");

@@ -1,7 +1,7 @@
 public class GameMain {
 
     static public void main(String[] passedArgs) throws InterruptedException {
-        short[] myImage=new short[24*48*3];
+        short[] myImage = new short[24*48*3];
         int thisKey=0;
         int frame = 0;
         int round = 1;
@@ -40,6 +40,7 @@ public class GameMain {
             frame++;
             Thread.sleep(100);
             System.out.println("+++ " + (System.currentTimeMillis() - startTime) + " +++");
+            p.addScore(fleet.damageControl());
             if((System.currentTimeMillis() - startTime) > roundtime){
                 myImage = fleet.employFleet(myImage, (3 - fleet.getNumberOfAliveShips()));
                 round++;

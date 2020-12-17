@@ -1,5 +1,6 @@
 public class Enemy extends Ship {
     private int range;
+    private int dmg = 0;
 
     Enemy(int hp){
         super(hp);
@@ -16,9 +17,9 @@ public class Enemy extends Ship {
         this.range = r;
     }
 
-    // protected void shoot() {
-
-    // }
+    public int getDamageReceived(){
+        return this.dmg;
+    }
 
     public short[] run(short[] myImage){
         myImage = clearTrace(myImage);
@@ -26,7 +27,10 @@ public class Enemy extends Ship {
             shoot();
         }
         move();
-        if (collide(myImage)){
+        if (collide(myImage) == 1){
+            resetMove();
+        }
+        if (collide(myImage) == 2){
             resetMove();
         }
         if(this.bullet != null){
@@ -78,14 +82,19 @@ public class Enemy extends Ship {
     /**
      * The method collide looks at the pixels of the ship and look if it collided with another object
      * */
-    public boolean collide(short[] myImage){
-        boolean ret = false;
+    public int collide(short[] myImage){
+        int ret = 0;
         for(int i=0; i < this.pos.length; i++){
             int idx = (this.pos[i][1] * 48 + this.pos[i][0]) * 3;
-            if (hitBullet(myImage, this.pos[i][0], this.pos[i][1]) || hitPlayer(myImage, this.pos[i][0], this.pos[i][1])) {
+            if (hitBullet(myImage, this.pos[i][0], this.pos[i][1])){
                 damage(1);
-                ret = true;
+                ret = 2;
             }
+                if(hitPlayer(myImage, this.pos[i][0], this.pos[i][1])) {
+                damage(1);
+                this.dmg += 1;
+                ret = 1;
+                }
         }
         return ret;
     }
