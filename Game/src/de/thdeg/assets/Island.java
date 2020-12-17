@@ -1,22 +1,70 @@
 public class Island extends Agent {
     protected short[][] color = {{196, 156, 53},{186, 148, 48}}; // normale Insel, Hafeninsel
     protected int[][][] pos;
+    protected int[] size;
     protected Harbor harbor = null;
 
-    Island(int[][][] pos, Harbor harbor){
-        this.pos = pos;
-        this.harbor = harbor;
+    Island(int[] size, int x, int y){
+        this.pos = new int[size[0]][size[1]][2];
+        for(int i1 = 0; i1 < size[0]; i1++){
+            for(int i2 = 0; i2 < size[1]; i2++){
+                this.pos[i1][i2][0] = x + i1;
+                this.pos[i1][i2][1] = y + i2;
+            }
+        }
     }
 
-    Island(int[][][] pos){
-        this.pos = pos;
+    Island(int[] size, int x, int y, Harbor harbor){
+        this.pos = new int[size[0]][size[1]][2];
+        for(int i1 = 0; i1 < size[0]; i1++){
+            for(int i2 = 0; i2 < size[1]; i2++){
+                this.pos[i1][i2][0] = x + i1;
+                this.pos[i1][i2][1] = y + i2;
+            }
+        }
+        this.harbor = harbor;
     }
 
     @Override
     short[] paint(short[] myImage) {
         for(int i1 = 0; i1 < this.pos.length; i1++){
-            for(int i2 = 0; i2 < this.pos.length; i2++){
+            for(int i2 = 0; i2 < this.pos[i1].length; i2++){
+                if(harbor == null){
+                    myImage[(this.pos[i1][i2][1] * 48 + this.pos[i1][i2][0]) * 3 + 0] = color[0][0]; // (y * 48 + x) * 3 + 0
+                    myImage[(this.pos[i1][i2][1] * 48 + this.pos[i1][i2][0]) * 3 + 1] = color[0][1]; // (y * 48 + x) * 3 + 1
+                    myImage[(this.pos[i1][i2][1] * 48 + this.pos[i1][i2][0]) * 3 + 2] = color[0][2]; // (y * 48 + x) * 3 + 2
+                }
+                else{
+                    myImage[(this.pos[i1][i2][1] * 48 + this.pos[i1][i2][0]) * 3 + 0] = color[1][0]; // (y * 48 + x) * 3 + 0
+                    myImage[(this.pos[i1][i2][1] * 48 + this.pos[i1][i2][0]) * 3 + 1] = color[1][1]; // (y * 48 + x) * 3 + 1
+                    myImage[(this.pos[i1][i2][1] * 48 + this.pos[i1][i2][0]) * 3 + 2] = color[1][2]; // (y * 48 + x) * 3 + 2
+                    switch(harbor.getOrient()){
+                        case 1:
 
+                            break;
+                        case 2:
+
+                            break;
+                        case 3:
+
+                            break;
+                        case 4:
+
+                            break;
+                        case 5:
+
+                            break;
+                        case 6:
+
+                            break;
+                        case 7:
+
+                            break;
+                        case 8:
+
+                            break;
+                    }
+                }
             }
         }
         return myImage;

@@ -1,8 +1,16 @@
 public class Harbor extends Agent{
     protected short[] color = {125, 66, 24};
-    protected int[][] pos;
+    protected int orient;
     protected boolean captured = false;
     protected boolean possession = false;
+
+    Harbor(int orient){
+        this.orient = orient;
+    }
+
+    public int getOrient(){
+        return this.orient;
+    }
 
     @Override
     short[] paint(short[] myImage) {
@@ -10,13 +18,12 @@ public class Harbor extends Agent{
     }
 
     @Override
-    boolean collide(short[] myImage) {
-        return false;
+    int collide(short[] myImage) {
+        return -1;
     }
 
     @Override
     void move(int dir) {
-
     }
 
     @Override
