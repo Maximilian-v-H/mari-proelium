@@ -19,14 +19,16 @@ public class GameMain {
         System.out.println("Sending to displayThread");
         Player p = new Player(3, 7, 7, 5);
         Fleet fleet = new Fleet();
-        fleet.addFleetmember(new Enemy(2, 12, 15, 1, 5));
-        fleet.addFleetmember(new Enemy(2, 9, 12, 3, 5));
-        fleet.addFleetmember(new Enemy(2, 20, 15, 7, 5));
+        // fleet.addFleetmember(new Enemy(2, 12, 15, 1, 5));
+        // fleet.addFleetmember(new Enemy(2, 9, 12, 3, 5));
+        // fleet.addFleetmember(new Enemy(2, 20, 15, 7, 5));
         // fleet.addFleetmember(new Enemy(2, 30, 12, 8, 5));
         // fleet.addFleetmember(new Enemy(2, 23, 6, 2, 5));
         // fleet.addFleetmember(new Enemy(2, 40, 4, 5, 5));
         // fleet.addFleetmember(new Enemy(2, 35, 3, 4, 5));
 
+        myImage = fleet.employFleet(myImage, 3);
+        fleet.printing();
 
         myImage = p.paint(myImage);
         myImage = fleet.paintFleet(myImage);
@@ -41,13 +43,13 @@ public class GameMain {
             myImage = fleet.statusUpdate(myImage);
             if(frame % 3 == 0) {
                 frame = 0;
-                fleet.executeOrders(myImage);
+                myImage = fleet.executeOrders(myImage);
             }
             InternalLedGameThread.showImage(myImage);
             frame++;
             Thread.sleep(100);
             System.out.println("+++ " + (System.currentTimeMillis() - startTime) + " +++");
-        if((System.currentTimeMillis() - startTime) > roundtime){
+            if((System.currentTimeMillis() - startTime) > roundtime){
                 round++;
                 startTime = System.currentTimeMillis();
                 p.addScore(200);

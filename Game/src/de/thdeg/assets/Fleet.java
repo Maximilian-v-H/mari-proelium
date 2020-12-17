@@ -11,12 +11,48 @@ public class Fleet {
         this.fleet.add(s);
     }
 
-    public void executeOrders(short[] myImage){
+    private boolean isWater(short[] myImage, int idx){
+        return (myImage[idx] == 0 && myImage[idx + 1] == 177 && myImage[idx + 2] == 241);
+    }
+
+    public short[] employFleet(short[] myImage, int num){
+        for(int i = 1; i < 47; i++){
+            for(int j = 1; j < 23; j++){
+                if(     isWater(myImage, (((j-1) * 48 +  i   ) * 3)) &&
+                        isWater(myImage, (((j-1) * 48 + (i+1)) * 3)) &&
+                        isWater(myImage, (((j-1) * 48 + (i-1)) * 3)) &&
+                        isWater(myImage, ((j     * 48 +  i   ) * 3)) &&
+                        isWater(myImage, ((j     * 48 + (i+1)) * 3)) &&
+                        isWater(myImage, ((j     * 48 + (i-1)) * 3)) &&
+                        isWater(myImage, (((j+1) * 48 +  i   ) * 3)) &&
+                        isWater(myImage, (((j+1) * 48 + (i+1)) * 3)) &&
+                        isWater(myImage, (((j+1) * 48 + (i-1)) * 3))){
+                    if(num > 0){
+                System.out.println(i + " " + j);
+                        addFleetmember(new Enemy(2, i, j, 4, 8));
+                        myImage = paintFleet(myImage);
+                        num--;
+                        continue;
+                    }
+                        }
+            }
+        }
+        return myImage;
+    }
+
+    public void printing(){
+        for(Enemy e : this.fleet){
+            e.print("text");
+        }
+    }
+
+    public short[] executeOrders(short[] myImage){
         for (Enemy s : this.fleet){
             if(s.isAlive()){
                 myImage = s.run(myImage);
             }
         }
+        return myImage;
     }
 
     public short[] statusUpdate(short[] myImage){
