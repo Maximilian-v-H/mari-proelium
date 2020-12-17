@@ -3,6 +3,10 @@ public class GameMain {
     static public void main(String[] passedArgs) throws InterruptedException {
         short[] myImage=new short[24*48*3];
         int thisKey=0;
+        int frame = 0;
+        int round = 1;
+        long startTime = System.currentTimeMillis();
+        long roundtime = 30000;
 
         // This is initialization, do not change this
         InternalLedGameThread.run();
@@ -19,24 +23,11 @@ public class GameMain {
         System.out.println("Sending to displayThread");
         Player p = new Player(3, 7, 7, 5);
         Fleet fleet = new Fleet();
-        // fleet.addFleetmember(new Enemy(2, 12, 15, 1, 5));
-        // fleet.addFleetmember(new Enemy(2, 9, 12, 3, 5));
-        // fleet.addFleetmember(new Enemy(2, 20, 15, 7, 5));
-        // fleet.addFleetmember(new Enemy(2, 30, 12, 8, 5));
-        // fleet.addFleetmember(new Enemy(2, 23, 6, 2, 5));
-        // fleet.addFleetmember(new Enemy(2, 40, 4, 5, 5));
-        // fleet.addFleetmember(new Enemy(2, 35, 3, 4, 5));
 
         myImage = fleet.employFleet(myImage, 3);
-        fleet.printing();
-
         myImage = p.paint(myImage);
         myImage = fleet.paintFleet(myImage);
         InternalLedGameThread.showImage(myImage);
-        int frame = 0;
-        int round = 1;
-        long startTime = System.currentTimeMillis();
-        long roundtime = 30000;
         while(p.isAlive()){
             thisKey = InternalLedGameThread.getKeyboard();
             myImage = p.run(thisKey, myImage);
@@ -50,6 +41,7 @@ public class GameMain {
             Thread.sleep(100);
             System.out.println("+++ " + (System.currentTimeMillis() - startTime) + " +++");
             if((System.currentTimeMillis() - startTime) > roundtime){
+                myImage = fleet.employFleet(myImage, (3 - fleet.getNumberOfAliveShips()));
                 round++;
                 startTime = System.currentTimeMillis();
                 p.addScore(200);

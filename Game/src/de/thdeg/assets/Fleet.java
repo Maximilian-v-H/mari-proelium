@@ -28,7 +28,6 @@ public class Fleet {
                         isWater(myImage, (((j+1) * 48 + (i+1)) * 3)) &&
                         isWater(myImage, (((j+1) * 48 + (i-1)) * 3))){
                     if(num > 0){
-                System.out.println(i + " " + j);
                         addFleetmember(new Enemy(2, i, j, 4, 8));
                         myImage = paintFleet(myImage);
                         num--;
@@ -38,6 +37,16 @@ public class Fleet {
             }
         }
         return myImage;
+    }
+
+    public int getNumberOfAliveShips(){
+        int ret = 0;
+        for (Enemy s : this.fleet){
+            if(s.isAlive()){
+                ret++;
+            }
+        }
+        return ret;
     }
 
     public void printing(){
