@@ -20,7 +20,7 @@ public class Player extends Ship {
      * The method collide looks at the pixels of the ship and look if it collided with another object
      * */
     public int collide(short[] myImage){
-        boolean ret = 0;
+        int ret = 0;
         for(int i=0; i < this.pos.length; i++){
             if (hitBullet(myImage, this.pos[i][0], this.pos[i][1]) || hitEnemy(myImage, this.pos[i][0], this.pos[i][1])) {
                 damage(1);

@@ -21,7 +21,7 @@ public class Bullet extends Agent {
         return myImage;
     }
 
-    private short[] clear(short[] myImage){
+    public short[] clear(short[] myImage){
             myImage[(this.pos[1] * 48 + this.pos[0]) * 3 + 0] = (short)0;
             myImage[(this.pos[1] * 48 + this.pos[0]) * 3 + 1] = (short)177;
             myImage[(this.pos[1] * 48 + this.pos[0]) * 3 + 2] = (short)241;

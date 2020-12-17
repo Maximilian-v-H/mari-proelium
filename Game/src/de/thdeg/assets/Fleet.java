@@ -49,6 +49,11 @@ public class Fleet {
         return ret;
     }
 
+    public void resetDamageControl(){
+        for (Enemy e : this.fleet){
+            e.resetDmg();
+        }
+    }
     public int damageControl(){
         int ret = 0;
         for (Enemy e : this.fleet){

@@ -116,6 +116,9 @@ public class Ship extends Agent {
                 myImage[(this.pos[i][1] * 48 + this.pos[i][0]) * 3 + 1] = 177;
                 myImage[(this.pos[i][1] * 48 + this.pos[i][0]) * 3 + 2] = 241;
             }
+            if(this.bullet != null){
+                myImage = this.bullet.clear(myImage);
+            }
         }
         return myImage;
     }

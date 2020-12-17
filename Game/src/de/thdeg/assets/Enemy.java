@@ -17,6 +17,10 @@ public class Enemy extends Ship {
         this.range = r;
     }
 
+    public void resetDmg(){
+        this.dmg = 0;
+    }
+
     public int getDamageReceived(){
         return this.dmg;
     }
