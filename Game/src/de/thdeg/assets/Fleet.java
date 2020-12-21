@@ -16,25 +16,23 @@ public class Fleet {
     }
 
     public short[] employFleet(short[] myImage, int num){
-        for(int i = 1; i < 47; i++){
-            for(int j = 1; j < 23; j++){
-                if(     isWater(myImage, (((j-1) * 48 +  i   ) * 3)) &&
-                        isWater(myImage, (((j-1) * 48 + (i+1)) * 3)) &&
-                        isWater(myImage, (((j-1) * 48 + (i-1)) * 3)) &&
-                        isWater(myImage, ((j     * 48 +  i   ) * 3)) &&
-                        isWater(myImage, ((j     * 48 + (i+1)) * 3)) &&
-                        isWater(myImage, ((j     * 48 + (i-1)) * 3)) &&
-                        isWater(myImage, (((j+1) * 48 +  i   ) * 3)) &&
-                        isWater(myImage, (((j+1) * 48 + (i+1)) * 3)) &&
-                        isWater(myImage, (((j+1) * 48 + (i-1)) * 3))){
-                    if(num > 0){
-                        addFleetmember(new Enemy(2, i, j, 4, 8));
-                        myImage = paintFleet(myImage);
-                        num--;
-                        continue;
+        while (num > 0){
+            int i = (int)(Math.random() * 47);
+            int j = (int)(Math.random() * 23);
+            if(     isWater(myImage, (((j-1) * 48 +  i   ) * 3)) &&
+                    isWater(myImage, (((j-1) * 48 + (i+1)) * 3)) &&
+                    isWater(myImage, (((j-1) * 48 + (i-1)) * 3)) &&
+                    isWater(myImage, ((j     * 48 +  i   ) * 3)) &&
+                    isWater(myImage, ((j     * 48 + (i+1)) * 3)) &&
+                    isWater(myImage, ((j     * 48 + (i-1)) * 3)) &&
+                    isWater(myImage, (((j+1) * 48 +  i   ) * 3)) &&
+                    isWater(myImage, (((j+1) * 48 + (i+1)) * 3)) &&
+                    isWater(myImage, (((j+1) * 48 + (i-1)) * 3))){
+                addFleetmember(new Enemy(2, i, j, 4, 8));
+                myImage = paintFleet(myImage);
+                num--;
+                continue;
                     }
-                        }
-            }
         }
         return myImage;
     }
