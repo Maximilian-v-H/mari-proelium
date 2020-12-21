@@ -1,6 +1,11 @@
 public class Enemy extends Ship {
     private int range;
     private int dmg = 0;
+    private int PX;
+    private int PY;
+    private int RouteX;
+    private int RouteY;
+    private boolean detectedPlayer = false;
 
     Enemy(int hp){
         super(hp);
@@ -25,16 +30,17 @@ public class Enemy extends Ship {
         return this.dmg;
     }
 
+    private void pathFinder(){
+
+    }
+
     public short[] run(short[] myImage){
         myImage = clearTrace(myImage);
         if(playerInVision(myImage) && this.bullet == null){
             shoot();
         }
         move();
-        if (collide(myImage) == 1){
-            resetMove();
-        }
-        if (collide(myImage) == 2){
+        if (collide(myImage) != 0){
             resetMove();
         }
         if(this.bullet != null){
@@ -73,6 +79,9 @@ public class Enemy extends Ship {
                     dify = this.pos[1][1] + j;
                     if ((Math.pow(difx - this.pos[0][1], 2)+Math.pow(dify - this.pos[1][1], 2)) <= Math.pow(this.range, 2)) {
                         if(hitPlayer(myImage, difx,dify)) {
+                            this.detectedPlayer = true;
+                            this.PX = difx;
+                            this.PY = dify;
                             return true;
                         }
                     }
@@ -82,6 +91,24 @@ public class Enemy extends Ship {
         return false;
     }
 
+    public void setRouteX(int PX){
+        this.PX = PX;
+    }
+
+    public void setRouteY(int PY){
+        this.PY = PY;
+    }
+    public int getPX(){
+        return this.PX;
+    }
+
+    public int getPY(){
+        return this.PY;
+    }
+
+    public boolean getPlayerDetected(){
+        return this.detectedPlayer;
+    }
 
     /**
      * The method collide looks at the pixels of the ship and look if it collided with another object

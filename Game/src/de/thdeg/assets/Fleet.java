@@ -2,6 +2,9 @@ import java.util.List;
 import java.util.ArrayList;
 public class Fleet {
     private List<Enemy> fleet;
+    private int PX;
+    private int PY;
+    private boolean detected = false;
 
     Fleet(){
         this.fleet = new ArrayList<Enemy>();
@@ -85,9 +88,22 @@ public class Fleet {
         }
     }
 
+    private void broadcastPosition(){
+        for(Enemy e : this.fleet){
+            if(e.getPlayerDetected()){
+                this.detected = true;
+                this.PX = e.getPX();
+                this.PY = e.getPY();
+            }
+        }
+    }
+
     public short[] executeOrders(short[] myImage){
+        broadcastPosition();
         for (Enemy s : this.fleet){
             if(s.isAlive()){
+                s.setRouteX(this.PX);
+                s.setRouteY(this.PY);
                 myImage = s.run(myImage);
             }
         }
