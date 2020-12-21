@@ -17,8 +17,8 @@ public class Fleet {
 
     public short[] employFleet(short[] myImage, int num){
         while (num > 0){
-            int i = (int)(Math.random() * 47);
-            int j = (int)(Math.random() * 23);
+            int i = (int)(Math.random() * 46) + 1;
+            int j = (int)(Math.random() * 22) + 1;
             if(     isWater(myImage, (((j-1) * 48 +  i   ) * 3)) &&
                     isWater(myImage, (((j-1) * 48 + (i+1)) * 3)) &&
                     isWater(myImage, (((j-1) * 48 + (i-1)) * 3)) &&
