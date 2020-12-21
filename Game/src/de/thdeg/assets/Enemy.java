@@ -94,13 +94,22 @@ public class Enemy extends Ship {
                 damage(1);
                 ret = 2;
             }
-                if(hitPlayer(myImage, this.pos[i][0], this.pos[i][1])) {
+            if(hitPlayer(myImage, this.pos[i][0], this.pos[i][1])) {
                 damage(1);
                 this.dmg += 1;
                 ret = 1;
-                }
+            }
         }
         return ret;
+    }
+
+    public boolean includesPos(int x, int y){
+        for (int i = 0; i < this.pos.length; i++){
+            if(this.pos[i][0] == x && this.pos[i][1] == y){
+                return true;
+            }
+        }
+        return false;
     }
 
     /**

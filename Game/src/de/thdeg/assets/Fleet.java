@@ -62,6 +62,25 @@ public class Fleet {
         return ret;
     }
 
+    public void distributeDamage(int x, int y){
+        for (Enemy e : fleet){
+            if(e.includesPos(x, y)){
+                e.damage(1);
+                break;
+            }
+        }
+    }
+
+    public int getDead(){
+        int ret = 0;
+        for (Enemy e : fleet){
+            if(!e.isAlive()){
+                ret++;
+            }
+        }
+        return ret;
+    }
+
     public void printing(){
         for(Enemy e : this.fleet){
             e.print("text");

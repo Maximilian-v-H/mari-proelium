@@ -1,5 +1,8 @@
 public class Player extends Ship {
     private int score = 0;
+    private boolean hit = false;
+    private int hitX;
+    private int hitY;
 
     Player(int hp){
         super(hp);
@@ -22,12 +25,39 @@ public class Player extends Ship {
     public int collide(short[] myImage){
         int ret = 0;
         for(int i=0; i < this.pos.length; i++){
-            if (hitBullet(myImage, this.pos[i][0], this.pos[i][1]) || hitEnemy(myImage, this.pos[i][0], this.pos[i][1])) {
+            if (hitBullet(myImage, this.pos[i][0], this.pos[i][1])){
                 damage(1);
                 ret = 1;
-               }
+            }
+            if(hitEnemy(myImage, this.pos[i][0], this.pos[i][1])) {
+                this.hit = true;
+                this.hitX = this.pos[i][0];
+                this.hitY = this.pos[i][1];
+                damage(1);
+                ret = 1;
+            }
         }
         return ret;
+    }
+
+    public int[][] getPos(){
+        return this.pos;
+    }
+
+    public int getHitX(){
+        return this.hitX;
+    }
+    public int getHitY(){
+        return this.hitY;
+    }
+    public boolean getHit(){
+        return this.hit;
+    }
+
+    public void resetHit(){
+        this.hit = false;
+        this.hitX = -1;
+        this.hitY = -1;
     }
 
     public short[] run(int key, short[] myImage){
@@ -55,7 +85,6 @@ public class Player extends Ship {
                 this.bullet = null;
             }
         }
-        System.out.println("Score: " + getScore());
         myImage = paint(myImage);
         return myImage;
     }

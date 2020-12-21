@@ -37,6 +37,9 @@ public class GameMain {
         while(p.isAlive()){
             thisKey = InternalLedGameThread.getKeyboard();
             myImage = p.run(thisKey, myImage);
+            if(p.getHit()){
+                fleet.distributeDamage(p.getHitX(), p.getHitY());
+            }
             myImage = fleet.statusUpdate(myImage);
             if(frame % 3 == 0) {
                 frame = 0;
@@ -46,7 +49,7 @@ public class GameMain {
             frame++;
             Thread.sleep(100);
             System.out.println("+++ " + (System.currentTimeMillis() - startTime) + " +++");
-            p.addScore(fleet.damageControl());
+            p.damage(fleet.damageControl());
             fleet.resetDamageControl();
             if((System.currentTimeMillis() - startTime) > roundtime){
                 myImage = fleet.employFleet(myImage, (3 - fleet.getNumberOfAliveShips()));
@@ -55,6 +58,7 @@ public class GameMain {
                 p.addScore(200);
             }
         }
+        p.addScore(fleet.getDead() * 50);
         highscore.add(p.getScore());
         System.out.println("(" + round + ") - Score: " + p.getScore());
     }
