@@ -1,3 +1,5 @@
+import java.util.List;
+import java.util.ArrayList;
 public class Enemy extends Ship {
     private int range;
     private int dmg = 0;
@@ -6,6 +8,7 @@ public class Enemy extends Ship {
     private int RouteX;
     private int RouteY;
     private boolean detectedPlayer = false;
+    private List<int[]> routing = new ArrayList<int[]>();
 
     Enemy(int hp){
         super(hp);
@@ -30,7 +33,16 @@ public class Enemy extends Ship {
         return this.dmg;
     }
 
+    /**
+     *  Create Routes
+     * */
     private void pathFinder(){
+        /**
+         *  Start:  this.pos[1][0]=x
+         *          this.pos[1][1]=y
+         *  End:    this.RouteX
+         *          this.RouteY
+         * */
 
     }
 
@@ -55,15 +67,87 @@ public class Enemy extends Ship {
     }
 
     private void move(){
-        if(canMove()){
-            forward();
-        }else{
-            if(Math.random() > 0.5){
-                rotate(0);
+        if(this.routing.size() <= 0 ){
+            if(canMove()){
+                forward();
+            }else{
+                if(Math.random() > 0.5){
+                    rotate(0);
+                }else {
+                    rotate(1);
+                }
+            }
+        }else {
+            switch(routeDirection(this.routing.get(this.routing.size() - 1))){
+                case 1 -> {
+                    rotateTo(1);
+                    forward();
+                }
+                case 2 -> {
+                    rotateTo(2);
+                    forward();
+                }
+                case 3 -> {
+                    rotateTo(3);
+                    forward();
+                }
+                case 4 -> {
+                    rotateTo(4);
+                    forward();
+                }
+                case 5 -> {
+                    rotateTo(5);
+                    forward();
+                }
+                case 6 -> {
+                    rotateTo(6);
+                    forward();
+                }
+                case 7 -> {
+                    rotateTo(7);
+                    forward();
+                }
+                case 8 -> {
+                    rotateTo(8);
+                    forward();
+                }
+                default -> {}
+            }
+            this.routing.remove(this.routing.size() - 1);
+        }
+    }
+
+    private void rotateTo(int newOri){
+        while (this.align != newOri) {
+            rotate(1);
+        }
+    }
+
+    private int routeDirection(int[] gPos){
+        if(this.pos[1][0] > gPos[0]){
+            if(this.pos[1][1] > gPos[1]){
+                return 8;
+            }else if(this.pos[1][1] < gPos[1]){
+                return 6;
             }else {
-                rotate(1);
+                return 7;
+            }
+        }else if(this.pos[1][0] > gPos[0]){
+            if(this.pos[1][1] > gPos[1]) {
+                return 2;
+            }else if(this.pos[1][1] < gPos[1]){
+                return 4;
+            }else {
+                return 3;
+            }
+        }else {
+            if(this.pos[1][1] > gPos[1]) {
+                return 1;
+            }else if(this.pos[1][1] < gPos[1]){
+                return 5;
             }
         }
+        return -1;
     }
 
     /**
@@ -98,6 +182,7 @@ public class Enemy extends Ship {
     public void setRouteY(int PY){
         this.PY = PY;
     }
+
     public int getPX(){
         return this.PX;
     }
