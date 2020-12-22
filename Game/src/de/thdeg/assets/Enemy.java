@@ -5,8 +5,8 @@ public class Enemy extends Ship {
     private int dmg = 0;
     private int PX;
     private int PY;
-    private int RouteX;
-    private int RouteY;
+    private int RouteX = -1;
+    private int RouteY = -1;
     private boolean detectedPlayer = false;
     private List<int[]> routing = new ArrayList<int[]>();
 
@@ -37,16 +37,65 @@ public class Enemy extends Ship {
      *  Create Routes
      * */
     private void pathFinder(){
+        this.routing = new ArrayList<int[]>();
         /**
          *  Start:  this.pos[1][0]=x
          *          this.pos[1][1]=y
          *  End:    this.RouteX
          *          this.RouteY
          * */
-
+        this.PX = this.RouteX;
+        this.PY = this.RouteY;
+        int pX = this.pos[1][0];
+        int pY = this.pos[1][1];
+        while(pX != this.RouteX && pY != this.RouteY){
+            int[] ia = {this.RouteX, this.RouteY};
+            switch(routeDirection(pX, pY, ia)){
+                case 1 -> {
+                    int[] rt = {pX, --pY};
+                    this.routing.add(rt);
+                }
+                case 2 -> {
+                    int[] rt = {++pX, --pY};
+                    this.routing.add(rt);
+                }
+                case 3 -> {
+                    int[] rt = {++pX, pY};
+                    this.routing.add(rt);
+                }
+                case 4 -> {
+                    int[] rt = {++pX, ++pY};
+                    this.routing.add(rt);
+                }
+                case 5 -> {
+                    int[] rt = {pX, ++pY};
+                    this.routing.add(rt);
+                }
+                case 6 -> {
+                    int[] rt = {--pX, ++pY};
+                    this.routing.add(rt);
+                }
+                case 7 -> {
+                    int[] rt = {--pX, pY};
+                    this.routing.add(rt);
+                }
+                case 8 -> {
+                    int[] rt = {--pX, --pY};
+                    this.routing.add(rt);
+                }
+                default -> {
+                    break;
+                }
+            }
+        }
     }
 
     public short[] run(short[] myImage){
+        if(this.RouteX != -1 && this.RouteY != -1){
+            pathFinder();
+            pR();
+            System.out.println(this.routing.get(0)[0]);
+        }
         myImage = clearTrace(myImage);
         if(playerInVision(myImage) && this.bullet == null){
             shoot();
@@ -78,7 +127,7 @@ public class Enemy extends Ship {
                 }
             }
         }else {
-            switch(routeDirection(this.routing.get(this.routing.size() - 1))){
+            switch(routeDirection(this.pos[1][0], this.pos[1][1], this.routing.get(this.routing.size() - 1))){
                 case 1 -> {
                     rotateTo(1);
                     forward();
@@ -117,33 +166,39 @@ public class Enemy extends Ship {
         }
     }
 
+    private void pR(){
+        for(int[] i : this.routing){
+            System.out.println("| " + i[0] + " | " + i[1] + " |");
+        }
+    }
+
     private void rotateTo(int newOri){
         while (this.align != newOri) {
             rotate(1);
         }
     }
 
-    private int routeDirection(int[] gPos){
-        if(this.pos[1][0] > gPos[0]){
-            if(this.pos[1][1] > gPos[1]){
+    private int routeDirection(int x, int y, int[] gPos){
+        if(x > gPos[0]){
+            if(y > gPos[1]){
                 return 8;
-            }else if(this.pos[1][1] < gPos[1]){
+            }else if(y < gPos[1]){
                 return 6;
             }else {
                 return 7;
             }
-        }else if(this.pos[1][0] > gPos[0]){
-            if(this.pos[1][1] > gPos[1]) {
+        }else if(x > gPos[0]){
+            if(y > gPos[1]) {
                 return 2;
-            }else if(this.pos[1][1] < gPos[1]){
+            }else if(y < gPos[1]){
                 return 4;
             }else {
                 return 3;
             }
         }else {
-            if(this.pos[1][1] > gPos[1]) {
+            if(y > gPos[1]) {
                 return 1;
-            }else if(this.pos[1][1] < gPos[1]){
+            }else if(y < gPos[1]){
                 return 5;
             }
         }
