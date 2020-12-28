@@ -2,4 +2,5 @@
 \contentsline {section}{\numberline {1}Projektvorraussetzungen}{III}{section.1}%
 \contentsline {section}{\numberline {2}Idee}{IV}{section.2}%
 \contentsline {section}{\numberline {3}Beschreibung}{V}{section.3}%
-\contentsline {section}{\numberline {4}Klassendiagramm}{VI}{section.4}%
+\contentsline {section}{\numberline {4}Projektablauf}{VI}{section.4}%
+\contentsline {section}{\numberline {5}Klassendiagramm}{VII}{section.5}%
