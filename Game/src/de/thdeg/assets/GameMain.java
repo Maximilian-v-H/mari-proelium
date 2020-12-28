@@ -23,12 +23,6 @@ public class GameMain {
         boolean end = false;
         Scanner scan = new Scanner(System.in);
         do {
-            System.out.println("Drucken Sie eine beliebige Taste um das Spiel zu starten.");
-            while(true){
-                if(InternalLedGameThread.getKeyboard() != -1){
-                    break;
-                }
-            }
             for(int i=0; i<myImage.length; i+=3){
                 myImage[i+0]=(short)0;
                 myImage[i+1]=(short)177;
@@ -46,6 +40,12 @@ public class GameMain {
             myImage = fleet.paintFleet(myImage);
             myImage = island.paint(myImage);
             InternalLedGameThread.showImage(myImage);
+            System.out.println("Drucken Sie eine beliebige Taste um das Spiel zu starten.");
+            while(true){
+                if(InternalLedGameThread.getKeyboard() != -1){
+                    break;
+                }
+            }
             while(p.isAlive()){
                 thisKey = InternalLedGameThread.getKeyboard();
                 myImage = p.run(thisKey, myImage);

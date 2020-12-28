@@ -144,8 +144,10 @@ Die Steuerung wird auf die vier verfügbaren Tasten aufgeteilt, sodass man ohne 
 \begin{itemize}
     \item \textbf{Vorbereitung}
         \newline
+        Es werden alle Spielnotwendigen Variablen deklariert und initialisiert. In einer \textit{Do-While} Schleife wird daraufhin gestarted um mehrere Spiele hintereinander spielen zu Können. Am Start der Schleife wird die Karte, der Spieler und die Gegner erstellt und gezeichnet und auf eine Eingabe des Benutzers gewartet. Bei Eingabe wird der Spielablauf gestartet. Nach dem Tod des Spielers wird der Punktestand ausgegeben und die Möglichkeit geboten ein neues Spiel zu Starten.
     \item \textbf{Spielablauf}
         \newline
+        Zuerst wird der Spieler bewegt und auf Kollisionen überprüft, danach die Gegner. Anschließend wird überprüft ob man eine Runde überlebt hat.
 \end{itemize}
 \newpage
 
