@@ -33,7 +33,7 @@ public class GameMain {
             Player p = new Player(3, 7, 7, 5);
             Fleet fleet = new Fleet();
             World world = new World();
-            myImage = world.createIsland(myImage,7);
+            myImage = world.createIsland(myImage,20);
             myImage = fleet.employFleet(myImage, 3);
             myImage = p.paint(myImage);
             myImage = fleet.paintFleet(myImage);
