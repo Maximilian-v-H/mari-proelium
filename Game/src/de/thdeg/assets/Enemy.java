@@ -100,7 +100,7 @@ public class Enemy extends Ship {
         if(playerInVision(myImage) && this.bullet == null){
             shoot();
         }
-        move();
+        move(myImage);
         if (collide(myImage) != 0){
             resetMove();
         }
@@ -115,10 +115,10 @@ public class Enemy extends Ship {
         return myImage;
     }
 
-    private void move(){
+    private void move(short[] myImage){
         if(this.routing.size() <= 0 ){
-            if(canMove()){
-                forward();
+            if(canMove(myImage)){
+                forward(myImage);
             }else{
                 if(Math.random() > 0.5){
                     rotate(0);
@@ -130,35 +130,35 @@ public class Enemy extends Ship {
             switch(routeDirection(this.pos[1][0], this.pos[1][1], this.routing.get(this.routing.size() - 1))){
                 case 1 -> {
                     rotateTo(1);
-                    forward();
+                    forward(myImage);
                 }
                 case 2 -> {
                     rotateTo(2);
-                    forward();
+                    forward(myImage);
                 }
                 case 3 -> {
                     rotateTo(3);
-                    forward();
+                    forward(myImage);
                 }
                 case 4 -> {
                     rotateTo(4);
-                    forward();
+                    forward(myImage);
                 }
                 case 5 -> {
                     rotateTo(5);
-                    forward();
+                    forward(myImage);
                 }
                 case 6 -> {
                     rotateTo(6);
-                    forward();
+                    forward(myImage);
                 }
                 case 7 -> {
                     rotateTo(7);
-                    forward();
+                    forward(myImage);
                 }
                 case 8 -> {
                     rotateTo(8);
-                    forward();
+                    forward(myImage);
                 }
                 default -> {}
             }

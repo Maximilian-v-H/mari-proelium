@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class Island extends Agent {
     protected short[][] color = {{196, 156, 53},{186, 148, 48}}; // normale Insel, Hafeninsel
     protected int[][][] pos;
@@ -92,11 +94,12 @@ public class Island extends Agent {
     }
 
     @Override
-    void move(int dir) {
+    void move(int dir,short[] myImage) {
     }
 
     @Override
     short[] run(int key, short[] myImage) {
         return myImage;
     }
+
 }

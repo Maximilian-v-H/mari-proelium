@@ -67,7 +67,7 @@ public class Player extends Ship {
         myImage = isHit(myImage);
         if(key != -1){
             myImage = clearTrace(myImage);
-            move(key);
+            move(key,myImage);
             if (collide(myImage) == 1){
                 resetMove();
                 if(key == 2){

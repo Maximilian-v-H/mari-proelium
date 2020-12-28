@@ -156,10 +156,10 @@ public class Ship extends Agent {
      *          2 - left
      *          3 - right
      * */
-    protected void move(int dir){
+    protected void move(int dir, short[] myImage){
         switch(dir){
             case 0: // Hoch
-                forward();
+                forward(myImage);
                 break;
             case 1: // Runter
                 shoot();
@@ -334,8 +334,8 @@ public class Ship extends Agent {
     /**
      * Used to move the ship in the direction it is aligned to.
      * */
-    protected void forward(){
-        if(canMove()){
+    protected void forward(short[] myImage){
+        if(canMove(myImage)){
             switch(this.align){
                 case 1:
                     saveOldPos();
@@ -397,17 +397,17 @@ public class Ship extends Agent {
      * Used to determine if the ship can move forward.
      * @return the returnvalue says, if the ship can move forward or if the ship would move outside the map.
      * */
-    protected boolean canMove(){
+    protected boolean canMove(short[] myImage){
         boolean ret = false;
         switch(this.align){
-            case 1 -> ret = (this.pos[0][1] - 1 >= 0);
-            case 2 -> ret = (this.pos[0][1] - 1 > 0 && this.pos[0][0] + 1 < 48);
-            case 3 -> ret = (this.pos[0][0] + 1 < 48);
-            case 4 -> ret = (this.pos[0][0] + 1 < 48 && this.pos[0][1] + 1 < 24);
-            case 5 -> ret = (this.pos[0][1] + 1 < 24);
-            case 6 -> ret = (this.pos[0][1] + 1 < 24 && this.pos[0][0] - 1 >= 0);
-            case 7 -> ret = (this.pos[0][0] - 1 >= 0);
-            case 8 -> ret = (this.pos[0][0] - 1 >= 0 && this.pos[0][1] - 1 >= 0);
+            case 1 -> ret = (this.pos[0][1] - 1 >= 0 && !hitIsland(myImage,this.pos[0][0],this.pos[0][1]-1) && !hitEnemy(myImage,this.pos[0][0],this.pos[0][1]-1));
+            case 2 -> ret = (this.pos[0][1] - 1 > 0 && this.pos[0][0] + 1 < 48 && !hitIsland(myImage,this.pos[0][0]+1,this.pos[0][1]-1) && !hitEnemy(myImage,this.pos[0][0]+1,this.pos[0][1]-1));
+            case 3 -> ret = (this.pos[0][0] + 1 < 48 && !hitIsland(myImage,this.pos[0][0]+1,this.pos[0][1]) && !hitEnemy(myImage,this.pos[0][0]+1,this.pos[0][1]));
+            case 4 -> ret = (this.pos[0][0] + 1 < 48 && this.pos[0][1] + 1 < 24 && !hitIsland(myImage,this.pos[0][0]+1,this.pos[0][1]+1) && !hitEnemy(myImage,this.pos[0][0]+1,this.pos[0][1]+1));
+            case 5 -> ret = (this.pos[0][1] + 1 < 24 && !hitIsland(myImage,this.pos[0][0],this.pos[0][1]+1) && !hitEnemy(myImage,this.pos[0][0],this.pos[0][1]+1));
+            case 6 -> ret = (this.pos[0][1] + 1 < 24 && this.pos[0][0] - 1 >= 0 && !hitIsland(myImage,this.pos[0][0]-1,this.pos[0][1]+1) && !hitEnemy(myImage,this.pos[0][0]-1,this.pos[0][1]+1));
+            case 7 -> ret = (this.pos[0][0] - 1 >= 0 && !hitIsland(myImage,this.pos[0][0]-1,this.pos[0][1]) && !hitEnemy(myImage,this.pos[0][0]-1,this.pos[0][1]));
+            case 8 -> ret = (this.pos[0][0] - 1 >= 0 && this.pos[0][1] - 1 >= 0 && !hitIsland(myImage,this.pos[0][0]-1,this.pos[0][1]-1) && !hitEnemy(myImage,this.pos[0][0]-1,this.pos[0][1]-1));
         }
         return ret;
     }
@@ -498,7 +498,7 @@ public class Ship extends Agent {
         myImage = isHit(myImage);
         if(key != -1){
             myImage = clearTrace(myImage);
-            move(key);
+            move(key,myImage);
             if (collide(myImage) == 1){
                 resetMove();
                 if(key == 2){

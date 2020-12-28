@@ -32,13 +32,11 @@ public class GameMain {
             System.out.println("Sending to displayThread");
             Player p = new Player(3, 7, 7, 5);
             Fleet fleet = new Fleet();
-            int[] islandPosition = {3,3};
-            Island island = new Island(islandPosition,20,20, new Harbor(3));
-
+            World world = new World();
+            myImage = world.createIsland(myImage,7);
             myImage = fleet.employFleet(myImage, 3);
             myImage = p.paint(myImage);
             myImage = fleet.paintFleet(myImage);
-            myImage = island.paint(myImage);
             InternalLedGameThread.showImage(myImage);
             System.out.println("Drucken Sie eine beliebige Taste um das Spiel zu starten.");
             while(true){
@@ -53,11 +51,11 @@ public class GameMain {
                     fleet.distributeDamage(p.getHitX(), p.getHitY());
                 }
                 myImage = fleet.statusUpdate(myImage);
-                if(frame % 3 == 0) {
+                if(frame % 10 == 0) {
                     frame = 0;
                     myImage = fleet.executeOrders(myImage);
                 }
-                myImage = island.paint(myImage);
+                myImage = world.paintIslands(myImage);
                 InternalLedGameThread.showImage(myImage);
                 frame++;
                 Thread.sleep(100);
@@ -78,6 +76,7 @@ public class GameMain {
             p.addScore(fleet.getDead() * 50);
             highscore.add(p.getScore());
             Collections.sort(highscore);
+            Collections.reverse(highscore);
             System.out.println("(" + round + ") - Score: " + p.getScore());
             System.out.println("Highscores:");
             for(int i = 0; i < highscore.size(); i++){
@@ -85,7 +84,7 @@ public class GameMain {
             }
 
             System.out.println("Wollen Sie noch eine Runde spielen? (Y/N)\n> ");
-            end = (scan.next() == "Y") ? false : true;
+            end = !scan.next().equals("Y");
         }while(!end);
     }
 }

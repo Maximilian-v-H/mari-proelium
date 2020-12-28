@@ -27,7 +27,7 @@ public class Harbor extends Agent{
     }
 
     @Override
-    void move(int dir) {
+    void move(int dir,short[] myImage) {
     }
 
     @Override

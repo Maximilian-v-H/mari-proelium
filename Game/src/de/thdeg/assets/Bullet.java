@@ -89,7 +89,7 @@ public class Bullet extends Agent {
     }
 
 
-    public void move(int dir){}
+    public void move(int dir,short[] myImage){}
 
     private void saveOldPos(){
         this.oldpos[0] = this.pos[0];
