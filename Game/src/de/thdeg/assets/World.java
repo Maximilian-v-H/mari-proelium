@@ -39,7 +39,7 @@ public class World {
                     isWater(myImage, (((j+1) * 48 + (i+1)) * 3)) &&
                     isWater(myImage, (((j+1) * 48 + (i+2)) * 3))){
                 int[] size = {3,3};
-                if(Math.random() < 0.75){
+                if(Math.random() < 0.9){
                     addIslands(new Island(size,i,j));
                 } else {
                     addIslands(new Island(size,i,j,new Harbor((int)(Math.random()*7)+1)));
