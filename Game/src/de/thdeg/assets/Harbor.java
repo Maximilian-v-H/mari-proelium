@@ -12,6 +12,10 @@ public class Harbor extends Agent{
         return this.orient;
     }
 
+    public short[] getColor() {
+        return this.color;
+    }
+
     @Override
     short[] paint(short[] myImage) {
         return new short[0];
