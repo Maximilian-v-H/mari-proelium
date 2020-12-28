@@ -468,6 +468,17 @@ public class Ship extends Agent {
         }
     }
 
+    protected boolean hitIsland(short[] myImage, int x, int y){
+        if (x <= 47 && y <= 23 && x >= 0 && y >= 0) {
+            int idx = (y * 48 + x) * 3;
+            return (myImage[idx + 0] == 196 && myImage[idx + 1] == 156 && myImage[idx + 2] == 53) ||
+                    (myImage[idx + 0] == 186 && myImage[idx + 1] == 148 && myImage[idx + 2] == 48) ||
+                    (myImage[idx + 0] == 125 && myImage[idx + 1] == 66 && myImage[idx + 2] == 24);
+        }else {
+            return false;
+        }
+    }
+
 
     /**
      * This method is used to set the align variable after a succesful rotation

@@ -33,7 +33,7 @@ public class GameMain {
             Player p = new Player(3, 7, 7, 5);
             Fleet fleet = new Fleet();
             int[] islandPosition = {3,3};
-            Island island = new Island(islandPosition,20,20);
+            Island island = new Island(islandPosition,20,20, new Harbor(3));
 
             myImage = fleet.employFleet(myImage, 3);
             myImage = p.paint(myImage);
@@ -57,6 +57,7 @@ public class GameMain {
                     frame = 0;
                     myImage = fleet.executeOrders(myImage);
                 }
+                myImage = island.paint(myImage);
                 InternalLedGameThread.showImage(myImage);
                 frame++;
                 Thread.sleep(100);

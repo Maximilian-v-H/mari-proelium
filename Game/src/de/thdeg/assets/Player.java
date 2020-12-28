@@ -25,6 +25,9 @@ public class Player extends Ship {
     public int collide(short[] myImage){
         int ret = 0;
         for(int i=0; i < this.pos.length; i++){
+            if (hitIsland(myImage, this.pos[i][0], this.pos[i][1])){
+                ret = 1;
+            }
             if (hitBullet(myImage, this.pos[i][0], this.pos[i][1])){
                 damage(1);
                 ret = 1;

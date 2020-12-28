@@ -257,6 +257,9 @@ public class Enemy extends Ship {
         int ret = 0;
         for(int i=0; i < this.pos.length; i++){
             int idx = (this.pos[i][1] * 48 + this.pos[i][0]) * 3;
+            if (hitIsland(myImage, this.pos[i][0], this.pos[i][1])){
+                ret = 1;
+            }
             if (hitBullet(myImage, this.pos[i][0], this.pos[i][1])){
                 damage(1);
                 ret = 2;
