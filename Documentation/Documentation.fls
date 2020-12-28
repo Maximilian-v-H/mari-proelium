@@ -290,6 +290,9 @@ INPUT ../Game/src/de/thdeg/assets/Player.java
 INPUT ../Game/src/de/thdeg/assets/GameMain.java
 INPUT ../Game/src/de/thdeg/assets/GameMain.java
 INPUT ../Game/src/de/thdeg/assets/GameMain.java
+INPUT ../Game/src/de/thdeg/assets/World.java
+INPUT ../Game/src/de/thdeg/assets/World.java
+INPUT ../Game/src/de/thdeg/assets/World.java
 INPUT Documentation.aux
 INPUT ./Documentation.out
 INPUT ./Documentation.out
