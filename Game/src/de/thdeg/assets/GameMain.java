@@ -17,7 +17,7 @@ public class GameMain {
         InternalLedGameThread.run();
 
         // Now we show some introductory message and wait 3s before we switch to purple
-        System.out.println("Willkommen bei Mari proelium!\n In kürze wird das Spiel beginnen und Ihr Punktestand wird mit den anderen Spielern verglichen!\n");
+        System.out.println("Willkommen bei Mari proelium!\n In kuerze wird das Spiel beginnen und Ihr Punktestand wird mit den anderen Spielern verglichen!\n");
         Thread.sleep(1000);
 
         boolean end = false;
