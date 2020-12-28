@@ -1,11 +1,12 @@
 public class Player extends Ship {
-    private int score = 0;
+    private Score score;
     private boolean hit = false;
     private int hitX;
     private int hitY;
 
     Player(int hp){
         super(hp);
+        this.score = new Score();
         short[][][] rgbs = {{{237, 76, 36},{145, 47, 22},{74, 24, 11}},{{237, 207, 36},{148, 129, 22},{66, 58, 10}},{{123, 237, 36},{74, 143, 21},{38, 74, 11}}};
         changeColor(rgbs);
 
@@ -15,6 +16,7 @@ public class Player extends Ship {
 
     Player(int hp, int x, int y, int o){
         super(hp, x, y, o);
+        this.score = new Score();
         short[][][] rgbs = {{{237, 76, 36},{145, 47, 22},{74, 24, 11}},{{237, 207, 36},{148, 129, 22},{66, 58, 10}},{{123, 237, 36},{74, 143, 21},{38, 74, 11}}};
         changeColor(rgbs);
     }
@@ -92,12 +94,12 @@ public class Player extends Ship {
         return myImage;
     }
 
-    public int getScore(){
+    public Score getScore(){
         return this.score;
     }
 
     public void addScore(int val){
-        this.score += val;
+        this.score.add(val);
     }
 
     /**

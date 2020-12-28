@@ -74,10 +74,10 @@ public class GameMain {
             }
 
             p.addScore(fleet.getDead() * 50);
-            highscore.add(p.getScore());
+            highscore.add(p.getScore().getScore());
             Collections.sort(highscore);
             Collections.reverse(highscore);
-            System.out.println("(" + round + ") - Score: " + p.getScore());
+            System.out.println("(" + round + ") - Score: " + p.getScore().getScore());
             System.out.println("Highscores:");
             for(int i = 0; i < highscore.size(); i++){
                 System.out.println("(" + (i+1) + ") -> " + highscore.get(i));
