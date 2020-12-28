@@ -51,7 +51,7 @@ public class GameMain {
                     fleet.distributeDamage(p.getHitX(), p.getHitY());
                 }
                 myImage = fleet.statusUpdate(myImage);
-                if(frame % 10 == 0) {
+                if(frame % 4 == 0) {
                     frame = 0;
                     myImage = fleet.executeOrders(myImage);
                 }
