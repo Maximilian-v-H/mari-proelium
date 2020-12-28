@@ -33,6 +33,9 @@ public class GameMain {
             Player p = new Player(3, 7, 7, 5);
             Fleet fleet = new Fleet();
             World world = new World();
+            myImage = world.parseImage();
+            InternalLedGameThread.showImage(myImage);
+            Thread.sleep(15000);
             myImage = world.createIsland(myImage,7);
             myImage = fleet.employFleet(myImage, 3);
             myImage = p.paint(myImage);

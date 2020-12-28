@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.List;
-
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 public class World {
     private List<Island> islands;
 
@@ -9,8 +11,8 @@ public class World {
     }
 
     public void addIslands(Island s){
-    this.islands.add(s);
-}
+        this.islands.add(s);
+    }
 
     public short[] paintIslands(short[] myImage){
         for(Island i : this.islands){
@@ -45,8 +47,28 @@ public class World {
                 myImage = paintIslands(myImage);
                 num--;
                 continue;
-            }
+                    }
         }
         return myImage;
+    }
+
+    public short[] parseImage(){
+        short[] ret = new short[24*48*3];
+        try {
+            Scanner myReader = new Scanner(new File("./../src/de/thdeg/assets/intro.mvh"));
+            while (myReader.hasNextLine()) {
+                String data = myReader.nextLine();
+                String[] pos = data.substring(0, data.indexOf(':')).split("-");
+                String[] rgb = data.substring(data.indexOf(':')+1).split("-");
+                ret[(Integer.parseInt(pos[1]) * 48 + Integer.parseInt(pos[0])) * 3 + 0] = Short.parseShort(rgb[0]);
+                ret[(Integer.parseInt(pos[1]) * 48 + Integer.parseInt(pos[0])) * 3 + 1] = Short.parseShort(rgb[1]);
+                ret[(Integer.parseInt(pos[1]) * 48 + Integer.parseInt(pos[0])) * 3 + 2] = Short.parseShort(rgb[2]);
+            }
+            myReader.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+        return ret;
     }
 }
