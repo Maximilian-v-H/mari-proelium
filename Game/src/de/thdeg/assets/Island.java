@@ -45,41 +45,49 @@ public class Island extends Agent {
                             myImage[(this.pos[0][(int)(this.pos[0].length/2)][1] * 48 + this.pos[0][(int)(this.pos[0].length/2)][0]) * 3 + 0] = harbor.getColor()[0]; // (y * 48 + x) * 3 + 0
                             myImage[(this.pos[0][(int)(this.pos[0].length/2)][1] * 48 + this.pos[0][(int)(this.pos[0].length/2)][0]) * 3 + 1] = harbor.getColor()[1]; // (y * 48 + x) * 3 + 1
                             myImage[(this.pos[0][(int)(this.pos[0].length/2)][1] * 48 + this.pos[0][(int)(this.pos[0].length/2)][0]) * 3 + 2] = harbor.getColor()[2]; // (y * 48 + x) * 3 + 2
+                            harbor.setPos(this.pos[0][(int)(this.pos[0].length/2)][1],this.pos[0][(int)(this.pos[0].length/2)][0]);
                             break;
                         case 2:
                             myImage[(this.pos[0][(int)(this.pos[0].length-1)][1] * 48 + this.pos[0][(int)(this.pos[0].length-1)][0]) * 3 + 0] = harbor.getColor()[0]; // (y * 48 + x) * 3 + 0
                             myImage[(this.pos[0][(int)(this.pos[0].length-1)][1] * 48 + this.pos[0][(int)(this.pos[0].length-1)][0]) * 3 + 1] = harbor.getColor()[1]; // (y * 48 + x) * 3 + 1
                             myImage[(this.pos[0][(int)(this.pos[0].length-1)][1] * 48 + this.pos[0][(int)(this.pos[0].length-1)][0]) * 3 + 2] = harbor.getColor()[2]; // (y * 48 + x) * 3 + 2
+                            harbor.setPos(this.pos[0][(int)(this.pos[0].length-1)][1],this.pos[0][(int)(this.pos[0].length-1)][0]);
                             break;
                         case 3:
                             myImage[(this.pos[(int)(this.pos.length/2)][(int)(this.pos[0].length-1)][1] * 48 + this.pos[(int)(this.pos.length/2)][(int)(this.pos[0].length-1)][0]) * 3 + 0] = harbor.getColor()[0]; // (y * 48 + x) * 3 + 0
                             myImage[(this.pos[(int)(this.pos.length/2)][(int)(this.pos[0].length-1)][1] * 48 + this.pos[(int)(this.pos.length/2)][(int)(this.pos[0].length-1)][0]) * 3 + 1] = harbor.getColor()[1]; // (y * 48 + x) * 3 + 1
                             myImage[(this.pos[(int)(this.pos.length/2)][(int)(this.pos[0].length-1)][1] * 48 + this.pos[(int)(this.pos.length/2)][(int)(this.pos[0].length-1)][0]) * 3 + 2] = harbor.getColor()[2]; // (y * 48 + x) * 3 + 2
+                            harbor.setPos(this.pos[(int)(this.pos.length/2)][(int)(this.pos[0].length-1)][1],this.pos[(int)(this.pos.length/2)][(int)(this.pos[0].length-1)][0]);
                             break;
                         case 4:
                             myImage[(this.pos[(int)(this.pos.length-1)][(int)(this.pos[0].length-1)][1] * 48 + this.pos[(int)(this.pos.length-1)][(int)(this.pos[0].length-1)][0]) * 3 + 0] = harbor.getColor()[0]; // (y * 48 + x) * 3 + 0
                             myImage[(this.pos[(int)(this.pos.length-1)][(int)(this.pos[0].length-1)][1] * 48 + this.pos[(int)(this.pos.length-1)][(int)(this.pos[0].length-1)][0]) * 3 + 1] = harbor.getColor()[1]; // (y * 48 + x) * 3 + 1
                             myImage[(this.pos[(int)(this.pos.length-1)][(int)(this.pos[0].length-1)][1] * 48 + this.pos[(int)(this.pos.length-1)][(int)(this.pos[0].length-1)][0]) * 3 + 2] = harbor.getColor()[2]; // (y * 48 + x) * 3 + 2
+                            harbor.setPos(this.pos[(int)(this.pos.length-1)][(int)(this.pos[0].length-1)][1],this.pos[(int)(this.pos.length-1)][(int)(this.pos[0].length-1)][0]);
                             break;
                         case 5:
                             myImage[(this.pos[(int)(this.pos.length-1)][(int)(this.pos[0].length/2)][1] * 48 + this.pos[(int)(this.pos.length-1)][(int)(this.pos[0].length/2)][0]) * 3 + 0] = harbor.getColor()[0]; // (y * 48 + x) * 3 + 0
                             myImage[(this.pos[(int)(this.pos.length-1)][(int)(this.pos[0].length/2)][1] * 48 + this.pos[(int)(this.pos.length-1)][(int)(this.pos[0].length/2)][0]) * 3 + 1] = harbor.getColor()[1]; // (y * 48 + x) * 3 + 1
                             myImage[(this.pos[(int)(this.pos.length-1)][(int)(this.pos[0].length/2)][1] * 48 + this.pos[(int)(this.pos.length-1)][(int)(this.pos[0].length/2)][0]) * 3 + 2] = harbor.getColor()[2]; // (y * 48 + x) * 3 + 2
+                            harbor.setPos(this.pos[(int)(this.pos.length-1)][(int)(this.pos[0].length/2)][1],this.pos[(int)(this.pos.length-1)][(int)(this.pos[0].length/2)][0]);
                             break;
                         case 6:
                             myImage[(this.pos[(int)(this.pos.length-1)][0][1] * 48 + this.pos[(int)(this.pos.length-1)][0][0]) * 3 + 0] = harbor.getColor()[0]; // (y * 48 + x) * 3 + 0
                             myImage[(this.pos[(int)(this.pos.length-1)][0][1] * 48 + this.pos[(int)(this.pos.length-1)][0][0]) * 3 + 1] = harbor.getColor()[1]; // (y * 48 + x) * 3 + 1
                             myImage[(this.pos[(int)(this.pos.length-1)][0][1] * 48 + this.pos[(int)(this.pos.length-1)][0][0]) * 3 + 2] = harbor.getColor()[2]; // (y * 48 + x) * 3 + 2
+                            harbor.setPos(this.pos[(int)(this.pos.length-1)][0][1],this.pos[(int)(this.pos.length-1)][0][0]);
                             break;
                         case 7:
                             myImage[(this.pos[(int)(this.pos.length/2)][0][1] * 48 + this.pos[(int)(this.pos.length/2)][0][0]) * 3 + 0] = harbor.getColor()[0]; // (y * 48 + x) * 3 + 0
                             myImage[(this.pos[(int)(this.pos.length/2)][0][1] * 48 + this.pos[(int)(this.pos.length/2)][0][0]) * 3 + 1] = harbor.getColor()[1]; // (y * 48 + x) * 3 + 1
                             myImage[(this.pos[(int)(this.pos.length/2)][0][1] * 48 + this.pos[(int)(this.pos.length/2)][0][0]) * 3 + 2] = harbor.getColor()[2]; // (y * 48 + x) * 3 + 2
+                            harbor.setPos(this.pos[(int)(this.pos.length/2)][0][1],this.pos[(int)(this.pos.length/2)][0][0]);
                             break;
                         case 8:
                             myImage[(this.pos[0][0][1] * 48 + this.pos[0][0][0]) * 3 + 0] = harbor.getColor()[0]; // (y * 48 + x) * 3 + 0
                             myImage[(this.pos[0][0][1] * 48 + this.pos[0][0][0]) * 3 + 1] = harbor.getColor()[1]; // (y * 48 + x) * 3 + 1
                             myImage[(this.pos[0][0][1] * 48 + this.pos[0][0][0]) * 3 + 2] = harbor.getColor()[2]; // (y * 48 + x) * 3 + 2
+                            harbor.setPos(this.pos[0][0][1],this.pos[0][0][0]);
                             break;
                     }
                 }
