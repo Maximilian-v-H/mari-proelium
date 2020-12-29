@@ -23,19 +23,14 @@ public class GameMain {
         boolean end = false;
         Scanner scan = new Scanner(System.in);
         do {
-            for(int i=0; i<myImage.length; i+=3){
-                myImage[i+0]=(short)0;
-                myImage[i+1]=(short)177;
-                myImage[i+2]=(short)241;
-            }
-
             System.out.println("Sending to displayThread");
             Player p = new Player(3, 7, 7, 5);
             Fleet fleet = new Fleet();
             World world = new World();
             myImage = world.parseImage();
             InternalLedGameThread.showImage(myImage);
-            Thread.sleep(15000);
+            Thread.sleep(5000);
+            myImage = world.clear();
             myImage = world.createIsland(myImage,7);
             myImage = world.createIsland(myImage,20);
             myImage = fleet.employFleet(myImage, 3);

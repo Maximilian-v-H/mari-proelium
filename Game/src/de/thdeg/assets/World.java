@@ -52,17 +52,37 @@ public class World {
         return myImage;
     }
 
+    public short[] clear(){
+        short[] ret = new short[24*48*3];
+        for(int i=0; i<ret.length; i+=3){
+            ret[i+0]=(short)0;
+            ret[i+1]=(short)177;
+            ret[i+2]=(short)241;
+        }
+        return ret;
+    }
+
     public short[] parseImage(){
         short[] ret = new short[24*48*3];
         try {
-            Scanner myReader = new Scanner(new File("./../src/de/thdeg/assets/intro.mvh"));
+            Scanner myReader = new Scanner(new File("./../src/de/thdeg/assets/img/intro.mvh"));
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
-                String[] pos = data.substring(0, data.indexOf(':')).split("-");
-                String[] rgb = data.substring(data.indexOf(':')+1).split("-");
-                ret[(Integer.parseInt(pos[1]) * 48 + Integer.parseInt(pos[0])) * 3 + 0] = Short.parseShort(rgb[0]);
-                ret[(Integer.parseInt(pos[1]) * 48 + Integer.parseInt(pos[0])) * 3 + 1] = Short.parseShort(rgb[1]);
-                ret[(Integer.parseInt(pos[1]) * 48 + Integer.parseInt(pos[0])) * 3 + 2] = Short.parseShort(rgb[2]);
+                System.out.println(data.length());
+                if(data.length() > 1 && data.substring(0,1).equals("B")){
+                    for(int i = 0; i < ret.length; i += 3){
+                        String[] s = data.substring(1).split("-");
+                        ret[i] = Short.parseShort(s[0]);
+                        ret[i + 1] = Short.parseShort(s[1]);
+                        ret[i + 2] = Short.parseShort(s[2]);
+                    }
+                }else{
+                    String[] pos = data.substring(0, data.indexOf(':')).split("-");
+                    String[] rgb = data.substring(data.indexOf(':')+1).split("-");
+                    ret[(Integer.parseInt(pos[1]) * 48 + Integer.parseInt(pos[0])) * 3 + 0] = Short.parseShort(rgb[0]);
+                    ret[(Integer.parseInt(pos[1]) * 48 + Integer.parseInt(pos[0])) * 3 + 1] = Short.parseShort(rgb[1]);
+                    ret[(Integer.parseInt(pos[1]) * 48 + Integer.parseInt(pos[0])) * 3 + 2] = Short.parseShort(rgb[2]);
+                }
             }
             myReader.close();
         } catch (FileNotFoundException e) {
