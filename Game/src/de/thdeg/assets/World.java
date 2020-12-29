@@ -25,29 +25,34 @@ public class World {
         return (myImage[idx] == 0 && myImage[idx + 1] == 177 && myImage[idx + 2] == 241);
     }
 
+    private boolean canPlaceIsland(short[] myImage, int rad, int x, int y){
+        boolean ret = true;
+        for(int i = -rad; i <= rad; i++){
+            for(int j = -rad; j <= rad; j++){
+                if((y+i) >= 0 && (y+i) <= 23 && (x+j) <= 47 && (x+j) >= 0 && isWater(myImage, (((y+i) * 48 + (x+j)) * 3)) && ret){
+                    ret = true;
+                }else {
+                    return false;
+                }
+            }
+        }
+        return ret;
+    }
+
     public short[] createIsland(short[] myImage, int num){
         while (num > 0){
             int i = (int)(Math.random() * 45) + 1;
             int j = (int)(Math.random() * 21) + 1;
-            if(     isWater(myImage, (((j+2) * 48 +  i   ) * 3)) &&
-                    isWater(myImage, (((j+2) * 48 + (i+1)) * 3)) &&
-                    isWater(myImage, (((j+2) * 48 + (i+2)) * 3)) &&
-                    isWater(myImage, ((j     * 48 +  i   ) * 3)) &&
-                    isWater(myImage, ((j     * 48 + (i+1)) * 3)) &&
-                    isWater(myImage, ((j     * 48 + (i+2)) * 3)) &&
-                    isWater(myImage, (((j+1) * 48 +  i   ) * 3)) &&
-                    isWater(myImage, (((j+1) * 48 + (i+1)) * 3)) &&
-                    isWater(myImage, (((j+1) * 48 + (i+2)) * 3))){
+            if(canPlaceIsland(myImage,5,i,j)){
                 int[] size = {3,3};
-                if(Math.random() < 0.9){
+                if(Math.random() < 0.75){
                     addIslands(new Island(size,i,j));
                 } else {
                     addIslands(new Island(size,i,j,new Harbor((int)(Math.random()*7)+1)));
                 }
                 myImage = paintIslands(myImage);
                 num--;
-                continue;
-                    }
+            }
         }
         return myImage;
     }

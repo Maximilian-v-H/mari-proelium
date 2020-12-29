@@ -13,7 +13,7 @@ public class GameMain {
         long startTime = System.currentTimeMillis();
         long roundtime = 30000;
 
-        // This is initialization, do not change this
+        // This is initialization, donot change this
         InternalLedGameThread.run();
 
         // Now we show some introductory message and wait 3s before we switch to purple
@@ -39,7 +39,7 @@ public class GameMain {
             InternalLedGameThread.showImage(myImage);
             Thread.sleep(1000);
             myImage = world.clear();
-            myImage = world.createIsland(myImage,20);
+            myImage = world.createIsland(myImage,10);
             myImage = fleet.employFleet(myImage, 3);
             Player p = Player.spawn(myImage,1);
             myImage = p.paint(myImage);

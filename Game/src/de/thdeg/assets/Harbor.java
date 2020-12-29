@@ -47,7 +47,7 @@ public class Harbor extends Agent{
     @Override
     short[] run(int key, short[] myImage) {
         if(this.captured){
-            if(detectShip(10, myImage) == this.possession) {
+            if(detectShip(15, myImage) == this.possession) {
                 shoot();
             }
         } else {
@@ -56,8 +56,10 @@ public class Harbor extends Agent{
                 this.captured = true;
                 if(poss == 0) {
                     this.possession = 1;
+                    this.color[2] += 150;
                 }else {
                     this.possession = 0;
+                    this.color[1] += 150;
                 }
             }
         }
@@ -99,7 +101,7 @@ public class Harbor extends Agent{
     protected void shoot() {
         int orient = routeDirection(this.pos[0], this.pos[1], this.enemyPos);
         if(this.bullet == null){
-            this.bullet = new Bullet(orient, 5, this.pos[0], this.pos[1]);
+            this.bullet = new Bullet(orient, 8, this.pos[0], this.pos[1]);
         }
     }
     protected boolean hitPlayer(short[] myImage, int x, int y){
