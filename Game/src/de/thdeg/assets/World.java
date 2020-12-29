@@ -45,7 +45,7 @@ public class World {
             int j = (int)(Math.random() * 21) + 1;
             if(canPlaceIsland(myImage,5,i,j)){
                 int[] size = {3,3};
-                if(Math.random() < 0.75){
+                if(Math.random() < 0.5){
                     addIslands(new Island(size,i,j));
                 } else {
                     addIslands(new Island(size,i,j,new Harbor((int)(Math.random()*7)+1)));
@@ -93,18 +93,30 @@ public class World {
         try {
             switch(what){
                 case "intro" -> {
-                    myReader = new Scanner(new File("Game"+File.separator+"src"+File.separator+"de"+File.separator+"thdeg"+File.separator+"assets"+File.separator+"img"+File.separator+"intro.mvh"));
+    myReader = new Scanner(new File("Game"+File.separator+"src"+File.separator+"de"+File.separator+"thdeg"+File.separator+"assets"+File.separator+"img"+File.separator+"intro.mvh"));
                 }
-                // case "round1" -> {
-                //     myReader = new Scanner(new File("Game"+File.separator+"src"+File.separator+"de"+File.separator+"thdeg"+File.separator+"assets"+File.separator+"img"+File.separator+"round1.mvh"));
-                // }
+                case "round1" -> {
+    myReader = new Scanner(new File("Game"+File.separator+"src"+File.separator+"de"+File.separator+"thdeg"+File.separator+"assets"+File.separator+"img"+File.separator+"round1.mvh"));
+                }
+                case "round2" -> {
+    myReader = new Scanner(new File("Game"+File.separator+"src"+File.separator+"de"+File.separator+"thdeg"+File.separator+"assets"+File.separator+"img"+File.separator+"round2.mvh"));
+                }
+                case "round3" -> {
+    myReader = new Scanner(new File("Game"+File.separator+"src"+File.separator+"de"+File.separator+"thdeg"+File.separator+"assets"+File.separator+"img"+File.separator+"round3.mvh"));
+                }
+                case "round4" -> {
+    myReader = new Scanner(new File("Game"+File.separator+"src"+File.separator+"de"+File.separator+"thdeg"+File.separator+"assets"+File.separator+"img"+File.separator+"round4.mvh"));
+                }
+                case "round5" -> {
+    myReader = new Scanner(new File("Game"+File.separator+"src"+File.separator+"de"+File.separator+"thdeg"+File.separator+"assets"+File.separator+"img"+File.separator+"round5.mvh"));
+                }
+                case "round6" -> {
+    myReader = new Scanner(new File("Game"+File.separator+"src"+File.separator+"de"+File.separator+"thdeg"+File.separator+"assets"+File.separator+"img"+File.separator+"round6.mvh"));
+                }
                 case "gameover" -> {
-                    myReader = new Scanner(new File("Game"+File.separator+"src"+File.separator+"de"+File.separator+"thdeg"+File.separator+"assets"+File.separator+"img"+File.separator+"gameover.mvh"));
+    myReader = new Scanner(new File("Game"+File.separator+"src"+File.separator+"de"+File.separator+"thdeg"+File.separator+"assets"+File.separator+"img"+File.separator+"gameover.mvh"));
                 }
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
                 if(data.length() > 1 && data.substring(0,1).equals("B")){
@@ -122,7 +134,10 @@ public class World {
                     ret[(Integer.parseInt(pos[1]) * 48 + Integer.parseInt(pos[0])) * 3 + 2] = Short.parseShort(rgb[2]);
                 }
             }
-            myReader.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        myReader.close();
         return ret;
     }
 }

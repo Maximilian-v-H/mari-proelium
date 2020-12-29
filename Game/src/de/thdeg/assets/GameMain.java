@@ -26,23 +26,23 @@ public class GameMain {
             System.out.println("Sending to displayThread");
             Fleet fleet = new Fleet();
             World world = new World();
-            // myImage = world.parseImage("intro");
+            myImage = world.parseImage("intro");
             InternalLedGameThread.showImage(myImage);
-            Thread.sleep(1000);
+            Thread.sleep(500);
             myImage = world.fade(myImage);
             InternalLedGameThread.showImage(myImage);
-            Thread.sleep(1000);
+            Thread.sleep(500);
             myImage = world.fade(myImage);
             InternalLedGameThread.showImage(myImage);
-            Thread.sleep(1000);
+            Thread.sleep(500);
             myImage = world.fade(myImage);
             InternalLedGameThread.showImage(myImage);
-            Thread.sleep(1000);
+            Thread.sleep(500);
             myImage = world.parseImage("round1");
             InternalLedGameThread.showImage(myImage);
-            Thread.sleep(1000);
+            Thread.sleep(500);
             myImage = world.clear();
-            myImage = world.createIsland(myImage,10);
+            myImage = world.createIsland(myImage, 5);
             myImage = fleet.employFleet(myImage, 3);
             Player p = Player.spawn(myImage,1);
             myImage = p.paint(myImage);
@@ -78,6 +78,12 @@ public class GameMain {
                     round++;
                     startTime = System.currentTimeMillis();
                     p.addScore(200);
+                    String s = "round" + round;
+                    System.out.println(s);
+                    myImage = world.parseImage(s);
+                    InternalLedGameThread.showImage(myImage);
+                    Thread.sleep(1000);
+                    myImage = world.clear();
                 }
                 if(fleet.getNumberOfAliveShips() == 0){
                     p.addScore(50);
