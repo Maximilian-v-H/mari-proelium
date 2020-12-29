@@ -514,14 +514,14 @@ public class Ship extends Agent {
         }
         if(this.bullet != null){
             if(this.bullet.getRange() > 0){
-                this.bullet.run(-1, myImage);
+                myImage = this.bullet.run(-1, myImage);
             }else{
                 this.bullet = null;
             }
         }
         if(this.bullet2 != null){
             if(this.bullet2.getRange() > 0){
-                this.bullet2.run(-1, myImage);
+                myImage = this.bullet2.run(-1, myImage);
             }else{
                 this.bullet2 = null;
             }

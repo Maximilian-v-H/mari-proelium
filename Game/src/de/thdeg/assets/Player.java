@@ -85,7 +85,7 @@ public class Player extends Ship {
                 addScore(50);
             }
             if(this.bullet.getRange() > 0){
-                this.bullet.run(-1, myImage);
+                myImage = this.bullet.run(-1, myImage);
             }else{
                 this.bullet = null;
             }
@@ -95,7 +95,7 @@ public class Player extends Ship {
                 addScore(50);
             }
             if(this.bullet2.getRange() > 0){
-                this.bullet2.run(-1, myImage);
+                myImage = this.bullet2.run(-1, myImage);
             }else{
                 this.bullet2 = null;
             }

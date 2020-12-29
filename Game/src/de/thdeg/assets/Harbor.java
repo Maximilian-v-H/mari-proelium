@@ -4,10 +4,13 @@ public class Harbor extends Agent{
     protected boolean captured = false;
     protected int possession = -1;
     protected int[] pos;
+    protected int[] enemyPos;
+    protected Bullet bullet = null;
 
     Harbor(int orient){
         this.orient = orient;
         this.pos = new int[2];
+        this.enemyPos = new int[2];
     }
 
     public int getOrient(){
@@ -44,16 +47,60 @@ public class Harbor extends Agent{
     @Override
     short[] run(int key, short[] myImage) {
         if(this.captured){
-            if(detectShip(10, myImage) == this.possession){
-
+            if(detectShip(10, myImage) == this.possession) {
+                shoot();
             }
         } else {
             int poss = detectShip(1, myImage);
-            if(poss != -1){
-
+            if(poss != -1) {
+                this.captured = true;
+                if(poss == 0) {
+                    this.possession = 1;
+                }else {
+                    this.possession = 0;
+                }
             }
         }
-        return new short[0];
+        if(this.bullet != null){
+            if(this.bullet.getRange() > 0){
+                myImage = this.bullet.run(-1, myImage);
+            }else{
+                this.bullet = null;
+            }
+        }
+        return myImage;
+    }
+    private int routeDirection(int x, int y, int[] gPos){
+        if(x > gPos[0]){
+            if(y > gPos[1]){
+                return 8;
+            }else if(y < gPos[1]){
+                return 6;
+            }else {
+                return 7;
+            }
+        }else if(x < gPos[0]){
+            if(y > gPos[1]) {
+                return 2;
+            }else if(y < gPos[1]){
+                return 4;
+            }else {
+                return 3;
+            }
+        }else {
+            if(y > gPos[1]) {
+                return 1;
+            }else if(y < gPos[1]){
+                return 5;
+            }
+        }
+        return -1;
+    }
+    protected void shoot() {
+        int orient = routeDirection(this.pos[0], this.pos[1], this.enemyPos);
+        if(this.bullet == null){
+            this.bullet = new Bullet(orient, 5, this.pos[0], this.pos[1]);
+        }
     }
     protected boolean hitPlayer(short[] myImage, int x, int y){
         if (x <= 47 && y <= 23 && x >= 0 && y >= 0) {
@@ -71,6 +118,22 @@ public class Harbor extends Agent{
             return false;
         }
     }
+    protected boolean hitEnemy(short[] myImage, int x, int y){
+        if (x <= 47 && y <= 23 && x >= 0 && y >= 0) {
+            int idx = (y * 48 + x) * 3;
+            return (myImage[idx + 0] == 31 && myImage[idx + 1] == 69 && myImage[idx + 2] == 222) ||
+                    (myImage[idx + 0] == 19 && myImage[idx + 1] == 43 && myImage[idx + 2] == 143) ||
+                    (myImage[idx + 0] == 10 && myImage[idx + 1] == 22 && myImage[idx + 2] == 74) ||
+                    (myImage[idx + 0] == 31 && myImage[idx + 1] == 222 && myImage[idx + 2] == 215) ||
+                    (myImage[idx + 0] == 21 && myImage[idx + 1] == 138 && myImage[idx + 2] == 134) ||
+                    (myImage[idx + 0] == 11 && myImage[idx + 1] == 74 && myImage[idx + 2] == 72) ||
+                    (myImage[idx + 0] == 153 && myImage[idx + 1] == 23 && myImage[idx + 2] == 209) ||
+                    (myImage[idx + 0] == 94 && myImage[idx + 1] == 15 && myImage[idx + 2] == 128) ||
+                    (myImage[idx + 0] == 55 && myImage[idx + 1] == 10 && myImage[idx + 2] == 74);
+        }else {
+            return false;
+        }
+    }
     protected int detectShip(int range, short[] myImage){
         int difx;
         int dify;
@@ -79,8 +142,15 @@ public class Harbor extends Agent{
             for (int j = -range; j <= range; j++) {
                 dify = this.pos[1] + j;
                 if ((Math.pow(difx - this.pos[0], 2)+Math.pow(dify - this.pos[1], 2)) <= Math.pow(range, 2)) {
-                    if(hitPlayer(myImage, difx,dify)) {
-
+                    if(hitPlayer(myImage, difx, dify)) {
+                        this.enemyPos[0] = difx;
+                        this.enemyPos[1] = dify;
+                        return 1;
+                    }
+                    if(hitEnemy(myImage, difx, dify)) {
+                        this.enemyPos[0] = difx;
+                        this.enemyPos[1] = dify;
+                        return 0;
                     }
                 }
             }

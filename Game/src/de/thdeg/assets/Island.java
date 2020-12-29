@@ -96,6 +96,14 @@ public class Island extends Agent {
         return myImage;
     }
 
+    public boolean hasHarbor(){
+        return (this.harbor != null) ? true : false;
+    }
+
+    public Harbor getHarbor(){
+        return this.harbor;
+    }
+
     @Override
     int collide(short[] myImage) {
         return -1;

@@ -62,6 +62,7 @@ public class GameMain {
                     frame = 0;
                     myImage = fleet.executeOrders(myImage);
                 }
+                myImage = world.runHarbor(myImage);
                 myImage = world.paintIslands(myImage);
                 InternalLedGameThread.showImage(myImage);
                 frame++;

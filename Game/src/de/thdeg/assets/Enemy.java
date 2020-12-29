@@ -106,14 +106,14 @@ public class Enemy extends Ship {
         }
         if(this.bullet != null){
             if(this.bullet.getRange() > 0){
-                this.bullet.run(-1, myImage);
+                myImage = this.bullet.run(-1, myImage);
             }else{
                 this.bullet = null;
             }
         }
         if(this.bullet2 != null){
             if(this.bullet2.getRange() > 0){
-                this.bullet2.run(-1, myImage);
+                myImage = this.bullet2.run(-1, myImage);
             }else{
                 this.bullet2 = null;
             }
@@ -194,7 +194,7 @@ public class Enemy extends Ship {
             }else {
                 return 7;
             }
-        }else if(x > gPos[0]){
+        }else if(x < gPos[0]){
             if(y > gPos[1]) {
                 return 2;
             }else if(y < gPos[1]){

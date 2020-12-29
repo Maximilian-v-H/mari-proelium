@@ -52,6 +52,15 @@ public class World {
         return myImage;
     }
 
+    public short[] runHarbor(short[] myImage){
+        for(Island i : this.islands){
+            if(i.hasHarbor()){
+                myImage = i.getHarbor().run(-1,myImage);
+            }
+        }
+        return myImage;
+    }
+
     public short[] clear(){
         short[] ret = new short[24*48*3];
         for(int i=0; i<ret.length; i+=3){
@@ -77,8 +86,6 @@ public class World {
         short[] ret = new short[24*48*3];
         Scanner myReader = null;
         try {
-            File directory = new File("./");
-            System.out.println(directory.getAbsolutePath());
             switch(what){
                 case "intro" -> {
                     myReader = new Scanner(new File("Game"+File.separator+"src"+File.separator+"de"+File.separator+"thdeg"+File.separator+"assets"+File.separator+"img"+File.separator+"intro.mvh"));
