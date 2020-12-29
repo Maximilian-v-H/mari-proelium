@@ -90,6 +90,16 @@ public class Player extends Ship {
                 this.bullet = null;
             }
         }
+        if(this.bullet2 != null){
+            if(this.bullet2.getHasHit()){
+                addScore(50);
+            }
+            if(this.bullet2.getRange() > 0){
+                this.bullet2.run(-1, myImage);
+            }else{
+                this.bullet2 = null;
+            }
+        }
         myImage = paint(myImage);
         return myImage;
     }
@@ -112,5 +122,29 @@ public class Player extends Ship {
             System.out.println("Xo: " + this.oldpos[i][0] + " Yo: " + this.oldpos[i][1]);
             // System.out.println("(" + i + ") -> X: " + (this.pos[i][0] - this.oldpos[i][0]) + " Y: " + (this.pos[i][1] - this.oldpos[i][1]));
         }
+    }
+    private static boolean isWater(short[] myImage, int idx){
+        return (myImage[idx] == 0 && myImage[idx + 1] == 177 && myImage[idx + 2] == 241);
+    }
+    public static Player spawn(short[] myImage, int num){
+        Player ret = null;
+        while (num > 0){
+            int i = (int)(Math.random() * 46) + 1;
+            int j = (int)(Math.random() * 22) + 1;
+            if(     isWater(myImage, (((j-1) * 48 +  i   ) * 3)) &&
+                    isWater(myImage, (((j-1) * 48 + (i+1)) * 3)) &&
+                    isWater(myImage, (((j-1) * 48 + (i-1)) * 3)) &&
+                    isWater(myImage, ((j     * 48 +  i   ) * 3)) &&
+                    isWater(myImage, ((j     * 48 + (i+1)) * 3)) &&
+                    isWater(myImage, ((j     * 48 + (i-1)) * 3)) &&
+                    isWater(myImage, (((j+1) * 48 +  i   ) * 3)) &&
+                    isWater(myImage, (((j+1) * 48 + (i+1)) * 3)) &&
+                    isWater(myImage, (((j+1) * 48 + (i-1)) * 3))){
+                ret = new Player(3,i,j,(int)(Math.random()*7)+1);
+                num--;
+                continue;
+            }
+        }
+        return ret;
     }
 }

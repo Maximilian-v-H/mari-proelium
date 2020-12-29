@@ -5,6 +5,7 @@ public class Ship extends Agent {
     protected int align;
     protected short[][][] color = new short[3][3][3];
     protected Bullet bullet = null;
+    protected Bullet bullet2 = null;
 
     Ship(int hp){
         this.pos = new int[3][2];
@@ -418,11 +419,13 @@ public class Ship extends Agent {
      * */
     protected void shoot() {
         int dir1 = (this.align + 2 > 8) ? (this.align + 2 - 8) : (this.align + 2);
-        // int dir2 = (this.align - 2 < 1) ? (8 + this.align - 2) : (this.align - 2);
+        int dir2 = (this.align - 2 < 1) ? (8 + this.align - 2) : (this.align - 2);
         if(this.bullet == null){
             this.bullet = new Bullet(dir1, 5, this.pos[1][0], this.pos[1][1]);
         }
-        // bullets.add(new Bullet(dir2, 5, this.pos[1][0], this.pos[1][1]));
+        if(this.bullet2 == null){
+            this.bullet2 = new Bullet(dir2, 5, this.pos[1][0], this.pos[1][1]);
+        }
     }
 
     protected boolean hitPlayer(short[] myImage, int x, int y){
@@ -514,6 +517,13 @@ public class Ship extends Agent {
                 this.bullet.run(-1, myImage);
             }else{
                 this.bullet = null;
+            }
+        }
+        if(this.bullet2 != null){
+            if(this.bullet2.getRange() > 0){
+                this.bullet2.run(-1, myImage);
+            }else{
+                this.bullet2 = null;
             }
         }
         myImage = paint(myImage);

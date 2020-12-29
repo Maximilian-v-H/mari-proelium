@@ -64,24 +64,20 @@ public class World {
 
     public short[] parseImage(String what){
         short[] ret = new short[24*48*3];
+        Scanner myReader = null;
         try {
+            File directory = new File("./");
+            System.out.println(directory.getAbsolutePath());
             switch(what){
                 case "intro" -> {
-                    Scanner myReader = new Scanner(new File("./../src/de/thdeg/assets/img/intro.mvh"));
+                    myReader = new Scanner(new File("Game"+File.separator+"src"+File.separator+"de"+File.separator+"thdeg"+File.separator+"assets"+File.separator+"img"+File.separator+"intro.mvh"));
                 }
                 case "gameover" -> {
-                    Scanner myReader = new Scanner(new File("./../src/de/thdeg/assets/img/gameover.mvh"));
+                    myReader = new Scanner(new File("Game"+File.separator+"src"+File.separator+"de"+File.separator+"thdeg"+File.separator+"assets"+File.separator+"img"+File.separator+"gameover.mvh"));
                 }
             }
         } catch (FileNotFoundException e) {
-            switch(what){
-                case "intro" -> {
-                    Scanner myReader = new Scanner(new File(".\\..\\src\\de\\thdeg\\assets\\img\\intro.mvh"));
-                }
-                case "gameover" -> {
-                    Scanner myReader = new Scanner(new File(".\\..\\src\\de\\thdeg\\assets\\img\\gameover.mvh"));
-                }
-            }
+            e.printStackTrace();
         }
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();

@@ -111,6 +111,13 @@ public class Enemy extends Ship {
                 this.bullet = null;
             }
         }
+        if(this.bullet2 != null){
+            if(this.bullet2.getRange() > 0){
+                this.bullet2.run(-1, myImage);
+            }else{
+                this.bullet2 = null;
+            }
+        }
         myImage = paint(myImage);
         return myImage;
     }

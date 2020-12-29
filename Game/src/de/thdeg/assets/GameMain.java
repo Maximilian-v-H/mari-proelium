@@ -24,15 +24,15 @@ public class GameMain {
         Scanner scan = new Scanner(System.in);
         do {
             System.out.println("Sending to displayThread");
-            Player p = new Player(3, 7, 7, 5);
             Fleet fleet = new Fleet();
             World world = new World();
-            myImage = world.parseImage();
+            myImage = world.parseImage("intro");
             InternalLedGameThread.showImage(myImage);
             Thread.sleep(5000);
             myImage = world.clear();
             myImage = world.createIsland(myImage,20);
             myImage = fleet.employFleet(myImage, 3);
+            Player p = Player.spawn(myImage,1);
             myImage = p.paint(myImage);
             myImage = fleet.paintFleet(myImage);
             InternalLedGameThread.showImage(myImage);
@@ -70,7 +70,9 @@ public class GameMain {
                     p.addScore(50);
                 }
             }
-
+            world.clear();
+            myImage = world.parseImage("gameover");
+            InternalLedGameThread.showImage(myImage);
             p.addScore(fleet.getDead() * 50);
             highscore.add(p.getScore().getScore());
             Collections.sort(highscore);
