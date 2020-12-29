@@ -62,10 +62,27 @@ public class World {
         return ret;
     }
 
-    public short[] parseImage(){
+    public short[] parseImage(String what){
         short[] ret = new short[24*48*3];
         try {
-            Scanner myReader = new Scanner(new File("./../src/de/thdeg/assets/img/intro.mvh"));
+            switch(what){
+                case "intro" -> {
+                    Scanner myReader = new Scanner(new File("./../src/de/thdeg/assets/img/intro.mvh"));
+                }
+                case "gameover" -> {
+                    Scanner myReader = new Scanner(new File("./../src/de/thdeg/assets/img/gameover.mvh"));
+                }
+            }
+        } catch (FileNotFoundException e) {
+            switch(what){
+                case "intro" -> {
+                    Scanner myReader = new Scanner(new File(".\\..\\src\\de\\thdeg\\assets\\img\\intro.mvh"));
+                }
+                case "gameover" -> {
+                    Scanner myReader = new Scanner(new File(".\\..\\src\\de\\thdeg\\assets\\img\\gameover.mvh"));
+                }
+            }
+        }
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
                 System.out.println(data.length());
@@ -85,10 +102,6 @@ public class World {
                 }
             }
             myReader.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-        }
         return ret;
     }
 }
