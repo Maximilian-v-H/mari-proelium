@@ -26,7 +26,7 @@ public class GameMain {
             System.out.println("Sending to displayThread");
             Fleet fleet = new Fleet();
             World world = new World();
-            myImage = world.parseImage("intro");
+            // myImage = world.parseImage("intro");
             InternalLedGameThread.showImage(myImage);
             Thread.sleep(1000);
             myImage = world.fade(myImage);
@@ -36,6 +36,9 @@ public class GameMain {
             InternalLedGameThread.showImage(myImage);
             Thread.sleep(1000);
             myImage = world.fade(myImage);
+            InternalLedGameThread.showImage(myImage);
+            Thread.sleep(1000);
+            myImage = world.parseImage("round1");
             InternalLedGameThread.showImage(myImage);
             Thread.sleep(1000);
             myImage = world.clear();

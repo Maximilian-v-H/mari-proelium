@@ -95,6 +95,9 @@ public class World {
                 case "intro" -> {
                     myReader = new Scanner(new File("Game"+File.separator+"src"+File.separator+"de"+File.separator+"thdeg"+File.separator+"assets"+File.separator+"img"+File.separator+"intro.mvh"));
                 }
+                // case "round1" -> {
+                //     myReader = new Scanner(new File("Game"+File.separator+"src"+File.separator+"de"+File.separator+"thdeg"+File.separator+"assets"+File.separator+"img"+File.separator+"round1.mvh"));
+                // }
                 case "gameover" -> {
                     myReader = new Scanner(new File("Game"+File.separator+"src"+File.separator+"de"+File.separator+"thdeg"+File.separator+"assets"+File.separator+"img"+File.separator+"gameover.mvh"));
                 }
