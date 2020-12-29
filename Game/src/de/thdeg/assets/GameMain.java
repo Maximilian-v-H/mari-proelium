@@ -28,13 +28,16 @@ public class GameMain {
             World world = new World();
             myImage = world.parseImage("intro");
             InternalLedGameThread.showImage(myImage);
+            Thread.sleep(1000);
             myImage = world.fade(myImage);
             InternalLedGameThread.showImage(myImage);
+            Thread.sleep(1000);
             myImage = world.fade(myImage);
             InternalLedGameThread.showImage(myImage);
+            Thread.sleep(1000);
             myImage = world.fade(myImage);
             InternalLedGameThread.showImage(myImage);
-            Thread.sleep(5000);
+            Thread.sleep(1000);
             myImage = world.clear();
             myImage = world.createIsland(myImage,20);
             myImage = fleet.employFleet(myImage, 3);

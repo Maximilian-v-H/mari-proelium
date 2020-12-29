@@ -64,8 +64,8 @@ public class World {
 
     public short[] fade(short[] myImage){
         for (int i = 0; i < myImage.length; i += 3){
-            double gr = myImage[i + 1] / myImage[i];
-            double br = myImage[i + 2] / myImage[i];
+            double gr = myImage[i + 1] / (myImage[i]+1);
+            double br = myImage[i + 2] / (myImage[i]+1);
             myImage[i] = (short) (myImage[i] * 0.7);
             myImage[i + 1] = (short) (myImage[i] * gr);
             myImage[i + 2] = (short) (myImage[i] * br);
@@ -92,7 +92,6 @@ public class World {
         }
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
-                System.out.println(data.length());
                 if(data.length() > 1 && data.substring(0,1).equals("B")){
                     for(int i = 0; i < ret.length; i += 3){
                         String[] s = data.substring(1).split("-");
