@@ -31,7 +31,6 @@ public class GameMain {
             InternalLedGameThread.showImage(myImage);
             Thread.sleep(5000);
             myImage = world.clear();
-            myImage = world.createIsland(myImage,7);
             myImage = world.createIsland(myImage,20);
             myImage = fleet.employFleet(myImage, 3);
             myImage = p.paint(myImage);

@@ -65,7 +65,7 @@ public class World {
     public short[] parseImage(){
         short[] ret = new short[24*48*3];
         try {
-            Scanner myReader = new Scanner(new File("./../src/de/thdeg/assets/img/intro.mvh"));
+            Scanner myReader = new Scanner(new File("C:\\Users\\Fabian\\IdeaProjects\\mari-proelium\\Game\\src\\de\\thdeg\\assets\\img\\intro.mvh"));
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
                 System.out.println(data.length());
