@@ -65,6 +65,7 @@ public class World {
     public short[] parseImage(String what){
         short[] ret = new short[24*48*3];
         try {
+<<<<<<< HEAD
             switch(what){
                 case "intro" -> {
                     Scanner myReader = new Scanner(new File("./../src/de/thdeg/assets/img/intro.mvh"));
@@ -83,6 +84,9 @@ public class World {
                 }
             }
         }
+=======
+            Scanner myReader = new Scanner(new File("C:\\Users\\Fabian\\IdeaProjects\\mari-proelium\\Game\\src\\de\\thdeg\\assets\\img\\intro.mvh"));
+>>>>>>> e324dc202fb6e3e20416c674d170c43ec26fbaca
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
                 System.out.println(data.length());
