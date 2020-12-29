@@ -28,6 +28,12 @@ public class GameMain {
             World world = new World();
             myImage = world.parseImage("intro");
             InternalLedGameThread.showImage(myImage);
+            myImage = world.fade(myImage);
+            InternalLedGameThread.showImage(myImage);
+            myImage = world.fade(myImage);
+            InternalLedGameThread.showImage(myImage);
+            myImage = world.fade(myImage);
+            InternalLedGameThread.showImage(myImage);
             Thread.sleep(5000);
             myImage = world.clear();
             myImage = world.createIsland(myImage,20);

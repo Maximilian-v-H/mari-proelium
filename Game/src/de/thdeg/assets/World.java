@@ -62,6 +62,17 @@ public class World {
         return ret;
     }
 
+    public short[] fade(short[] myImage){
+        for (int i = 0; i < myImage.length; i += 3){
+            double gr = myImage[i + 1] / myImage[i];
+            double br = myImage[i + 2] / myImage[i];
+            myImage[i] = (short) (myImage[i] * 0.7);
+            myImage[i + 1] = (short) (myImage[i] * gr);
+            myImage[i + 2] = (short) (myImage[i] * br);
+        }
+        return myImage;
+    }
+
     public short[] parseImage(String what){
         short[] ret = new short[24*48*3];
         Scanner myReader = null;
