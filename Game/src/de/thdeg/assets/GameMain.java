@@ -10,7 +10,8 @@ public class GameMain {
         int thisKey=0;
         int frame = 0;
         int round = 1;
-        int diff = 4;
+        int diff = 1;
+        int enemyHealth = 2;
         long startTime = System.currentTimeMillis();
         long roundtime = 30000;
 
@@ -42,7 +43,7 @@ public class GameMain {
             Thread.sleep(500);
             myImage = world.clear();
             myImage = world.createIsland(myImage, 5);
-            myImage = fleet.employFleet(myImage, diff);
+            myImage = fleet.employFleet(myImage, diff, enemyHealth);
             Player p = Player.spawn(myImage,1);
             myImage = p.paint(myImage);
             myImage = fleet.paintFleet(myImage);
@@ -65,7 +66,9 @@ public class GameMain {
                     frame = 0;
                     myImage = fleet.executeOrders(myImage);
                 }
-                myImage = world.runHarbor(myImage);
+                if(frame % 2 == 0){
+                    myImage = world.runHarbor(myImage);
+                }
                 myImage = world.paintIslands(myImage);
                 InternalLedGameThread.showImage(myImage);
                 frame++;
@@ -77,12 +80,17 @@ public class GameMain {
                     if(fleet.getNumberOfAliveShips() == 0){
                         p.addScore(50);
                     }
-                    myImage = fleet.employFleet(myImage, (diff - fleet.getNumberOfAliveShips()));
                     round++;
-                    if(round == 16){
-                        round = 1;
+                    if(round % 3 == 0){
                         diff++;
                     }
+                    if(round == 16){
+                        round = 1;
+                        enemyHealth++;
+                        diff = 1;
+                    }
+                    myImage = fleet.employFleet(myImage, (diff - fleet.getNumberOfAliveShips()), enemyHealth);
+                    myImage = world.resetHarbor(myImage);
                     startTime = System.currentTimeMillis();
                     p.addScore(200);
                     String s = "round" + round + ".mvh";

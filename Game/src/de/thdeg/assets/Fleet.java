@@ -18,7 +18,7 @@ public class Fleet {
         return (myImage[idx] == 0 && myImage[idx + 1] == 177 && myImage[idx + 2] == 241);
     }
 
-    public short[] employFleet(short[] myImage, int num){
+    public short[] employFleet(short[] myImage, int num, int hp){
         while (num > 0){
             int i = (int)(Math.random() * 46) + 1;
             int j = (int)(Math.random() * 22) + 1;
@@ -31,7 +31,7 @@ public class Fleet {
                     isWater(myImage, (((j+1) * 48 +  i   ) * 3)) &&
                     isWater(myImage, (((j+1) * 48 + (i+1)) * 3)) &&
                     isWater(myImage, (((j+1) * 48 + (i-1)) * 3))){
-                addFleetmember(new Enemy(2, i, j, 4, 10));
+                addFleetmember(new Enemy(hp, i, j, (int)(Math.random() * 7 + 1), 10));
                 myImage = paintFleet(myImage);
                 num--;
                 continue;

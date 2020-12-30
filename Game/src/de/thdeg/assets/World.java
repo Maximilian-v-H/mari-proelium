@@ -57,6 +57,15 @@ public class World {
         return myImage;
     }
 
+    public short[] resetHarbor(short[] myImage){
+        for(Island i : this.islands){
+            if(i.hasHarbor()){
+                myImage = i.getHarbor().reset(myImage);
+            }
+        }
+        return myImage;
+    }
+
     public short[] runHarbor(short[] myImage){
         for(Island i : this.islands){
             if(i.hasHarbor()){

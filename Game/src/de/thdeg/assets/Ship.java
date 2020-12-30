@@ -1,5 +1,6 @@
 public class Ship extends Agent {
     protected int hp;
+    protected final int MAXHP;
     protected int[][] pos;
     protected int[][] oldpos;
     protected int align;
@@ -11,6 +12,7 @@ public class Ship extends Agent {
         this.pos = new int[3][2];
         this.oldpos = new int[3][2];
         this.hp = hp;
+        this.MAXHP = hp;
         this.align = 7;
         this.pos[0][0] = 2;
         this.pos[0][1] = 3;
@@ -24,6 +26,7 @@ public class Ship extends Agent {
         this.pos = new int[3][2];
         this.oldpos = new int[3][2];
         this.hp = hp;
+        this.MAXHP = hp;
         if (x >= 1 && x <= 46 && y >= 1 && y <= 22) {
             this.align = orient;
             this.pos[1][0] = x;
@@ -98,6 +101,17 @@ public class Ship extends Agent {
         return myImage;
     }
 
+    protected int getShipColor(){
+        double ps = (double)this.hp / (double)this.MAXHP;
+        if(ps > 0.6){
+            return 2;
+        }else if(ps > 0.3){
+            return 1;
+        }else {
+            return 0;
+        }
+    }
+
     /**
      * This method uses the Players values to update the map and return it always.
      * @param myImage the Pixel array given from the {@link GameMain}
@@ -107,9 +121,9 @@ public class Ship extends Agent {
         myImage = clearTrace(myImage);
         if(this.hp > 0) {
             for(int i=0; i < this.pos.length; i++){
-                myImage[(this.pos[i][1] * 48 + this.pos[i][0]) * 3 + 0] = color[this.hp - 1][i][0];
-                myImage[(this.pos[i][1] * 48 + this.pos[i][0]) * 3 + 1] = color[this.hp - 1][i][1];
-                myImage[(this.pos[i][1] * 48 + this.pos[i][0]) * 3 + 2] = color[this.hp - 1][i][2];
+                myImage[(this.pos[i][1] * 48 + this.pos[i][0]) * 3 + 0] = color[getShipColor()][i][0];
+                myImage[(this.pos[i][1] * 48 + this.pos[i][0]) * 3 + 1] = color[getShipColor()][i][1];
+                myImage[(this.pos[i][1] * 48 + this.pos[i][0]) * 3 + 2] = color[getShipColor()][i][2];
             }
         }else {
             for(int i=0; i < this.pos.length; i++){
@@ -550,14 +564,14 @@ public class Ship extends Agent {
             int idx = (y * 48 + x) * 3;
             if(harbor){
                 return (myImage[idx + 0] == 125 && myImage[idx + 1] == 66 && myImage[idx + 2] == 24) ||
-                    (myImage[idx + 0] == 125 && myImage[idx + 1] == 216 && myImage[idx + 2] == 24) ||
-                    (myImage[idx + 0] == 125 && myImage[idx + 1] == 66 && myImage[idx + 2] == 174);
+                    (myImage[idx + 0] == 122 && myImage[idx + 1] == 236 && myImage[idx + 2] == 35) ||
+                    (myImage[idx + 0] == 152 && myImage[idx + 1] == 22 && myImage[idx + 2] == 208);
             }else {
             return (myImage[idx + 0] == 196 && myImage[idx + 1] == 156 && myImage[idx + 2] == 53) ||
                     (myImage[idx + 0] == 186 && myImage[idx + 1] == 148 && myImage[idx + 2] == 48) ||
                     (myImage[idx + 0] == 125 && myImage[idx + 1] == 66 && myImage[idx + 2] == 24) ||
-                    (myImage[idx + 0] == 125 && myImage[idx + 1] == 216 && myImage[idx + 2] == 24) ||
-                    (myImage[idx + 0] == 125 && myImage[idx + 1] == 66 && myImage[idx + 2] == 174);
+                    (myImage[idx + 0] == 122 && myImage[idx + 1] == 236 && myImage[idx + 2] == 35) ||
+                    (myImage[idx + 0] == 152 && myImage[idx + 1] == 22 && myImage[idx + 2] == 208);
             }
         }else {
             return false;
