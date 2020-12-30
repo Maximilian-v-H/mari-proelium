@@ -112,7 +112,9 @@ public class World {
                 }
             }
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            // e.printStackTrace();
+            ret = clear();
+            return ret;
         }
         myReader.close();
         return ret;

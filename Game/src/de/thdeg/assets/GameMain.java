@@ -16,14 +16,13 @@ public class GameMain {
         // This is initialization, donot change this
         InternalLedGameThread.run();
 
-        // Now we show some introductory message and wait 3s before we switch to purple
         System.out.println("Willkommen bei Mari proelium!\n In kuerze wird das Spiel beginnen und Ihr Punktestand wird mit den anderen Spielern verglichen!\n");
         Thread.sleep(1000);
 
         boolean end = false;
         Scanner scan = new Scanner(System.in);
         do {
-            System.out.println("Sending to displayThread");
+            startTime = System.currentTimeMillis();
             Fleet fleet = new Fleet();
             World world = new World();
             myImage = world.parseImage("intro.mvh");

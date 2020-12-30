@@ -166,10 +166,10 @@ public class Ship extends Agent {
                 shoot();
                 break;
             case 2: // Links
-                rotate(0);
+                rotate(0, true);
                 break;
             case 3: // Rechts
-                rotate(1);
+                rotate(1, true);
                 break;
         }
     }
@@ -179,13 +179,14 @@ public class Ship extends Agent {
      * @param dir represents the direction which the ship takes to rotate.
      *          0 - Left
      *          1 - Right
+     * @param save decides if the old ship position shall be saved
      * */
-    protected void rotate(int dir){
+    protected void rotate(int dir, boolean save){
         if(dir == 0){ // Left
             switch(this.align){
                 case 1:
                     if (this.pos[0][0] - 1 >= 0 && this.pos[2][0] + 1 <= 47) {
-                        saveOldPos();
+                        if(save){saveOldPos();}
                         this.pos[0][0]--;
                         this.pos[2][0]++;
                         changeAlign(-1);
@@ -193,7 +194,7 @@ public class Ship extends Agent {
                     break;
                 case 2:
                     if (this.pos[0][0] - 1 >= 0 && this.pos[2][0] + 1 <= 47) {
-                        saveOldPos();
+                        if(save){saveOldPos();}
                         this.pos[0][0]--;
                         this.pos[2][0]++;
                         changeAlign(-1);
@@ -201,7 +202,7 @@ public class Ship extends Agent {
                     break;
                 case 3:
                     if (this.pos[0][1] - 1 >= 0 && this.pos[2][1] + 1 <= 23) {
-                        saveOldPos();
+                        if(save){saveOldPos();}
                         this.pos[0][1]--;
                         this.pos[2][1]++;
                         changeAlign(-1);
@@ -209,7 +210,7 @@ public class Ship extends Agent {
                     break;
                 case 4:
                     if (this.pos[0][1] - 1 >= 0 && this.pos[2][1] + 1 <= 23) {
-                        saveOldPos();
+                        if(save){saveOldPos();}
                         this.pos[0][1]--;
                         this.pos[2][1]++;
                         changeAlign(-1);
@@ -217,7 +218,7 @@ public class Ship extends Agent {
                     break;
                 case 5:
                     if (this.pos[0][0] + 1 <= 47 && this.pos[2][0] - 1 >= 0) {
-                        saveOldPos();
+                        if(save){saveOldPos();}
                         this.pos[0][0]++;
                         this.pos[2][0]--;
                         changeAlign(-1);
@@ -225,7 +226,7 @@ public class Ship extends Agent {
                     break;
                 case 6:
                     if (this.pos[0][0] + 1 <= 47 && this.pos[2][0] - 1 >= 0) {
-                        saveOldPos();
+                        if(save){saveOldPos();}
                         this.pos[0][0]++;
                         this.pos[2][0]--;
                         changeAlign(-1);
@@ -233,7 +234,7 @@ public class Ship extends Agent {
                     break;
                 case 7:
                     if (this.pos[0][1] + 1 <= 23 && this.pos[2][1] - 1 >= 0) {
-                        saveOldPos();
+                        if(save){saveOldPos();}
                         this.pos[0][1]++;
                         this.pos[2][1]--;
                         changeAlign(-1);
@@ -241,7 +242,7 @@ public class Ship extends Agent {
                     break;
                 case 8:
                     if (this.pos[0][1] + 1 <= 23 && this.pos[2][1] - 1 >= 0) {
-                        saveOldPos();
+                        if(save){saveOldPos();}
                         this.pos[0][1]++;
                         this.pos[2][1]--;
                         changeAlign(-1);
@@ -252,7 +253,7 @@ public class Ship extends Agent {
             switch(this.align){
                 case 1:
                     if (this.pos[0][0] + 1 <= 47 && this.pos[2][0] - 1 >= 0) {
-                        saveOldPos();
+                        if(save){saveOldPos();}
                         this.pos[0][0]++;
                         this.pos[2][0]--;
                         changeAlign(1);
@@ -260,7 +261,7 @@ public class Ship extends Agent {
                     break;
                 case 2:
                     if (this.pos[0][1] + 1 <= 23 && this.pos[2][1] - 1 >= 0) {
-                        saveOldPos();
+                        if(save){saveOldPos();}
                         this.pos[0][1]++;
                         this.pos[2][1]--;
                         changeAlign(1);
@@ -268,7 +269,7 @@ public class Ship extends Agent {
                     break;
                 case 3:
                     if (this.pos[0][1] + 1 <= 23 && this.pos[2][1] - 1 >= 0) {
-                        saveOldPos();
+                        if(save){saveOldPos();}
                         this.pos[0][1]++;
                         this.pos[2][1]--;
                         changeAlign(1);
@@ -276,7 +277,7 @@ public class Ship extends Agent {
                     break;
                 case 4:
                     if (this.pos[0][0] - 1 >= 0 && this.pos[2][0] + 1 <= 47) {
-                        saveOldPos();
+                        if(save){saveOldPos();}
                         this.pos[0][0]--;
                         this.pos[2][0]++;
                         changeAlign(1);
@@ -284,7 +285,7 @@ public class Ship extends Agent {
                     break;
                 case 5:
                     if (this.pos[0][0] - 1 >= 0 && this.pos[2][0] + 1 <= 47) {
-                        saveOldPos();
+                        if(save){saveOldPos();}
                         this.pos[0][0]--;
                         this.pos[2][0]++;
                         changeAlign(1);
@@ -292,7 +293,7 @@ public class Ship extends Agent {
                     break;
                 case 6:
                     if (this.pos[0][1] - 1 >= 0 && this.pos[2][1] + 1 <= 23) {
-                        saveOldPos();
+                        if(save){saveOldPos();}
                         this.pos[0][1]--;
                         this.pos[2][1]++;
                         changeAlign(1);
@@ -300,7 +301,7 @@ public class Ship extends Agent {
                     break;
                 case 7:
                     if (this.pos[0][1] - 1 >= 0 && this.pos[2][1] + 1 <= 23) {
-                        saveOldPos();
+                        if(save){saveOldPos();}
                         this.pos[0][1]--;
                         this.pos[2][1]++;
                         changeAlign(1);
@@ -308,13 +309,20 @@ public class Ship extends Agent {
                     break;
                 case 8:
                     if (this.pos[0][0] + 1 <= 47 && this.pos[2][0] - 1 >= 0) {
-                        saveOldPos();
+                        if(save){saveOldPos();}
                         this.pos[0][0]++;
                         this.pos[2][0]--;
                         changeAlign(1);
                     }
                     break;
             }
+        }
+    }
+
+    protected void rotateTo(int newOri){
+        saveOldPos();
+        while (this.align != newOri) {
+            rotate(1, false);
         }
     }
 
@@ -391,6 +399,8 @@ public class Ship extends Agent {
                     }
                     break;
             }
+        }else{
+            
         }
     }
 
@@ -401,14 +411,78 @@ public class Ship extends Agent {
     protected boolean canMove(short[] myImage){
         boolean ret = false;
         switch(this.align){
-            case 1 -> ret = (this.pos[0][1] - 1 >= 0 && !hitIsland(myImage,this.pos[0][0],this.pos[0][1]-1) && !hitEnemy(myImage,this.pos[0][0],this.pos[0][1]-1));
-            case 2 -> ret = (this.pos[0][1] - 1 > 0 && this.pos[0][0] + 1 < 48 && !hitIsland(myImage,this.pos[0][0]+1,this.pos[0][1]-1) && !hitEnemy(myImage,this.pos[0][0]+1,this.pos[0][1]-1));
-            case 3 -> ret = (this.pos[0][0] + 1 < 48 && !hitIsland(myImage,this.pos[0][0]+1,this.pos[0][1]) && !hitEnemy(myImage,this.pos[0][0]+1,this.pos[0][1]));
-            case 4 -> ret = (this.pos[0][0] + 1 < 48 && this.pos[0][1] + 1 < 24 && !hitIsland(myImage,this.pos[0][0]+1,this.pos[0][1]+1) && !hitEnemy(myImage,this.pos[0][0]+1,this.pos[0][1]+1));
-            case 5 -> ret = (this.pos[0][1] + 1 < 24 && !hitIsland(myImage,this.pos[0][0],this.pos[0][1]+1) && !hitEnemy(myImage,this.pos[0][0],this.pos[0][1]+1));
-            case 6 -> ret = (this.pos[0][1] + 1 < 24 && this.pos[0][0] - 1 >= 0 && !hitIsland(myImage,this.pos[0][0]-1,this.pos[0][1]+1) && !hitEnemy(myImage,this.pos[0][0]-1,this.pos[0][1]+1));
-            case 7 -> ret = (this.pos[0][0] - 1 >= 0 && !hitIsland(myImage,this.pos[0][0]-1,this.pos[0][1]) && !hitEnemy(myImage,this.pos[0][0]-1,this.pos[0][1]));
-            case 8 -> ret = (this.pos[0][0] - 1 >= 0 && this.pos[0][1] - 1 >= 0 && !hitIsland(myImage,this.pos[0][0]-1,this.pos[0][1]-1) && !hitEnemy(myImage,this.pos[0][0]-1,this.pos[0][1]-1));
+            case 1 -> {
+                if(this.pos[0][1] - 1 >= 0 && !hitIsland(myImage,this.pos[0][0],this.pos[0][1]-1, false)){
+                    if(!hitEnemy(myImage,this.pos[0][0],this.pos[0][1]-1)){
+                        return true;
+                    }else {
+                        damage(1);
+                    }
+                }
+            }
+            case 2 -> {
+                if(this.pos[0][1] - 1 > 0 && this.pos[0][0] + 1 < 48 && !hitIsland(myImage,this.pos[0][0]+1,this.pos[0][1]-1, false)){
+                    if(!hitEnemy(myImage,this.pos[0][0]+1,this.pos[0][1]-1)){
+                        return true;
+                    }else {
+                        damage(1);
+                    }
+                }
+            }
+            case 3 -> {
+                if(this.pos[0][0] + 1 < 48 && !hitIsland(myImage,this.pos[0][0]+1,this.pos[0][1], false)){
+                    if(!hitEnemy(myImage,this.pos[0][0]+1,this.pos[0][1])){
+                        return true;
+                    }else {
+                        damage(1);
+                    }
+                }
+            }
+            case 4 -> {
+                if(this.pos[0][0] + 1 < 48 && this.pos[0][1] + 1 < 24 && !hitIsland(myImage,this.pos[0][0]+1,this.pos[0][1]+1, false)){
+                    if(!hitEnemy(myImage,this.pos[0][0]+1,this.pos[0][1]+1)){
+                        return true;
+                    }else {
+                        damage(1);
+                    }
+                }
+            }
+            case 5 -> {
+                if(this.pos[0][1] + 1 < 24 && !hitIsland(myImage,this.pos[0][0],this.pos[0][1]+1, false)){
+                    if(!hitEnemy(myImage,this.pos[0][0],this.pos[0][1]+1)){
+                        return true;
+                    }else {
+                        damage(1);
+                    }
+                }
+            }
+            case 6 -> {
+                if(this.pos[0][1] + 1 < 24 && this.pos[0][0] - 1 >= 0 && !hitIsland(myImage,this.pos[0][0]-1,this.pos[0][1]+1, false)){
+                    if(!hitEnemy(myImage,this.pos[0][0]-1,this.pos[0][1]+1)){
+                        return true;
+                    }else {
+                        damage(1);
+                    }
+                }
+            }
+            case 7 -> {
+                if(this.pos[0][0] - 1 >= 0 && !hitIsland(myImage,this.pos[0][0]-1,this.pos[0][1], false)){
+                    if(!hitEnemy(myImage,this.pos[0][0]-1,this.pos[0][1])){
+                        return true;
+                    }else {
+                        damage(1);
+                    }
+                }
+            }
+            case 8 -> {
+                if(this.pos[0][0] - 1 >= 0 && this.pos[0][1] - 1 >= 0 && !hitIsland(myImage,this.pos[0][0]-1,this.pos[0][1]-1, false)){
+                    if(!hitEnemy(myImage,this.pos[0][0]-1,this.pos[0][1]-1)){
+                        return true;
+                    }else {
+                        damage(1);
+                    }
+                }
+            }
         }
         return ret;
     }
@@ -471,12 +545,20 @@ public class Ship extends Agent {
         }
     }
 
-    protected boolean hitIsland(short[] myImage, int x, int y){
+    protected boolean hitIsland(short[] myImage, int x, int y, boolean harbor){
         if (x <= 47 && y <= 23 && x >= 0 && y >= 0) {
             int idx = (y * 48 + x) * 3;
+            if(harbor){
+                return (myImage[idx + 0] == 125 && myImage[idx + 1] == 66 && myImage[idx + 2] == 24) ||
+                    (myImage[idx + 0] == 125 && myImage[idx + 1] == 216 && myImage[idx + 2] == 24) ||
+                    (myImage[idx + 0] == 125 && myImage[idx + 1] == 66 && myImage[idx + 2] == 174);
+            }else {
             return (myImage[idx + 0] == 196 && myImage[idx + 1] == 156 && myImage[idx + 2] == 53) ||
                     (myImage[idx + 0] == 186 && myImage[idx + 1] == 148 && myImage[idx + 2] == 48) ||
-                    (myImage[idx + 0] == 125 && myImage[idx + 1] == 66 && myImage[idx + 2] == 24);
+                    (myImage[idx + 0] == 125 && myImage[idx + 1] == 66 && myImage[idx + 2] == 24) ||
+                    (myImage[idx + 0] == 125 && myImage[idx + 1] == 216 && myImage[idx + 2] == 24) ||
+                    (myImage[idx + 0] == 125 && myImage[idx + 1] == 66 && myImage[idx + 2] == 174);
+            }
         }else {
             return false;
         }

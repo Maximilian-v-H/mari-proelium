@@ -49,8 +49,7 @@ public class Enemy extends Ship {
         int pX = this.pos[1][0];
         int pY = this.pos[1][1];
         while(pX != this.RouteX && pY != this.RouteY){
-            int[] ia = {this.RouteX, this.RouteY};
-            switch(routeDirection(pX, pY, ia)){
+            switch(routeDirection(pX, pY, this.RouteX, this.RouteY)){
                 case 1 -> {
                     int[] rt = {pX, --pY};
                     this.routing.add(rt);
@@ -91,11 +90,11 @@ public class Enemy extends Ship {
     }
 
     public short[] run(short[] myImage){
-        if(this.RouteX != -1 && this.RouteY != -1){
-            pathFinder();
-            pR();
-            System.out.println(this.routing.get(0)[0]);
-        }
+        // if(this.RouteX != -1 && this.RouteY != -1){
+        //     pathFinder();
+        //     pR();
+        //     System.out.println(this.routing.get(0)[0]);
+        // }
         myImage = clearTrace(myImage);
         if(playerInVision(myImage) && this.bullet == null){
             shoot();
@@ -123,54 +122,54 @@ public class Enemy extends Ship {
     }
 
     private void move(short[] myImage){
-        if(this.routing.size() <= 0 ){
+        // if(this.routing.size() <= 0 ){
             if(canMove(myImage)){
                 forward(myImage);
             }else{
                 if(Math.random() > 0.5){
-                    rotate(0);
+                    rotate(0, true);
                 }else {
-                    rotate(1);
+                    rotate(1, true);
                 }
             }
-        }else {
-            switch(routeDirection(this.pos[1][0], this.pos[1][1], this.routing.get(this.routing.size() - 1))){
-                case 1 -> {
-                    rotateTo(1);
-                    forward(myImage);
-                }
-                case 2 -> {
-                    rotateTo(2);
-                    forward(myImage);
-                }
-                case 3 -> {
-                    rotateTo(3);
-                    forward(myImage);
-                }
-                case 4 -> {
-                    rotateTo(4);
-                    forward(myImage);
-                }
-                case 5 -> {
-                    rotateTo(5);
-                    forward(myImage);
-                }
-                case 6 -> {
-                    rotateTo(6);
-                    forward(myImage);
-                }
-                case 7 -> {
-                    rotateTo(7);
-                    forward(myImage);
-                }
-                case 8 -> {
-                    rotateTo(8);
-                    forward(myImage);
-                }
-                default -> {}
-            }
-            this.routing.remove(this.routing.size() - 1);
-        }
+        // }else {
+        //     switch(routeDirection(this.pos[1][0], this.pos[1][1], this.routing.get(this.routing.size() - 1)[0], this.routing.get(this.routing.size() - 1)[1])){
+        //         case 1 -> {
+        //             rotateTo(1);
+        //             forward(myImage);
+        //         }
+        //         case 2 -> {
+        //             rotateTo(2);
+        //             forward(myImage);
+        //         }
+        //         case 3 -> {
+        //             rotateTo(3);
+        //             forward(myImage);
+        //         }
+        //         case 4 -> {
+        //             rotateTo(4);
+        //             forward(myImage);
+        //         }
+        //         case 5 -> {
+        //             rotateTo(5);
+        //             forward(myImage);
+        //         }
+        //         case 6 -> {
+        //             rotateTo(6);
+        //             forward(myImage);
+        //         }
+        //         case 7 -> {
+        //             rotateTo(7);
+        //             forward(myImage);
+        //         }
+        //         case 8 -> {
+        //             rotateTo(8);
+        //             forward(myImage);
+        //         }
+        //         default -> {}
+        //     }
+            // this.routing.remove(this.routing.size() - 1);
+        // }
     }
 
     private void pR(){
@@ -179,33 +178,27 @@ public class Enemy extends Ship {
         }
     }
 
-    private void rotateTo(int newOri){
-        while (this.align != newOri) {
-            rotate(1);
-        }
-    }
-
-    private int routeDirection(int x, int y, int[] gPos){
-        if(x > gPos[0]){
-            if(y > gPos[1]){
+    private int routeDirection(int x, int y, int gx, int gy){
+        if(x > gx){
+            if(y > gy){
                 return 8;
-            }else if(y < gPos[1]){
+            }else if(y < gy){
                 return 6;
             }else {
                 return 7;
             }
-        }else if(x < gPos[0]){
-            if(y > gPos[1]) {
+        }else if(x < gx){
+            if(y > gy) {
                 return 2;
-            }else if(y < gPos[1]){
+            }else if(y < gy){
                 return 4;
             }else {
                 return 3;
             }
         }else {
-            if(y > gPos[1]) {
+            if(y > gy) {
                 return 1;
-            }else if(y < gPos[1]){
+            }else if(y < gy){
                 return 5;
             }
         }
@@ -224,11 +217,14 @@ public class Enemy extends Ship {
                 for (int j = 0 - this.range; j <= this.range; j++) {
                     dify = this.pos[1][1] + j;
                     if ((Math.pow(difx - this.pos[0][1], 2)+Math.pow(dify - this.pos[1][1], 2)) <= Math.pow(this.range, 2)) {
-                        if(hitPlayer(myImage, difx,dify)) {
+                        if(hitPlayer(myImage, difx, dify)) {
                             this.detectedPlayer = true;
                             this.PX = difx;
                             this.PY = dify;
                             return true;
+                        }
+                        if(hitIsland(myImage, difx, dify, true)){
+                            rotateTo(routeDirection(this.pos[1][0], this.pos[1][1], difx, dify));
                         }
                     }
                 }
@@ -264,7 +260,7 @@ public class Enemy extends Ship {
         int ret = 0;
         for(int i=0; i < this.pos.length; i++){
             int idx = (this.pos[i][1] * 48 + this.pos[i][0]) * 3;
-            if (hitIsland(myImage, this.pos[i][0], this.pos[i][1])){
+            if (hitIsland(myImage, this.pos[i][0], this.pos[i][1], false)){
                 ret = 1;
             }
             if (hitBullet(myImage, this.pos[i][0], this.pos[i][1])){
