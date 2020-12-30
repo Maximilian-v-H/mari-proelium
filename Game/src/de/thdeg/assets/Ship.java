@@ -421,10 +421,10 @@ public class Ship extends Agent {
         int dir1 = (this.align + 2 > 8) ? (this.align + 2 - 8) : (this.align + 2);
         int dir2 = (this.align - 2 < 1) ? (8 + this.align - 2) : (this.align - 2);
         if(this.bullet == null){
-            this.bullet = new Bullet(dir1, 5, this.pos[1][0], this.pos[1][1]);
+            this.bullet = new Bullet(dir1, 5, this.pos[1][0], this.pos[1][1], 0);
         }
         if(this.bullet2 == null){
-            this.bullet2 = new Bullet(dir2, 5, this.pos[1][0], this.pos[1][1]);
+            this.bullet2 = new Bullet(dir2, 5, this.pos[1][0], this.pos[1][1], 0);
         }
     }
 

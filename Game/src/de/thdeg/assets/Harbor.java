@@ -101,7 +101,7 @@ public class Harbor extends Agent{
     protected void shoot() {
         int orient = routeDirection(this.pos[0], this.pos[1], this.enemyPos);
         if(this.bullet == null){
-            this.bullet = new Bullet(orient, 8, this.pos[0], this.pos[1]);
+            this.bullet = new Bullet(orient, 8, this.pos[0], this.pos[1], 1);
         }
     }
     protected boolean hitPlayer(short[] myImage, int x, int y){
