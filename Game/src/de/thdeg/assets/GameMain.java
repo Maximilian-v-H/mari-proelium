@@ -101,9 +101,32 @@ public class GameMain {
             for(int i = 0; i < highscore.size(); i++){
                 System.out.println("(" + (i+1) + ") -> " + highscore.get(i));
             }
-
-            System.out.println("Wollen Sie noch eine Runde spielen? (Y/N)\n> ");
-            end = !scan.next().equals("Y");
+            myImage = world.parseImage("commands");
+            InternalLedGameThread.showImage(myImage);
+            Thread.sleep(1500);
+            while(true){
+                thisKey = InternalLedGameThread.getKeyboard();
+                if(thisKey != -1){
+                    break;
+                }
+            }
+            switch(thisKey){
+                case 0 -> {
+                    end = false;
+                }
+                case 1 -> {
+                    end = true;
+                    System.exit(0);
+                }
+                case 2 -> {
+                    end = true;
+                    System.exit(0);
+                }
+                case 3 -> {
+                    end = true;
+                    System.exit(0);
+                }
+            }
         }while(!end);
     }
 }

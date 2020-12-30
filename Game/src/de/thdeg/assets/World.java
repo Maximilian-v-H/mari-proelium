@@ -113,13 +113,17 @@ public class World {
                 case "round6" -> {
     myReader = new Scanner(new File("Game"+File.separator+"src"+File.separator+"de"+File.separator+"thdeg"+File.separator+"assets"+File.separator+"img"+File.separator+"round6.mvh"));
                 }
+                case "commands" -> {
+    myReader = new Scanner(new File("Game"+File.separator+"src"+File.separator+"de"+File.separator+"thdeg"+File.separator+"assets"+File.separator+"img"+File.separator+"commands.mvh"));
+                }
                 case "gameover" -> {
     myReader = new Scanner(new File("Game"+File.separator+"src"+File.separator+"de"+File.separator+"thdeg"+File.separator+"assets"+File.separator+"img"+File.separator+"gameover.mvh"));
                 }
             }
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
-                if(data.length() > 1 && data.substring(0,1).equals("B")){
+                if(data.length() > 1 && !data.substring(0,1).equals("/")){
+                if(data.substring(0,1).equals("B")){
                     for(int i = 0; i < ret.length; i += 3){
                         String[] s = data.substring(1).split("-");
                         ret[i] = Short.parseShort(s[0]);
@@ -132,6 +136,7 @@ public class World {
                     ret[(Integer.parseInt(pos[1]) * 48 + Integer.parseInt(pos[0])) * 3 + 0] = Short.parseShort(rgb[0]);
                     ret[(Integer.parseInt(pos[1]) * 48 + Integer.parseInt(pos[0])) * 3 + 1] = Short.parseShort(rgb[1]);
                     ret[(Integer.parseInt(pos[1]) * 48 + Integer.parseInt(pos[0])) * 3 + 2] = Short.parseShort(rgb[2]);
+                }
                 }
             }
         } catch (FileNotFoundException e) {
