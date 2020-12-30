@@ -26,9 +26,9 @@ public class GameMain {
             System.out.println("Sending to displayThread");
             Fleet fleet = new Fleet();
             World world = new World();
-            myImage = world.parseImage("intro");
+            myImage = world.parseImage("intro.mvh");
             InternalLedGameThread.showImage(myImage);
-            Thread.sleep(500);
+            Thread.sleep(1500);
             myImage = world.fade(myImage);
             InternalLedGameThread.showImage(myImage);
             Thread.sleep(500);
@@ -38,7 +38,7 @@ public class GameMain {
             myImage = world.fade(myImage);
             InternalLedGameThread.showImage(myImage);
             Thread.sleep(500);
-            myImage = world.parseImage("round1");
+            myImage = world.parseImage("round1.mvh");
             InternalLedGameThread.showImage(myImage);
             Thread.sleep(500);
             myImage = world.clear();
@@ -76,9 +76,12 @@ public class GameMain {
                 if((System.currentTimeMillis() - startTime) > roundtime){
                     myImage = fleet.employFleet(myImage, (3 - fleet.getNumberOfAliveShips()));
                     round++;
+                    if(round == 16){
+                        round = 1;
+                    }
                     startTime = System.currentTimeMillis();
                     p.addScore(200);
-                    String s = "round" + round;
+                    String s = "round" + round + ".mvh";
                     System.out.println(s);
                     myImage = world.parseImage(s);
                     InternalLedGameThread.showImage(myImage);
@@ -90,7 +93,7 @@ public class GameMain {
                 }
             }
             world.clear();
-            myImage = world.parseImage("gameover");
+            myImage = world.parseImage("gameover.mvh");
             InternalLedGameThread.showImage(myImage);
             p.addScore(fleet.getDead() * 50);
             highscore.add(p.getScore().getScore());
@@ -101,7 +104,7 @@ public class GameMain {
             for(int i = 0; i < highscore.size(); i++){
                 System.out.println("(" + (i+1) + ") -> " + highscore.get(i));
             }
-            myImage = world.parseImage("commands");
+            myImage = world.parseImage("commands.mvh");
             InternalLedGameThread.showImage(myImage);
             Thread.sleep(1500);
             while(true){

@@ -91,35 +91,7 @@ public class World {
         short[] ret = new short[24*48*3];
         Scanner myReader = null;
         try {
-            switch(what){
-                case "intro" -> {
-    myReader = new Scanner(new File("Game"+File.separator+"src"+File.separator+"de"+File.separator+"thdeg"+File.separator+"assets"+File.separator+"img"+File.separator+"intro.mvh"));
-                }
-                case "round1" -> {
-    myReader = new Scanner(new File("Game"+File.separator+"src"+File.separator+"de"+File.separator+"thdeg"+File.separator+"assets"+File.separator+"img"+File.separator+"round1.mvh"));
-                }
-                case "round2" -> {
-    myReader = new Scanner(new File("Game"+File.separator+"src"+File.separator+"de"+File.separator+"thdeg"+File.separator+"assets"+File.separator+"img"+File.separator+"round2.mvh"));
-                }
-                case "round3" -> {
-    myReader = new Scanner(new File("Game"+File.separator+"src"+File.separator+"de"+File.separator+"thdeg"+File.separator+"assets"+File.separator+"img"+File.separator+"round3.mvh"));
-                }
-                case "round4" -> {
-    myReader = new Scanner(new File("Game"+File.separator+"src"+File.separator+"de"+File.separator+"thdeg"+File.separator+"assets"+File.separator+"img"+File.separator+"round4.mvh"));
-                }
-                case "round5" -> {
-    myReader = new Scanner(new File("Game"+File.separator+"src"+File.separator+"de"+File.separator+"thdeg"+File.separator+"assets"+File.separator+"img"+File.separator+"round5.mvh"));
-                }
-                case "round6" -> {
-    myReader = new Scanner(new File("Game"+File.separator+"src"+File.separator+"de"+File.separator+"thdeg"+File.separator+"assets"+File.separator+"img"+File.separator+"round6.mvh"));
-                }
-                case "commands" -> {
-    myReader = new Scanner(new File("Game"+File.separator+"src"+File.separator+"de"+File.separator+"thdeg"+File.separator+"assets"+File.separator+"img"+File.separator+"commands.mvh"));
-                }
-                case "gameover" -> {
-    myReader = new Scanner(new File("Game"+File.separator+"src"+File.separator+"de"+File.separator+"thdeg"+File.separator+"assets"+File.separator+"img"+File.separator+"gameover.mvh"));
-                }
-            }
+    myReader = new Scanner(new File("Game"+File.separator+"src"+File.separator+"de"+File.separator+"thdeg"+File.separator+"assets"+File.separator+"img"+File.separator+what));
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
                 if(data.length() > 1 && !data.substring(0,1).equals("/")){
