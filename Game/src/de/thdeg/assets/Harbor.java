@@ -51,7 +51,7 @@ public class Harbor extends Agent{
                 shoot();
             }
         } else {
-            int poss = detectShip(1, myImage);
+            int poss = detectShip(7, myImage);
             if(poss != -1) {
                 this.captured = true;
                 if(poss == 0) {

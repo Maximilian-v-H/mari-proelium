@@ -123,8 +123,7 @@ public class Enemy extends Ship {
 
     private void move(short[] myImage){
         // if(this.routing.size() <= 0 ){
-        if(inVision(myImage, 1)){
-        }else if(canMove(myImage)){
+        if(canMove(myImage)){
             forward(myImage);
         }else{
             if(Math.random() > 0.5){

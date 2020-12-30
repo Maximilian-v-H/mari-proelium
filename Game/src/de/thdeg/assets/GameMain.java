@@ -108,6 +108,7 @@ public class GameMain {
             myImage = world.parseImage("commands.mvh");
             InternalLedGameThread.showImage(myImage);
             Thread.sleep(1500);
+            thisKey = -1;
             while(true){
                 thisKey = InternalLedGameThread.getKeyboard();
                 if(thisKey != -1){
