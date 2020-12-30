@@ -105,6 +105,8 @@ public class Fleet {
                 s.setRouteX(this.PX);
                 s.setRouteY(this.PY);
                 myImage = s.run(myImage);
+            }else {
+                myImage = s.paint(myImage);
             }
         }
         return myImage;

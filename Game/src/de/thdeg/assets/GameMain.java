@@ -73,7 +73,10 @@ public class GameMain {
                 System.out.println("+++ " + (System.currentTimeMillis() - startTime) + " +++");
                 p.damage(fleet.damageControl());
                 fleet.resetDamageControl();
-                if((System.currentTimeMillis() - startTime) > roundtime){
+                if((System.currentTimeMillis() - startTime) > roundtime || fleet.getNumberOfAliveShips() == 0){
+                    if(fleet.getNumberOfAliveShips() == 0){
+                        p.addScore(50);
+                    }
                     myImage = fleet.employFleet(myImage, (diff - fleet.getNumberOfAliveShips()));
                     round++;
                     if(round == 16){
@@ -88,9 +91,6 @@ public class GameMain {
                     InternalLedGameThread.showImage(myImage);
                     Thread.sleep(1000);
                     myImage = world.clear();
-                }
-                if(fleet.getNumberOfAliveShips() == 0){
-                    p.addScore(50);
                 }
             }
             world.clear();
