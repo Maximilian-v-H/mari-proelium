@@ -96,7 +96,7 @@ public class Enemy extends Ship {
         //     System.out.println(this.routing.get(0)[0]);
         // }
         myImage = clearTrace(myImage);
-        if(playerInVision(myImage) && this.bullet == null){
+        if(inVision(myImage, 0) && this.bullet == null){
             shoot();
         }
         move(myImage);
@@ -123,15 +123,16 @@ public class Enemy extends Ship {
 
     private void move(short[] myImage){
         // if(this.routing.size() <= 0 ){
-            if(canMove(myImage)){
-                forward(myImage);
-            }else{
-                if(Math.random() > 0.5){
-                    rotate(0, true);
-                }else {
-                    rotate(1, true);
-                }
+        if(inVision(myImage, 1)){
+        }else if(canMove(myImage)){
+            forward(myImage);
+        }else{
+            if(Math.random() > 0.5){
+                rotate(0, true);
+            }else {
+                rotate(1, true);
             }
+        }
         // }else {
         //     switch(routeDirection(this.pos[1][0], this.pos[1][1], this.routing.get(this.routing.size() - 1)[0], this.routing.get(this.routing.size() - 1)[1])){
         //         case 1 -> {
@@ -168,7 +169,7 @@ public class Enemy extends Ship {
         //         }
         //         default -> {}
         //     }
-            // this.routing.remove(this.routing.size() - 1);
+        // this.routing.remove(this.routing.size() - 1);
         // }
     }
 
@@ -208,7 +209,7 @@ public class Enemy extends Ship {
     /**
      *  Method to detect if the player is visible for the enemy ship.
      * */
-    private boolean playerInVision(short[] myImage){
+    private boolean inVision(short[] myImage, int who){
         int difx;
         int dify;
         if(this.hp > 0){
@@ -217,14 +218,20 @@ public class Enemy extends Ship {
                 for (int j = 0 - this.range; j <= this.range; j++) {
                     dify = this.pos[1][1] + j;
                     if ((Math.pow(difx - this.pos[0][1], 2)+Math.pow(dify - this.pos[1][1], 2)) <= Math.pow(this.range, 2)) {
-                        if(hitPlayer(myImage, difx, dify)) {
-                            this.detectedPlayer = true;
-                            this.PX = difx;
-                            this.PY = dify;
-                            return true;
-                        }
-                        if(hitIsland(myImage, difx, dify, true)){
-                            rotateTo(routeDirection(this.pos[1][0], this.pos[1][1], difx, dify));
+                        switch(who){
+                            case 0 -> {
+                                if(hitPlayer(myImage, difx, dify)) {
+                                    this.detectedPlayer = true;
+                                    this.PX = difx;
+                                    this.PY = dify;
+                                    return true;
+                                }
+                            }
+                            case 1 -> {
+                                if(hitIsland(myImage, difx, dify, true)){
+                                    rotateTo(routeDirection(this.pos[1][0], this.pos[1][1], difx, dify));
+                                }
+                            }
                         }
                     }
                 }

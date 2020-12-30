@@ -10,6 +10,7 @@ public class GameMain {
         int thisKey=0;
         int frame = 0;
         int round = 1;
+        int diff = 4;
         long startTime = System.currentTimeMillis();
         long roundtime = 30000;
 
@@ -22,7 +23,6 @@ public class GameMain {
         boolean end = false;
         Scanner scan = new Scanner(System.in);
         do {
-            startTime = System.currentTimeMillis();
             Fleet fleet = new Fleet();
             World world = new World();
             myImage = world.parseImage("intro.mvh");
@@ -42,7 +42,7 @@ public class GameMain {
             Thread.sleep(500);
             myImage = world.clear();
             myImage = world.createIsland(myImage, 5);
-            myImage = fleet.employFleet(myImage, 3);
+            myImage = fleet.employFleet(myImage, diff);
             Player p = Player.spawn(myImage,1);
             myImage = p.paint(myImage);
             myImage = fleet.paintFleet(myImage);
@@ -53,6 +53,7 @@ public class GameMain {
                     break;
                 }
             }
+            startTime = System.currentTimeMillis();
             while(p.isAlive()){
                 thisKey = InternalLedGameThread.getKeyboard();
                 myImage = p.run(thisKey, myImage);
@@ -73,10 +74,11 @@ public class GameMain {
                 p.damage(fleet.damageControl());
                 fleet.resetDamageControl();
                 if((System.currentTimeMillis() - startTime) > roundtime){
-                    myImage = fleet.employFleet(myImage, (3 - fleet.getNumberOfAliveShips()));
+                    myImage = fleet.employFleet(myImage, (diff - fleet.getNumberOfAliveShips()));
                     round++;
                     if(round == 16){
                         round = 1;
+                        diff++;
                     }
                     startTime = System.currentTimeMillis();
                     p.addScore(200);
