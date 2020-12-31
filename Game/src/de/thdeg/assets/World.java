@@ -40,6 +40,7 @@ public class World {
     }
 
     public short[] createIsland(short[] myImage, int num){
+        this.islands.clear();
         while (num > 0){
             int i = (int)(Math.random() * 45) + 1;
             int j = (int)(Math.random() * 21) + 1;

@@ -85,6 +85,7 @@ public class GameMain {
                         diff++;
                         p.resetHadBonus();
                         fleet.resetHadBonus();
+                        myImage = world.createIsland(myImage, 5);
                     }
                     if(round == 16){
                         round = 1;
