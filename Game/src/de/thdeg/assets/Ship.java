@@ -189,10 +189,10 @@ public class Ship extends Agent {
                 shoot();
                 break;
             case 2:// Links
-                rotate(0, true);
+                rotate(0, true, myImage);
                 break;
             case 3: // Rechts
-                rotate(1, true);
+                rotate(1, true, myImage);
                 break;
         }
     }
@@ -204,13 +204,13 @@ public class Ship extends Agent {
      *          1 - Right
      * @param save decides if the old ship position shall be saved
      * */
-    protected void rotate(int dir, boolean save){
+    protected void rotate(int dir, boolean save, short[] myImage){
         if(dir == 0){ // Left
             switch(this.align){
                 case 1:
                     if (this.pos[0][0] - 1 >= 0 && this.pos[2][0] + 1 <= 47 && 
-                            !hitIsland(myImage, this.pos[0][0] - 1, this.pos[0][1], false) && 
-                            !hitIsland(myImage, this.pos[2][0] + 1, this.pos[2][1], false)) {
+                            !(hitIsland(myImage, this.pos[0][0] - 1, this.pos[0][1], false) > 0) && 
+                            !(hitIsland(myImage, this.pos[2][0] + 1, this.pos[2][1], false) > 0)) {
                         if(save){saveOldPos();}
                         this.pos[0][0]--;
                         this.pos[2][0]++;
@@ -219,8 +219,8 @@ public class Ship extends Agent {
                     break;
                 case 2:
                     if (this.pos[0][0] - 1 >= 0 && this.pos[2][0] + 1 <= 47 && 
-                            !hitIsland(myImage, this.pos[0][0] - 1, this.pos[0][1], false) && 
-                            !hitIsland(myImage, this.pos[2][0] + 1, this.pos[2][1], false)) {
+                            !(hitIsland(myImage, this.pos[0][0] - 1, this.pos[0][1], false) > 0) && 
+                            !(hitIsland(myImage, this.pos[2][0] + 1, this.pos[2][1], false) > 0)) {
                         if(save){saveOldPos();}
                         this.pos[0][0]--;
                         this.pos[2][0]++;
@@ -229,8 +229,8 @@ public class Ship extends Agent {
                     break;
                 case 3:
                     if (this.pos[0][1] - 1 >= 0 && this.pos[2][1] + 1 <= 23 && 
-                            !hitIsland(myImage, this.pos[0][0], this.pos[0][1] - 1, false) && 
-                            !hitIsland(myImage, this.pos[2][0], this.pos[2][1] + 1, false)) {
+                            !(hitIsland(myImage, this.pos[0][0], this.pos[0][1] - 1, false) > 0) && 
+                            !(hitIsland(myImage, this.pos[2][0], this.pos[2][1] + 1, false) > 0)) {
                         if(save){saveOldPos();}
                         this.pos[0][1]--;
                         this.pos[2][1]++;
@@ -239,8 +239,8 @@ public class Ship extends Agent {
                     break;
                 case 4:
                     if (this.pos[0][1] - 1 >= 0 && this.pos[2][1] + 1 <= 23 && 
-                            !hitIsland(myImage, this.pos[0][0], this.pos[0][1] - 1, false) && 
-                            !hitIsland(myImage, this.pos[2][0], this.pos[2][1] + 1, false)) {
+                            !(hitIsland(myImage, this.pos[0][0], this.pos[0][1] - 1, false) > 0) && 
+                            !(hitIsland(myImage, this.pos[2][0], this.pos[2][1] + 1, false) > 0)) {
                         if(save){saveOldPos();}
                         this.pos[0][1]--;
                         this.pos[2][1]++;
@@ -249,8 +249,8 @@ public class Ship extends Agent {
                     break;
                 case 5:
                     if (this.pos[0][0] + 1 <= 47 && this.pos[2][0] - 1 >= 0 && 
-                            !hitIsland(myImage, this.pos[0][0] + 1, this.pos[0][1], false) && 
-                            !hitIsland(myImage, this.pos[2][0] - 1, this.pos[2][1], false)) {
+                            !(hitIsland(myImage, this.pos[0][0] + 1, this.pos[0][1], false) > 0) && 
+                            !(hitIsland(myImage, this.pos[2][0] - 1, this.pos[2][1], false) > 0)) {
                         if(save){saveOldPos();}
                         this.pos[0][0]++;
                         this.pos[2][0]--;
@@ -259,8 +259,8 @@ public class Ship extends Agent {
                     break;
                 case 6:
                     if (this.pos[0][0] + 1 <= 47 && this.pos[2][0] - 1 >= 0 && 
-                            !hitIsland(myImage, this.pos[0][0] + 1, this.pos[0][1], false) && 
-                            !hitIsland(myImage, this.pos[2][0] - 1, this.pos[2][1], false)) {
+                            !(hitIsland(myImage, this.pos[0][0] + 1, this.pos[0][1], false) > 0) && 
+                            !(hitIsland(myImage, this.pos[2][0] - 1, this.pos[2][1], false) > 0)) {
                         if(save){saveOldPos();}
                         this.pos[0][0]++;
                         this.pos[2][0]--;
@@ -269,8 +269,8 @@ public class Ship extends Agent {
                     break;
                 case 7:
                     if (this.pos[0][1] + 1 <= 23 && this.pos[2][1] - 1 >= 0 && 
-                            !hitIsland(myImage, this.pos[0][0], this.pos[0][1] + 1, false) && 
-                            !hitIsland(myImage, this.pos[2][0], this.pos[2][1] - 1, false)) {
+                            !(hitIsland(myImage, this.pos[0][0], this.pos[0][1] + 1, false) > 0) && 
+                            !(hitIsland(myImage, this.pos[2][0], this.pos[2][1] - 1, false) > 0)) {
                         if(save){saveOldPos();}
                         this.pos[0][1]++;
                         this.pos[2][1]--;
@@ -279,8 +279,8 @@ public class Ship extends Agent {
                     break;
                 case 8:
                     if (this.pos[0][1] + 1 <= 23 && this.pos[2][1] - 1 >= 0 && 
-                            !hitIsland(myImage, this.pos[0][0], this.pos[0][1] + 1, false) && 
-                            !hitIsland(myImage, this.pos[2][0], this.pos[2][1] - 1, false)) {
+                            !(hitIsland(myImage, this.pos[0][0], this.pos[0][1] + 1, false) > 0) && 
+                            !(hitIsland(myImage, this.pos[2][0], this.pos[2][1] - 1, false) > 0)) {
                         if(save){saveOldPos();}
                         this.pos[0][1]++;
                         this.pos[2][1]--;
@@ -292,8 +292,8 @@ public class Ship extends Agent {
             switch(this.align){
                 case 1:
                     if (this.pos[0][0] + 1 <= 47 && this.pos[2][0] - 1 >= 0 && 
-                            !hitIsland(myImage, this.pos[0][0] + 1, this.pos[0][1], false) && 
-                            !hitIsland(myImage, this.pos[2][0] - 1, this.pos[2][1], false)) {
+                            !(hitIsland(myImage, this.pos[0][0] + 1, this.pos[0][1], false) > 0) && 
+                            !(hitIsland(myImage, this.pos[2][0] - 1, this.pos[2][1], false) > 0)) {
                         if(save){saveOldPos();}
                         this.pos[0][0]++;
                         this.pos[2][0]--;
@@ -302,8 +302,8 @@ public class Ship extends Agent {
                     break;
                 case 2:
                     if (this.pos[0][1] + 1 <= 23 && this.pos[2][1] - 1 >= 0 && 
-                            !hitIsland(myImage, this.pos[0][0], this.pos[0][1] + 1, false) && 
-                            !hitIsland(myImage, this.pos[2][0], this.pos[2][1] - 1, false)) {
+                            !(hitIsland(myImage, this.pos[0][0], this.pos[0][1] + 1, false) > 0) && 
+                            !(hitIsland(myImage, this.pos[2][0], this.pos[2][1] - 1, false) > 0)) {
                         if(save){saveOldPos();}
                         this.pos[0][1]++;
                         this.pos[2][1]--;
@@ -312,8 +312,8 @@ public class Ship extends Agent {
                     break;
                 case 3:
                     if (this.pos[0][1] + 1 <= 23 && this.pos[2][1] - 1 >= 0 && 
-                            !hitIsland(myImage, this.pos[0][0], this.pos[0][1] + 1, false) && 
-                            !hitIsland(myImage, this.pos[2][0], this.pos[2][1] - 1, false)) {
+                            !(hitIsland(myImage, this.pos[0][0], this.pos[0][1] + 1, false) > 0) && 
+                            !(hitIsland(myImage, this.pos[2][0], this.pos[2][1] - 1, false) > 0)) {
                         if(save){saveOldPos();}
                         this.pos[0][1]++;
                         this.pos[2][1]--;
@@ -322,8 +322,8 @@ public class Ship extends Agent {
                     break;
                 case 4:
                     if (this.pos[0][0] - 1 >= 0 && this.pos[2][0] + 1 <= 47 && 
-                            !hitIsland(myImage, this.pos[0][0] - 1, this.pos[0][1], false) && 
-                            !hitIsland(myImage, this.pos[2][0] + 1, this.pos[2][1], false)) {
+                            !(hitIsland(myImage, this.pos[0][0] - 1, this.pos[0][1], false) > 0) && 
+                            !(hitIsland(myImage, this.pos[2][0] + 1, this.pos[2][1], false) > 0)) {
                         if(save){saveOldPos();}
                         this.pos[0][0]--;
                         this.pos[2][0]++;
@@ -332,8 +332,8 @@ public class Ship extends Agent {
                     break;
                 case 5:
                     if (this.pos[0][0] - 1 >= 0 && this.pos[2][0] + 1 <= 47 && 
-                            !hitIsland(myImage, this.pos[0][0] - 1, this.pos[0][1], false) && 
-                            !hitIsland(myImage, this.pos[2][0] + 2, this.pos[2][1], false)) {
+                            !(hitIsland(myImage, this.pos[0][0] - 1, this.pos[0][1], false) > 0) && 
+                            !(hitIsland(myImage, this.pos[2][0] + 2, this.pos[2][1], false) > 0)) {
                         if(save){saveOldPos();}
                         this.pos[0][0]--;
                         this.pos[2][0]++;
@@ -342,8 +342,8 @@ public class Ship extends Agent {
                     break;
                 case 6:
                     if (this.pos[0][1] - 1 >= 0 && this.pos[2][1] + 1 <= 23 && 
-                            !hitIsland(myImage, this.pos[0][0], this.pos[0][1] - 1, false) && 
-                            !hitIsland(myImage, this.pos[2][0], this.pos[2][1] + 1, false)) {
+                            !(hitIsland(myImage, this.pos[0][0], this.pos[0][1] - 1, false) > 0) && 
+                            !(hitIsland(myImage, this.pos[2][0], this.pos[2][1] + 1, false) > 0)) {
                         if(save){saveOldPos();}
                         this.pos[0][1]--;
                         this.pos[2][1]++;
@@ -352,8 +352,8 @@ public class Ship extends Agent {
                     break;
                 case 7:
                     if (this.pos[0][1] - 1 >= 0 && this.pos[2][1] + 1 <= 23 && 
-                            !hitIsland(myImage, this.pos[0][0], this.pos[0][1] - 1, false) && 
-                            !hitIsland(myImage, this.pos[2][0], this.pos[2][1] + 1, false)) {
+                            !(hitIsland(myImage, this.pos[0][0], this.pos[0][1] - 1, false) > 0) && 
+                            !(hitIsland(myImage, this.pos[2][0], this.pos[2][1] + 1, false) > 0)) {
                         if(save){saveOldPos();}
                         this.pos[0][1]--;
                         this.pos[2][1]++;
@@ -362,8 +362,8 @@ public class Ship extends Agent {
                     break;
                 case 8:
                     if (this.pos[0][0] + 1 <= 47 && this.pos[2][0] - 1 >= 0 && 
-                            !hitIsland(myImage, this.pos[0][0] + 1, this.pos[0][1], false) && 
-                            !hitIsland(myImage, this.pos[2][0] - 1, this.pos[2][1], false)) {
+                            !(hitIsland(myImage, this.pos[0][0] + 1, this.pos[0][1], false) > 0) && 
+                            !(hitIsland(myImage, this.pos[2][0] - 1, this.pos[2][1], false) > 0)) {
                         if(save){saveOldPos();}
                         this.pos[0][0]++;
                         this.pos[2][0]--;
@@ -374,10 +374,10 @@ public class Ship extends Agent {
         }
     }
 
-    protected void rotateTo(int newOri){
+    protected void rotateTo(int newOri, short[] myImage){
         saveOldPos();
         while (this.align != newOri) {
-            rotate(1, false);
+            rotate(1, false, myImage);
         }
     }
 
@@ -663,6 +663,8 @@ public class Ship extends Agent {
         myImage = isHit(myImage);
         if(key != -1){
             myImage = clearTrace(myImage);
+            System.out.println("k " + key + " |a " + this.align);
+            print("beforeif");
             move(key,myImage);
             if (collide(myImage) == 1){
                 resetMove();
@@ -673,6 +675,8 @@ public class Ship extends Agent {
                     this.align--;
                 }
             }
+            System.out.println("k " + key + " |a " + this.align);
+            print("afterif");
         }
         if(this.bullet != null){
             if(this.bullet.getRange() > 0){

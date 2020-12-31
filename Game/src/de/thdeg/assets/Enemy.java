@@ -211,9 +211,9 @@ public class Enemy extends Ship {
             forward(myImage);
         }else{
             if(Math.random() > 0.5){
-                rotate(0, true);
+                rotate(0, true, myImage);
             }else {
-                rotate(1, true);
+                rotate(1, true, myImage);
             }
         }
         // }else {
@@ -286,7 +286,7 @@ public class Enemy extends Ship {
                             }
                             case 1 -> {
                                 if(hitIsland(myImage, difx, dify, true) > 0){
-                                    rotateTo(routeDirection(this.pos[1][0], this.pos[1][1], difx, dify));
+                                    rotateTo(routeDirection(this.pos[1][0], this.pos[1][1], difx, dify), myImage);
                                 }
                             }
                         }
