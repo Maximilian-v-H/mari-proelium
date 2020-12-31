@@ -146,7 +146,6 @@ public class Harbor extends Agent{
     protected boolean hitPlayer(short[] myImage, int x, int y){
         if (x <= 47 && y <= 23 && x >= 0 && y >= 0) {
             int idx = (y * 48 + x) * 3;
-            System.out.println(myImage.length);
             return (myImage[idx + 0] == 237 && myImage[idx + 1] == 76 && myImage[idx + 2] == 36) ||
                 (myImage[idx + 0] == 237 && myImage[idx + 1] == 207 && myImage[idx + 2] == 36) ||
                 (myImage[idx + 0] == 123 && myImage[idx + 1] == 237 && myImage[idx + 2] == 36) ||
