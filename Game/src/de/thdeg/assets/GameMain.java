@@ -129,6 +129,11 @@ public class GameMain {
             switch(thisKey){
                 case 0 -> {
                     end = false;
+                    thisKey=0;
+                    frame = 0;
+                    round = 1;
+                    diff = 1;
+                    enemyHealth = 2;
                 }
                 case 1 -> {
                     end = true;
