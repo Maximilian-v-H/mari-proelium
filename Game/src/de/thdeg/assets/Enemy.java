@@ -33,6 +33,25 @@ public class Enemy extends Ship {
         return this.dmg;
     }
 
+    protected int hitIsland(short[] myImage, int x, int y, boolean harbor){
+        if (x <= 47 && y <= 23 && x >= 0 && y >= 0) {
+            int idx = (y * 48 + x) * 3;
+            if(harbor){
+                return ((myImage[idx + 0] == 125 && myImage[idx + 1] == 66 && myImage[idx + 2] == 24) ||
+                    (myImage[idx + 0] == 122 && myImage[idx + 1] == 236 && myImage[idx + 2] == 35) ||
+                    (myImage[idx + 0] == 30 && myImage[idx + 1] == 68 && myImage[idx + 2] == 221)) ? (((myImage[idx + 0] == 29 && myImage[idx + 1] == 67 && myImage[idx + 2] == 220)) ? 2 : 1) : 0;
+            }else {
+            return ((myImage[idx + 0] == 196 && myImage[idx + 1] == 156 && myImage[idx + 2] == 53) ||
+                    (myImage[idx + 0] == 186 && myImage[idx + 1] == 148 && myImage[idx + 2] == 48) ||
+                    (myImage[idx + 0] == 125 && myImage[idx + 1] == 66 && myImage[idx + 2] == 24) ||
+                    (myImage[idx + 0] == 122 && myImage[idx + 1] == 236 && myImage[idx + 2] == 35) ||
+                    (myImage[idx + 0] == 30 && myImage[idx + 1] == 68 && myImage[idx + 2] == 221)) ? (((myImage[idx + 0] == 29 && myImage[idx + 1] == 67 && myImage[idx + 2] == 220)) ? 2 : 1) : 0;
+            }
+        }else {
+            return 0;
+        }
+    }
+
     /**
      *  Create Routes
      * */
@@ -95,6 +114,10 @@ public class Enemy extends Ship {
         //     pR();
         //     System.out.println(this.routing.get(0)[0]);
         // }
+        if(collectBonus(myImage, 0) && !this.hadBonus){
+            this.hp += (this.hp < this.MAXHP) ? 1 : 0;
+            this.hadBonus = true;
+        }
         myImage = clearTrace(myImage);
         if(inVision(myImage, 0) && this.bullet == null){
             shoot();
@@ -227,7 +250,7 @@ public class Enemy extends Ship {
                                 }
                             }
                             case 1 -> {
-                                if(hitIsland(myImage, difx, dify, true)){
+                                if(hitIsland(myImage, difx, dify, true) > 0){
                                     rotateTo(routeDirection(this.pos[1][0], this.pos[1][1], difx, dify));
                                 }
                             }
@@ -266,7 +289,7 @@ public class Enemy extends Ship {
         int ret = 0;
         for(int i=0; i < this.pos.length; i++){
             int idx = (this.pos[i][1] * 48 + this.pos[i][0]) * 3;
-            if (hitIsland(myImage, this.pos[i][0], this.pos[i][1], false)){
+            if (hitIsland(myImage, this.pos[i][0], this.pos[i][1], false) > 0){
                 ret = 1;
             }
             if (hitBullet(myImage, this.pos[i][0], this.pos[i][1])){

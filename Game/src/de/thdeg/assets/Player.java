@@ -27,7 +27,7 @@ public class Player extends Ship {
     public int collide(short[] myImage){
         int ret = 0;
         for(int i=0; i < this.pos.length; i++){
-            if (hitIsland(myImage, this.pos[i][0], this.pos[i][1], false)){
+            if (hitIsland(myImage, this.pos[i][0], this.pos[i][1], false) > 0){
                 ret = 1;
             }
             if (hitBullet(myImage, this.pos[i][0], this.pos[i][1])){
@@ -65,8 +65,31 @@ public class Player extends Ship {
         this.hitY = -1;
     }
 
+    protected int hitIsland(short[] myImage, int x, int y, boolean harbor){
+        if (x <= 47 && y <= 23 && x >= 0 && y >= 0) {
+            int idx = (y * 48 + x) * 3;
+            if(harbor){
+                return ((myImage[idx + 0] == 125 && myImage[idx + 1] == 66 && myImage[idx + 2] == 24) ||
+                    (myImage[idx + 0] == 122 && myImage[idx + 1] == 236 && myImage[idx + 2] == 35) ||
+                    (myImage[idx + 0] == 30 && myImage[idx + 1] == 68 && myImage[idx + 2] == 221)) ? (((myImage[idx + 0] == 121 && myImage[idx + 1] == 235 && myImage[idx + 2] == 34)) ? 2 : 1) : 0;
+            }else {
+            return ((myImage[idx + 0] == 196 && myImage[idx + 1] == 156 && myImage[idx + 2] == 53) ||
+                    (myImage[idx + 0] == 186 && myImage[idx + 1] == 148 && myImage[idx + 2] == 48) ||
+                    (myImage[idx + 0] == 125 && myImage[idx + 1] == 66 && myImage[idx + 2] == 24) ||
+                    (myImage[idx + 0] == 122 && myImage[idx + 1] == 236 && myImage[idx + 2] == 35) ||
+                    (myImage[idx + 0] == 30 && myImage[idx + 1] == 68 && myImage[idx + 2] == 221)) ? (((myImage[idx + 0] == 121 && myImage[idx + 1] == 235 && myImage[idx + 2] == 34)) ? 2 : 1) : 0;
+            }
+        }else {
+            return 0;
+        }
+    }
+
     public short[] run(int key, short[] myImage){
         myImage = isHit(myImage);
+        if(collectBonus(myImage, 1) && !this.hadBonus){
+            this.hp += (this.hp < this.MAXHP) ? 1 : 0;
+            this.hadBonus = true;
+        }
         if(key != -1){
             myImage = clearTrace(myImage);
             move(key,myImage);

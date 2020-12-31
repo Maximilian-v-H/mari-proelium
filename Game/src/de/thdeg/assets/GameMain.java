@@ -56,6 +56,7 @@ public class GameMain {
             }
             startTime = System.currentTimeMillis();
             while(p.isAlive()){
+                System.out.println(p.getHp());
                 thisKey = InternalLedGameThread.getKeyboard();
                 myImage = p.run(thisKey, myImage);
                 if(p.getHit()){
@@ -66,7 +67,7 @@ public class GameMain {
                     frame = 0;
                     myImage = fleet.executeOrders(myImage);
                 }
-                if(frame % 2 == 0){
+                if(frame % 2 == 0 || p.getHadBonus() || fleet.getHadBonus()){
                     myImage = world.runHarbor(myImage);
                 }
                 myImage = world.paintIslands(myImage);
@@ -80,6 +81,8 @@ public class GameMain {
                     if(fleet.getNumberOfAliveShips() == 0){
                         p.addScore(50);
                     }
+                    p.resetHadBonus();
+                    fleet.resetHadBonus();
                     round++;
                     if(round % 3 == 0){
                         diff++;

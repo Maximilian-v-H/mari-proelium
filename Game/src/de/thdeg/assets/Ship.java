@@ -7,6 +7,7 @@ public class Ship extends Agent {
     protected short[][][] color = new short[3][3][3];
     protected Bullet bullet = null;
     protected Bullet bullet2 = null;
+    protected boolean hadBonus = false;
 
     Ship(int hp){
         this.pos = new int[3][2];
@@ -90,6 +91,14 @@ public class Ship extends Agent {
             this.pos[2][1] = 1;
             this.align = 7;
         }
+    }
+
+    public boolean getHadBonus(){
+        return this.hadBonus;
+    }
+
+    public void resetHadBonus(){
+        this.hadBonus = false;
     }
 
     protected short[] clearTrace(short[] myImage){
@@ -414,7 +423,7 @@ public class Ship extends Agent {
                     break;
             }
         }else{
-            
+
         }
     }
 
@@ -426,7 +435,7 @@ public class Ship extends Agent {
         boolean ret = false;
         switch(this.align){
             case 1 -> {
-                if(this.pos[0][1] - 1 >= 0 && !hitIsland(myImage,this.pos[0][0],this.pos[0][1]-1, false)){
+                if(this.pos[0][1] - 1 >= 0 && !(hitIsland(myImage,this.pos[0][0],this.pos[0][1]-1, false) > 0)){
                     if(!hitEnemy(myImage,this.pos[0][0],this.pos[0][1]-1)){
                         return true;
                     }else {
@@ -435,7 +444,7 @@ public class Ship extends Agent {
                 }
             }
             case 2 -> {
-                if(this.pos[0][1] - 1 > 0 && this.pos[0][0] + 1 < 48 && !hitIsland(myImage,this.pos[0][0]+1,this.pos[0][1]-1, false)){
+                if(this.pos[0][1] - 1 > 0 && this.pos[0][0] + 1 < 48 && !(hitIsland(myImage,this.pos[0][0]+1,this.pos[0][1]-1, false) > 0)){
                     if(!hitEnemy(myImage,this.pos[0][0]+1,this.pos[0][1]-1)){
                         return true;
                     }else {
@@ -444,7 +453,7 @@ public class Ship extends Agent {
                 }
             }
             case 3 -> {
-                if(this.pos[0][0] + 1 < 48 && !hitIsland(myImage,this.pos[0][0]+1,this.pos[0][1], false)){
+                if(this.pos[0][0] + 1 < 48 && !(hitIsland(myImage,this.pos[0][0]+1,this.pos[0][1], false) > 0)){
                     if(!hitEnemy(myImage,this.pos[0][0]+1,this.pos[0][1])){
                         return true;
                     }else {
@@ -453,7 +462,7 @@ public class Ship extends Agent {
                 }
             }
             case 4 -> {
-                if(this.pos[0][0] + 1 < 48 && this.pos[0][1] + 1 < 24 && !hitIsland(myImage,this.pos[0][0]+1,this.pos[0][1]+1, false)){
+                if(this.pos[0][0] + 1 < 48 && this.pos[0][1] + 1 < 24 && !(hitIsland(myImage,this.pos[0][0]+1,this.pos[0][1]+1, false) > 0)){
                     if(!hitEnemy(myImage,this.pos[0][0]+1,this.pos[0][1]+1)){
                         return true;
                     }else {
@@ -462,7 +471,7 @@ public class Ship extends Agent {
                 }
             }
             case 5 -> {
-                if(this.pos[0][1] + 1 < 24 && !hitIsland(myImage,this.pos[0][0],this.pos[0][1]+1, false)){
+                if(this.pos[0][1] + 1 < 24 && !(hitIsland(myImage,this.pos[0][0],this.pos[0][1]+1, false) > 0)){
                     if(!hitEnemy(myImage,this.pos[0][0],this.pos[0][1]+1)){
                         return true;
                     }else {
@@ -471,7 +480,7 @@ public class Ship extends Agent {
                 }
             }
             case 6 -> {
-                if(this.pos[0][1] + 1 < 24 && this.pos[0][0] - 1 >= 0 && !hitIsland(myImage,this.pos[0][0]-1,this.pos[0][1]+1, false)){
+                if(this.pos[0][1] + 1 < 24 && this.pos[0][0] - 1 >= 0 && !(hitIsland(myImage,this.pos[0][0]-1,this.pos[0][1]+1, false) > 0)){
                     if(!hitEnemy(myImage,this.pos[0][0]-1,this.pos[0][1]+1)){
                         return true;
                     }else {
@@ -480,7 +489,7 @@ public class Ship extends Agent {
                 }
             }
             case 7 -> {
-                if(this.pos[0][0] - 1 >= 0 && !hitIsland(myImage,this.pos[0][0]-1,this.pos[0][1], false)){
+                if(this.pos[0][0] - 1 >= 0 && !(hitIsland(myImage,this.pos[0][0]-1,this.pos[0][1], false) > 0)){
                     if(!hitEnemy(myImage,this.pos[0][0]-1,this.pos[0][1])){
                         return true;
                     }else {
@@ -489,7 +498,7 @@ public class Ship extends Agent {
                 }
             }
             case 8 -> {
-                if(this.pos[0][0] - 1 >= 0 && this.pos[0][1] - 1 >= 0 && !hitIsland(myImage,this.pos[0][0]-1,this.pos[0][1]-1, false)){
+                if(this.pos[0][0] - 1 >= 0 && this.pos[0][1] - 1 >= 0 && !(hitIsland(myImage,this.pos[0][0]-1,this.pos[0][1]-1, false) > 0)){
                     if(!hitEnemy(myImage,this.pos[0][0]-1,this.pos[0][1]-1)){
                         return true;
                     }else {
@@ -533,6 +542,25 @@ public class Ship extends Agent {
         }
     }
 
+    protected int hitIsland(short[] myImage, int x, int y, boolean harbor){
+        if (x <= 47 && y <= 23 && x >= 0 && y >= 0) {
+            int idx = (y * 48 + x) * 3;
+            if(harbor){
+                return ((myImage[idx + 0] == 125 && myImage[idx + 1] == 66 && myImage[idx + 2] == 24) ||
+                    (myImage[idx + 0] == 122 && myImage[idx + 1] == 236 && myImage[idx + 2] == 35) ||
+                    (myImage[idx + 0] == 30 && myImage[idx + 1] == 68 && myImage[idx + 2] == 221)) ? 1 : 0;
+            }else {
+            return ((myImage[idx + 0] == 196 && myImage[idx + 1] == 156 && myImage[idx + 2] == 53) ||
+                    (myImage[idx + 0] == 186 && myImage[idx + 1] == 148 && myImage[idx + 2] == 48) ||
+                    (myImage[idx + 0] == 125 && myImage[idx + 1] == 66 && myImage[idx + 2] == 24) ||
+                    (myImage[idx + 0] == 122 && myImage[idx + 1] == 236 && myImage[idx + 2] == 35) ||
+                    (myImage[idx + 0] == 30 && myImage[idx + 1] == 68 && myImage[idx + 2] == 221)) ? 1 : 0;
+            }
+        }else {
+            return 0;
+        }
+    }
+
     protected boolean hitEnemy(short[] myImage, int x, int y){
         if (x <= 47 && y <= 23 && x >= 0 && y >= 0) {
             int idx = (y * 48 + x) * 3;
@@ -559,25 +587,31 @@ public class Ship extends Agent {
         }
     }
 
-    protected boolean hitIsland(short[] myImage, int x, int y, boolean harbor){
-        if (x <= 47 && y <= 23 && x >= 0 && y >= 0) {
-            int idx = (y * 48 + x) * 3;
-            if(harbor){
-                return (myImage[idx + 0] == 125 && myImage[idx + 1] == 66 && myImage[idx + 2] == 24) ||
-                    (myImage[idx + 0] == 122 && myImage[idx + 1] == 236 && myImage[idx + 2] == 35) ||
-                    (myImage[idx + 0] == 152 && myImage[idx + 1] == 22 && myImage[idx + 2] == 208);
-            }else {
-            return (myImage[idx + 0] == 196 && myImage[idx + 1] == 156 && myImage[idx + 2] == 53) ||
-                    (myImage[idx + 0] == 186 && myImage[idx + 1] == 148 && myImage[idx + 2] == 48) ||
-                    (myImage[idx + 0] == 125 && myImage[idx + 1] == 66 && myImage[idx + 2] == 24) ||
-                    (myImage[idx + 0] == 122 && myImage[idx + 1] == 236 && myImage[idx + 2] == 35) ||
-                    (myImage[idx + 0] == 152 && myImage[idx + 1] == 22 && myImage[idx + 2] == 208);
-            }
+    /**
+     *  0 - Enemy
+     *  1 - Player
+     * */
+    private boolean isCollectable(short[] myImage, int idx, int who){
+        if(who == 0){
+            return (myImage[idx] == 29 && myImage[idx + 1] == 67 && myImage[idx + 2] == 220);
         }else {
-            return false;
+            return (myImage[idx] == 121 && myImage[idx + 1] == 235 && myImage[idx + 2] == 34);
         }
     }
 
+    protected boolean collectBonus(short[] myImage, int who){
+        boolean ret = false;
+        for (int k = 0; k < this.pos.length; k++){
+            for(int i = -1; i <= 1; i++){
+                for(int j = -1; j <= 1; j++){
+                    if((this.pos[k][1]+i) >= 0 && (this.pos[k][1]+i) <= 23 && (this.pos[k][0]+j) <= 47 && (this.pos[k][0]+j) >= 0 && isCollectable(myImage, (((this.pos[k][1]+i) * 48 + (this.pos[k][0]+j)) * 3), who)){
+                        ret = true;
+                    }
+                }
+            }
+        }
+        return ret;
+    }
 
     /**
      * This method is used to set the align variable after a succesful rotation

@@ -40,6 +40,24 @@ public class Fleet {
         return myImage;
     }
 
+    public void resetHadBonus(){
+        for(Enemy e : this.fleet){
+            if(e.isAlive()){
+                e.resetHadBonus();
+            }
+        }
+    }
+
+    public boolean getHadBonus(){
+        boolean ret = false;
+        for(Enemy e : this.fleet){
+            if(e.isAlive() && e.getHadBonus()){
+                ret = true;
+            }
+        }
+        return ret;
+    }
+
     public int getNumberOfAliveShips(){
         int ret = 0;
         for (Enemy s : this.fleet){

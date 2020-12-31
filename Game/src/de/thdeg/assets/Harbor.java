@@ -1,5 +1,6 @@
 public class Harbor extends Agent{
     protected short[][] color = {{125, 66, 24},{122, 236, 35},{30, 68, 221}};
+    protected int hasBonus = 0;
     protected int orient;
     protected boolean captured = false;
     protected int possession = -1;
@@ -37,6 +38,7 @@ public class Harbor extends Agent{
     public short[] reset(short[] myImage){
         this.possession = -1;
         this.captured = false;
+        this.hasBonus = 0;
         myImage = paint(myImage);
         return myImage;
     }
@@ -71,6 +73,14 @@ public class Harbor extends Agent{
         }
     }
 
+    public int getHasBonus(){
+        return this.hasBonus;
+    }
+
+    public void setHasBonus(int hasBonus) {
+        this.hasBonus = hasBonus;
+    }
+
     @Override
     short[] run(int key, short[] myImage) {
         // myImage = isHit(myImage);
@@ -78,10 +88,14 @@ public class Harbor extends Agent{
             if(detectShip(15, myImage) == this.possession) {
                 shoot();
             }
+            if(detectShip(1, myImage) == Math.abs(this.possession - 1)){
+                this.hasBonus = 0;
+            }
         } else {
             int poss = detectShip(7, myImage);
             if(poss != -1) {
                 this.captured = true;
+                this.hasBonus = 1;
                 if(poss == 0) {
                     this.possession = 1;
                 }else {
