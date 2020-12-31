@@ -39,7 +39,6 @@ public class Harbor extends Agent{
         this.possession = -1;
         this.captured = false;
         this.hasBonus = 0;
-        myImage = paint(myImage);
         return myImage;
     }
 
@@ -54,9 +53,14 @@ public class Harbor extends Agent{
     }
 
     public short[] isHit(short[] myImage){
+        System.out.println("hmmmmmmmmmmmmmmmm" + myImage.length);
         if (hitBullet(myImage, this.pos[0], this.pos[1])){
+        System.out.println("hmmmmmmmmmmmmmmmm" + myImage.length);
             myImage = reset(myImage);
+        System.out.println("hmmmmmmmmmmmmmmmm" + myImage.length);
+            System.out.println("MISSION FAILED!!");
         }
+        System.out.println("hmmmmmmmmmmmmmmmm" + myImage.length);
         return myImage;
     }
 
@@ -83,12 +87,12 @@ public class Harbor extends Agent{
 
     @Override
     short[] run(int key, short[] myImage) {
-        // myImage = isHit(myImage);
         if(this.captured){
-            if(detectShip(15, myImage) == this.possession) {
+            myImage = isHit(myImage);
+            if(this.captured && detectShip(15, myImage) == this.possession) {
                 shoot();
             }
-            if(detectShip(1, myImage) == Math.abs(this.possession - 1)){
+            if(this.captured && detectShip(1, myImage) == Math.abs(this.possession - 1)){
                 this.hasBonus = 0;
             }
         } else {
@@ -147,6 +151,7 @@ public class Harbor extends Agent{
     protected boolean hitPlayer(short[] myImage, int x, int y){
         if (x <= 47 && y <= 23 && x >= 0 && y >= 0) {
             int idx = (y * 48 + x) * 3;
+            System.out.println(myImage.length);
             return (myImage[idx + 0] == 237 && myImage[idx + 1] == 76 && myImage[idx + 2] == 36) ||
                 (myImage[idx + 0] == 237 && myImage[idx + 1] == 207 && myImage[idx + 2] == 36) ||
                 (myImage[idx + 0] == 123 && myImage[idx + 1] == 237 && myImage[idx + 2] == 36) ||
