@@ -53,14 +53,9 @@ public class Harbor extends Agent{
     }
 
     public short[] isHit(short[] myImage){
-        System.out.println("hmmmmmmmmmmmmmmmm" + myImage.length);
         if (hitBullet(myImage, this.pos[0], this.pos[1])){
-        System.out.println("hmmmmmmmmmmmmmmmm" + myImage.length);
             myImage = reset(myImage);
-        System.out.println("hmmmmmmmmmmmmmmmm" + myImage.length);
-            System.out.println("MISSION FAILED!!");
         }
-        System.out.println("hmmmmmmmmmmmmmmmm" + myImage.length);
         return myImage;
     }
 

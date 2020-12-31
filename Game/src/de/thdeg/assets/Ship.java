@@ -112,9 +112,9 @@ public class Ship extends Agent {
 
     protected int getShipColor(){
         double ps = (double)this.hp / (double)this.MAXHP;
-        if(ps > 0.6){
+        if(ps > 0.67){
             return 2;
-        }else if(ps > 0.3){
+        }else if(ps > 0.34){
             return 1;
         }else {
             return 0;
