@@ -31,7 +31,7 @@ public class Fleet {
                     isWater(myImage, (((j+1) * 48 +  i   ) * 3)) &&
                     isWater(myImage, (((j+1) * 48 + (i+1)) * 3)) &&
                     isWater(myImage, (((j+1) * 48 + (i-1)) * 3))){
-                addFleetmember(new Enemy(hp, i, j, (int)(Math.random() * 7 + 1), 10));
+                addFleetmember(new Enemy(hp, i, j, (int)(Math.random() * 7 + 1), 15));
                 myImage = paintFleet(myImage);
                 num--;
                 continue;

@@ -81,11 +81,11 @@ public class GameMain {
                     if(fleet.getNumberOfAliveShips() == 0){
                         p.addScore(50);
                     }
-                    p.resetHadBonus();
-                    fleet.resetHadBonus();
                     round++;
                     if(round % 3 == 0){
                         diff++;
+                        p.resetHadBonus();
+                        fleet.resetHadBonus();
                     }
                     if(round == 16){
                         round = 1;

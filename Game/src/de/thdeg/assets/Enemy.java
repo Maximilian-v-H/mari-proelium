@@ -144,6 +144,67 @@ public class Enemy extends Ship {
         return myImage;
     }
 
+    private int routeDirection(int x, int y, int gx, int gy){
+        if(x > gx){
+            if(y > gy){
+                return 8;
+            }else if(y < gy){
+                return 6;
+            }else {
+                return 7;
+            }
+        }else if(x < gx){
+            if(y > gy) {
+                return 2;
+            }else if(y < gy){
+                return 4;
+            }else {
+                return 3;
+            }
+        }else {
+            if(y > gy) {
+                return 1;
+            }else if(y < gy){
+                return 5;
+            }
+        }
+        return -1;
+    }
+
+    // private int routeDirection(int x, int y, int[] gPos){
+    //     if(x > gPos[0]){
+            // if(y > gPos[1]){
+            //     return 8;
+            // }else if(y < gPos[1]){
+            //     return 6;
+            // }else {
+            //     return 7;
+            // }
+        // }else if(x < gPos[0]){
+            // if(y > gPos[1]) {
+            //     return 2;
+            // }else if(y < gPos[1]){
+            //     return 4;
+            // }else {
+            //     return 3;
+            // }
+        // }else {
+            // if(y > gPos[1]) {
+            //     return 1;
+            // }else if(y < gPos[1]){
+            //     return 5;
+            // }
+        // }
+        // return -1;
+    // }
+
+    public void shoot(){
+        int orient = routeDirection(this.pos[1][0], this.pos[1][1], this.PX, this.PY);
+        if(this.bullet == null){
+            this.bullet = new Bullet(orient, 8, this.pos[1][0], this.pos[1][1], 1);
+        }
+    }
+
     private void move(short[] myImage){
         // if(this.routing.size() <= 0 ){
         if(canMove(myImage)){
@@ -201,32 +262,6 @@ public class Enemy extends Ship {
         }
     }
 
-    private int routeDirection(int x, int y, int gx, int gy){
-        if(x > gx){
-            if(y > gy){
-                return 8;
-            }else if(y < gy){
-                return 6;
-            }else {
-                return 7;
-            }
-        }else if(x < gx){
-            if(y > gy) {
-                return 2;
-            }else if(y < gy){
-                return 4;
-            }else {
-                return 3;
-            }
-        }else {
-            if(y > gy) {
-                return 1;
-            }else if(y < gy){
-                return 5;
-            }
-        }
-        return -1;
-    }
 
     /**
      *  Method to detect if the player is visible for the enemy ship.
