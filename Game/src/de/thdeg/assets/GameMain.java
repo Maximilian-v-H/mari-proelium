@@ -56,7 +56,6 @@ public class GameMain {
             }
             startTime = System.currentTimeMillis();
             while(p.isAlive()){
-                System.out.println(p.getHp());
                 thisKey = InternalLedGameThread.getKeyboard();
                 myImage = p.run(thisKey, myImage);
                 if(p.getHit()){
