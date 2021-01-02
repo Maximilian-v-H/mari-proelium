@@ -194,16 +194,25 @@ INPUT /usr/share/texmf-dist/tex/latex/supertabular/supertabular.sty
 INPUT /usr/share/texmf-dist/tex/latex/supertabular/supertabular.sty
 INPUT /usr/share/texmf-dist/tex/latex/glossaries/styles/glossary-tree.sty
 INPUT /usr/share/texmf-dist/tex/latex/glossaries/styles/glossary-tree.sty
+INPUT /usr/share/texmf-dist/tex/latex/pdfpages/pdfpages.sty
+INPUT /usr/share/texmf-dist/tex/latex/pdfpages/pdfpages.sty
+INPUT /usr/share/texmf-dist/tex/latex/tools/calc.sty
+INPUT /usr/share/texmf-dist/tex/latex/tools/calc.sty
+INPUT /usr/share/texmf-dist/tex/latex/eso-pic/eso-pic.sty
+INPUT /usr/share/texmf-dist/tex/latex/eso-pic/eso-pic.sty
+INPUT /usr/share/texmf-dist/tex/latex/xcolor/xcolor.sty
+INPUT /usr/share/texmf-dist/tex/latex/xcolor/xcolor.sty
+INPUT /usr/share/texmf-dist/tex/latex/xcolor/xcolor.sty
+INPUT /usr/share/texmf-dist/tex/latex/graphics-cfg/color.cfg
+INPUT /usr/share/texmf-dist/tex/latex/graphics-cfg/color.cfg
+INPUT /usr/share/texmf-dist/tex/latex/pdfpages/pppdftex.def
+INPUT /usr/share/texmf-dist/tex/latex/pdfpages/pppdftex.def
 INPUT /usr/share/texmf-dist/tex/latex/listings/listings.sty
 INPUT /usr/share/texmf-dist/tex/latex/listings/listings.sty
 INPUT /usr/share/texmf-dist/tex/latex/listings/lstmisc.sty
 INPUT /usr/share/texmf-dist/tex/latex/listings/lstmisc.sty
 INPUT /usr/share/texmf-dist/tex/latex/listings/listings.cfg
 INPUT /usr/share/texmf-dist/tex/latex/listings/listings.cfg
-INPUT /usr/share/texmf-dist/tex/latex/graphics/color.sty
-INPUT /usr/share/texmf-dist/tex/latex/graphics/color.sty
-INPUT /usr/share/texmf-dist/tex/latex/graphics-cfg/color.cfg
-INPUT /usr/share/texmf-dist/tex/latex/graphics-cfg/color.cfg
 INPUT /usr/share/texmf-dist/tex/latex/listings/lstlang1.sty
 INPUT /usr/share/texmf-dist/tex/latex/listings/lstlang1.sty
 OUTPUT Documentation.glo
@@ -235,6 +244,10 @@ OUTPUT Documentation.pdf
 INPUT ./Documentation.out
 INPUT ./Documentation.out
 OUTPUT Documentation.out
+INPUT /usr/share/texmf-dist/tex/latex/pdflscape/pdflscape.sty
+INPUT /usr/share/texmf-dist/tex/latex/pdflscape/pdflscape.sty
+INPUT /usr/share/texmf-dist/tex/latex/graphics/lscape.sty
+INPUT /usr/share/texmf-dist/tex/latex/graphics/lscape.sty
 INPUT /usr/share/texmf-dist/fonts/map/fontname/texfonts.map
 INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmr17.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmr12.tfm
@@ -261,6 +274,25 @@ INPUT /usr/share/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/jknappen/ec/tcrm1000.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmti10.tfm
+INPUT ./Stundenliste - Stundenliste.pdf
+INPUT ./Stundenliste - Stundenliste.pdf
+INPUT ./Stundenliste - Stundenliste.pdf
+INPUT ./Stundenliste - Stundenliste.pdf
+INPUT ./Stundenliste - Stundenliste.pdf
+INPUT ./Stundenliste - Stundenliste.pdf
+INPUT ./Stundenliste - Stundenliste.pdf
+INPUT ./Stundenliste - Stundenliste.pdf
+INPUT ./Stundenliste - Stundenliste.pdf
+INPUT ./Stundenliste - Stundenliste.pdf
+INPUT ./Stundenliste - Stundenliste.pdf
+INPUT ./Stundenliste - Stundenliste.pdf
+INPUT ./Stundenliste - Stundenliste.pdf
+INPUT ./Stundenliste - Stundenliste.pdf
+INPUT ./Stundenliste - Stundenliste.pdf
+INPUT ./Stundenliste - Stundenliste.pdf
+INPUT ./Stundenliste - Stundenliste.pdf
+INPUT ./Stundenliste - Stundenliste.pdf
+INPUT ./Stundenliste - Stundenliste.pdf
 INPUT ./images/Rough_UML.png
 INPUT ./images/Rough_UML.png
 INPUT ./images/Rough_UML.png
