@@ -185,20 +185,23 @@ Die Steuerung wird auf die vier verfügbaren Tasten aufgeteilt, sodass man ohne 
 \begin{itemize}
     \item \textbf{Vorbereitung}
         \newline
-        Es werden alle Spielnotwendigen Variablen deklariert und initialisiert. In einer \textit{Do-While} Schleife wird daraufhin gestarted um mehrere Spiele hintereinander spielen zu Können. Am Start der Schleife wird die Karte, der Spieler und die Gegner erstellt und gezeichnet und auf eine Eingabe des Benutzers gewartet. Bei Eingabe wird der Spielablauf gestartet. Nach dem Tod des Spielers wird der Punktestand ausgegeben und die Möglichkeit geboten ein neues Spiel zu Starten.
+        Es werden alle Spielnotwendigen Variablen deklariert und initialisiert. In einer \textit{Do-While} Schleife wird daraufhin gestarted um mehrere Spiele hintereinander spielen zu Können. Am Start der Schleife wird die Karte, der Spieler und die Gegner erstellt und gezeichnet und auf eine Eingabe des Benutzers gewartet. Bei Eingabe wird der Spielablauf gestartet. Nach dem Tod des Spielers wird der Punktestand ausgegeben und die Möglichkeit geboten ein neues Spiel zu Starten oder das Program zu Beenden.
     \item \textbf{Spielablauf}
         \newline
-        Zuerst wird der Spieler bewegt und auf Kollisionen überprüft, danach die Gegner. Anschließend wird überprüft ob man eine Runde überlebt hat.
+        Zuerst wird der Spieler bewegt und auf Kollisionen überprüft, danach die Gegner. Anschließend wird überprüft ob man eine Runde überlebt hat und falls ja werden die Punkte zugewiesen und neue Gegner erstellt. Alle drei Runden wird das Spiel schwerer und die Positionen der Inseln neu gewählt.
 \end{itemize}
 \newpage
-\section{Arbeitsaufteilung}
-\includepdf[pages=-,landscape=true]{./Stundenliste - Stundenliste.pdf}
+
+\includepdf[pages=1,landscape=true]{./Stundenliste - Stundenliste.pdf}
 \newpage
 \section{Klassendiagramm}
 Das Diagramm stellt einen groben Ausschnitt des Klassendiagramms, inklusive der Vererbung der Klassen, dar. Die ausführliche Version des Klassendiagramms befindet sich im \textit{Documentation} Ordner.
 \newline
 
 \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{./images/Rough_UML.png}
+\newpage
+\section{Kommentare und Zusammenfassung}
+
 \newpage
 \section{Programmcode}
 \textbf{Ship.java}
