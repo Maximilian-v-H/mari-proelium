@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="mari-proelium:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/mari_proelium_jar</output-path>
+    <root id="archive" name="mari-proelium.jar">
+      <element id="module-output" name="mari-proelium" />
+    </root>
+  </artifact>
+</component>
