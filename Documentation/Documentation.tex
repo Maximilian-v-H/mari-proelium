@@ -89,51 +89,91 @@ MP - Mari proelium
 \newline
 \textbf{Spiel:}
 \newline
-Der Spieler steuert ein Schiff und probiert so lang zu überleben wie möglich. Es existieren Gegner, die sich zufällig bewegen.
+Idee war es, ein Spiel zu programmieren, dass in der Vogelperspektive gespielt wird, um dem Spieler die maximale Übersicht über das Spiel zu geben, d.h. man sieht ständig die vollständige Karte.
 \newline
-Das Spiel wird in einer Vogelperspektive gespielt, man hat dadurch jederzeit den Überblick der gesamten Karte.
+Der Spieler steuert dabei ein Schiff, welches drei Leben besitzt und probiert so lang zu überleben wie nur möglich. Es existieren sowohl Gegner, die sich zufällig bewegen und nach jeder Runde neu erzeugt werden und Inseln, mit optionalen Häfen, die bei Eroberung sowohl dem Gegner als auch dem Spieler zugewandt sein können.
 \newline
-Das Spielprinzip der Runden wird in dem Sinne implementiert, dass alle 30 Sekunden neue Gegner auftauchen und man für jede überlebte Runde zusätzliche Punkte bekommt.
+Das Spiel basiert auf dem klassischen Levelprinzip, d.h. dass alle 30 Sekunden neue Gegner auftauchen, jede dritte Runde ein weiterer Gegner erzeugt wird und man für jede überlebte Runde zusätzliche Punkte bekommt. 
 \newline
 Das Punktesystem wird von der Zeit, die man am Leben ist und der Anzahl der besiegten feindlichen Schiffe beeinflusst.
 \newline
-Die Steuerung wird auf die vier verfügbaren Tasten aufgeteilt, sodass man ohne Probleme sein Schiff steuern kann und zugleich auch schiessen kann. Die Kollisionsinteraktionen mit feindlichen Schiffen und eventuellen Häfen wird vom System übernommen.
+Die Steuerung wird auf die vier verfügbaren Tasten aufgeteilt, sodass man ohne Probleme sein Schiff steuern und zugleich auch schießen kann. Die Kollisionsinteraktionen mit feindlichen Schiffen und eventuellen Häfen wird vom System übernommen.
 \newpage
 
 \section{Beschreibung}
 \textbf{Karte:}
 \begin{itemize}
-    \item \textbf{Aussehen}
+    \item \textbf{Darstellung}
         \newline
-        Die Karte hat einen blauen Hintergrund, der den Ozean darstellt. Auf dem Ozean kann es vorkommen, dass es verschiedene Inseln geben kann. Inseln werden durch braune Pixel dargestellt. Die Platzierung der Inseln wird zufällig am Anfang des Spiels festgelegt und wird nur bei einem kompletten Neustart verändert. Auf den Inseln können Häfen generiert werden, die einem einen Bonus geben, falls man sie erreichen sollte. Die Häfen können vom Spieler und den Gegnern eingenommen werden und helfen der dementsprechenden Partei.
+        Der Hintergrund der Karte ist blau gefärbt und soll das Meer/den Ozean simulieren. Auf der gesamten Karte werden jede dritte Runde fünf Inseln zufällig/randomisiert erstellt. Diese lassen sich sowohl vom Gegner als auch vom Spieler einnehmen. Diese unterstützen, in Form von einer Kanone, die auf den jeweiligen Feind schießt, den jeweiligen Besitzer. Inseln werden durch gelbe und Häfen durch braune Pixel dargestellt. Die Häfen können den Besitzer „heilen“, d.h. +1 Leben verleihen. Die Spieler und Gegner können sich auf der Karte vollständig frei bewegen.
 \end{itemize}
 \textbf{Spieler:}
 \begin{itemize}
-    \item \textbf{Aussehen}
+    \item \textbf{Darstellung}
         \newline
-        Ein zwei bzw. drei Pixel langes Schiff.
+        Ein drei Pixel langes Schiff in grüner, gelber oder roter Farbe (Je nach Anzahl der Leben).
     \item \textbf{Fähigkeiten}
-        \newline - Links: 45 Grad Drehung gegen den Uhrzeigersinn
-        \newline - Rechts: 45 Grad Drehung in den Uhrzeigersinn
-        \newline - Oben: Vorwärts Bewegung nach vorne
-        \newline - Unten: Benutzen der Schiffsinternen Kanone
+        \begin{itemize}
+            \item Schussrichtung senkrecht zur Fahrtrichtung (beidseitig)
+            \item 3 Leben
+            \item 4x schneller als Gegner
+        \end{itemize}
 \end{itemize}
 \textbf{Gegner:}
 \begin{itemize}
-    \item \textbf{Aussehen}
+    \item \textbf{Darstellung}
         \newline
-        Ein zwei bzw. drei Pixel langes Schiff.
+        Ein drei Pixel langes Schiff in blauer, violetter Farbe (Je nach Anzahl der Leben).
     \item \textbf{Fähigkeiten}
-        \newline - Zufälliges Bewegen auf der Karte
-        \newline - Bei Spielersicht wird Geschossen
+        \begin{itemize}
+            \item Schussrichtung 360°
+            \item 2 Leben (jede 15. Runde +1 Leben)
+            \item Werden jede Runde neu erzeugt (sofern gestorben in vorangegangener Runde)
+            \item Jede 3. Runde erhöht sich die Gegneranzahl um +1
+        \end{itemize}
+\end{itemize}
+\textbf{Insel ohne Hafen}
+\begin{itemize}
+    \item \textbf{Darstellung}
+        \newline
+        Drei mal drei große Raster in gelb.
+    \item \textbf{Fähigkeiten}
+        \begin{itemize}
+            \item Kugeln werden von Inseln geblockt
+            \item Kollision verursacht keinen Schaden
+        \end{itemize}
+\end{itemize}
+
+\textbf{Insel mit Hafen}
+\begin{itemize}
+    \item \textbf{Darstellung}
+        \newline
+        Drei mal drei große Raster in gelb mit einem braunen Pixel als Hafen.
+    \item \textbf{Fähigkeiten}
+        \begin{itemize}
+            \item Können eingenommen werden
+            \item Können durch Zerstörung zurückerobert werden
+            \item Schussrichtung 360°
+            \item Geben beim Andocken jede 3. Runde +1 Leben
+        \end{itemize}
+\end{itemize}
+
+\textbf{Steuerung}
+\begin{itemize}
+    \item ↑ Bewegung um 1 Pixel in Fahrtrichtung
+    \item ← Drehung um 45° gegen den Uhrzeigersinn
+    \item → Drehung um 45° im Uhrzeigersinn
+    \item ↓ Schießen (beidseitig)
 \end{itemize}
 \textbf{Punkte:}
 \begin{itemize}
     \item \textbf{Punktequellen}
-        \newline - Beim treffen eines Gegners
-        \newline - Beim besiegen eines Gegners
-        \newline - Besiegen aller gerade lebender Geger
-        \newline - Fürs überleben einer Runde
+\begin{itemize}
+    \item Beim treffen eines Gegners
+    \item Beim besiegen eines Gegners
+    \item Besiegen aller gerade lebender Geger
+    \item Fürs überleben einer Runde
+\end{itemize}
     \item \textbf{Highscore}
         \newline
         Punkte werden in der Konsole als Highscore nach jedem Tod des Spielers ausgegeben
@@ -150,10 +190,11 @@ Die Steuerung wird auf die vier verfügbaren Tasten aufgeteilt, sodass man ohne 
         Zuerst wird der Spieler bewegt und auf Kollisionen überprüft, danach die Gegner. Anschließend wird überprüft ob man eine Runde überlebt hat.
 \end{itemize}
 \newpage
+\section{Arbeitsaufteilung}
 
+\newpage
 \section{Klassendiagramm}
-\newline
-\textbf{Hier sehen Sie einen groben Ausschnitt des Klassendiagramms der die Vererbung der Klassen darstellt. Die ausführliche Version des Klassendiagramms können Sie im \textit{Documentation} Ordner finden.}
+Das Diagramm stellt einen groben Ausschnitt des Klassendiagramms, inklusive der Vererbung der Klassen, dar. Die ausführliche Version des Klassendiagramms befindet sich im \textit{Documentation} Ordner.
 \newline
 
 \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{./images/Rough_UML.png}
