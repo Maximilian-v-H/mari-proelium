@@ -194,6 +194,8 @@ INPUT /usr/share/texmf-dist/tex/latex/supertabular/supertabular.sty
 INPUT /usr/share/texmf-dist/tex/latex/supertabular/supertabular.sty
 INPUT /usr/share/texmf-dist/tex/latex/glossaries/styles/glossary-tree.sty
 INPUT /usr/share/texmf-dist/tex/latex/glossaries/styles/glossary-tree.sty
+INPUT /usr/share/texmf-dist/tex/latex/graphics/lscape.sty
+INPUT /usr/share/texmf-dist/tex/latex/graphics/lscape.sty
 INPUT /usr/share/texmf-dist/tex/latex/pdfpages/pdfpages.sty
 INPUT /usr/share/texmf-dist/tex/latex/pdfpages/pdfpages.sty
 INPUT /usr/share/texmf-dist/tex/latex/tools/calc.sty
@@ -246,8 +248,6 @@ INPUT ./Documentation.out
 OUTPUT Documentation.out
 INPUT /usr/share/texmf-dist/tex/latex/pdflscape/pdflscape.sty
 INPUT /usr/share/texmf-dist/tex/latex/pdflscape/pdflscape.sty
-INPUT /usr/share/texmf-dist/tex/latex/graphics/lscape.sty
-INPUT /usr/share/texmf-dist/tex/latex/graphics/lscape.sty
 INPUT /usr/share/texmf-dist/fonts/map/fontname/texfonts.map
 INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmr17.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmr12.tfm
