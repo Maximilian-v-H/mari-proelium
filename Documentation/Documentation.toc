@@ -4,6 +4,6 @@
 \contentsline {section}{\numberline {3}Beschreibung}{V}{section.3}%
 \contentsline {section}{\numberline {4}Programmablauf}{VII}{section.4}%
 \contentsline {section}{\numberline {5}Arbeitsaufteilung}{VIII}{section.5}%
-\contentsline {section}{\numberline {6}Klassendiagramm}{X}{section.6}%
-\contentsline {section}{\numberline {7}Kommentare und Zusammenfassung}{XI}{section.7}%
-\contentsline {section}{\numberline {8}Programmcode}{XII}{section.8}%
+\contentsline {section}{\numberline {6}Klassendiagramm}{IX}{section.6}%
+\contentsline {section}{\numberline {7}Kommentare und Zusammenfassung}{X}{section.7}%
+\contentsline {section}{\numberline {8}Programmcode}{XI}{section.8}%
