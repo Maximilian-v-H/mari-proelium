@@ -18,7 +18,7 @@ public class GameMain {
         int thisKey = 0;
         int frame = 0;
         int round = 1;
-        int diff = 1;
+        int diff = 15;
         int enemyHealth = 2;
         long startTime = System.currentTimeMillis();
         long roundtime = 30000;
